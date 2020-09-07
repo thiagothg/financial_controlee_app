@@ -52,7 +52,7 @@ class LoginBloc extends BlocBase with LoginValidators {
   Function(String) get changeEmail => _emailController.sink.add;
   Function(String) get changePassword => _passwordController.sink.add;
 
-  StreamSubscription _streamSubscription;
+  // StreamSubscription _streamSubscription;
 
   void submit() {
     final email = _emailController.value;

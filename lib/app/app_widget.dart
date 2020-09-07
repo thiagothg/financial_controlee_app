@@ -3,6 +3,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 
 import 'app_controller.dart';
 import 'core/consts/routers_const.dart';
+import 'shared/utils/global_scaffold.dart';
 
 class AppWidget extends StatelessWidget {
   @override
@@ -12,11 +13,14 @@ class AppWidget extends StatelessWidget {
       title: 'Flutter Slidy',
       theme: Modular.get<AppController>().themeApp.getTheme(),
       themeMode: Modular.get<AppController>().themeMode,
-      // theme: ThemeData(
-      //   primarySwatch: Colors.blue,
-      // ),
       initialRoute: RoutersConst.splash,
       onGenerateRoute: Modular.generateRoute,
+      builder: (context, child) {
+        return Scaffold(
+          key: GlobalScaffold.instance.scaffkey,
+          body: child,
+        );
+      },
     );
   }
 }

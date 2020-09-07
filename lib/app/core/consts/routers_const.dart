@@ -5,6 +5,10 @@ class RoutersConst {
   static const String login = '/login';
   static const String register = '/login/sign_up';
   static const String home = '/home';
+  static const String dashboard = '/dashboard';
+  static const String year = '/year';
+  static const String goals = '/year/goals';
+  
   static const String forgetPassword = '/forget_password';
 
 }

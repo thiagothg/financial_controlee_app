@@ -27,6 +27,14 @@ class BaseModel implements IBaseModelInterface {
     return map;
   }
 
+   @override
+  BaseModel.fromData(Map<String, dynamic>  data) {
+    id = data['uid'];
+    isActive = data["isActive"];
+    createdAt = data["createdAt"];
+    updatedAt = data["updatedAt"];
+  }
+
   @override
   String documentId() => id;
 

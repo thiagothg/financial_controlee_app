@@ -1,7 +1,7 @@
 import 'package:flutter_modular/flutter_modular_test.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-import 'package:financialcontroleeapp/app/modules/sign_up/sign_up_module.dart';
+import 'package:financialcontroleeapp/app/modules/sign_up_module.dart';
 
 void main() {
   initModule(SignUpModule());

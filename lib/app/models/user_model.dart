@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 import 'base_model.dart';
 
@@ -15,6 +16,13 @@ class User extends BaseModel {
     bio = document.data["bio"];
     photoUrl = document.data["photoUrl"];
     email = document.data["email"];
+  }
+
+  User.toModelFirebaseUser(FirebaseUser data) {
+    name = data.displayName;
+    photoUrl = data.photoUrl;
+    email = data.email;
+    id = data.uid; 
   }
 
   @override

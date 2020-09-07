@@ -3,12 +3,16 @@
 import 'dart:async';
 
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
 
 import '../../core/consts/routers_const.dart';
 import '../../core/enums/app_enums.dart';
 import '../../core/responses/response_default.dart';
+import '../../models/user_model.dart';
+import '../../repositories/user_repository.dart';
+import '../utils/global_scaffold.dart';
 import 'repositories/auth_repository_interface.dart';
 
 part 'auth_controller.g.dart';
@@ -18,21 +22,7 @@ class AuthController = _AuthControllerBase with _$AuthController;
 abstract class _AuthControllerBase with Store {
 
   final IAuthRepository _authRepository = Modular.get();
-
-  @observable
-  AuthStatus status = AuthStatus.loading;
-
-  @observable
-  FirebaseUser user;
-
-  @action
-  void setUser(DefaultResponse result) {
-    if(result.success) {
-      status = AuthStatus.login;
-    } else {
-      status = AuthStatus.logoff;
-    }
-  }
+  final UserRepository _userRepository = Modular.get();
 
   _AuthControllerBase() {
     _authRepository.getUser().then(setUser).catchError((e) {
@@ -40,14 +30,42 @@ abstract class _AuthControllerBase with Store {
     });
   }
 
+  @observable
+  AuthStatus status = AuthStatus.loading;
+
+  @observable
+  FirebaseUser user;
+
+  @observable
+  User userModel = User();
+
+  @action
+  void setUser(DefaultResponse result) {
+    if(result.success && result.object != null) {
+      status = AuthStatus.login;
+      user = result.object;
+      userModel = User.toModelFirebaseUser(user);
+     
+      print(userModel);
+    } else {
+      status = AuthStatus.logoff;
+    }
+  }
+
+
   @action
   Future loginWithGoogle() async {
-   await _authRepository.getGoogleLogin().then((result) {
+   await _authRepository.getGoogleLogin().then((result) async {
      if(result.success) {
-       print(result.object);
-       Modular.to.pushReplacementNamed(RoutersConst.home);
+      await createUser(result.object);
+       
+      Modular.to.pushReplacementNamed(RoutersConst.home);
      } else {
-       print(result);
+        final snackBar = SnackBar(
+         content: Text(result.message.toString())
+        );
+        GlobalScaffold.instance.showSnackBar(snackBar);
+        print(result);
      }
    });
   }
@@ -55,6 +73,7 @@ abstract class _AuthControllerBase with Store {
   Future logout() async {
     var response = await _authRepository.getLogout();
     if (response.success) {
+      status = AuthStatus.logoff;
       Modular.to.pushReplacementNamed(RoutersConst.login);
     } else {
       print(response.message);
@@ -80,5 +99,23 @@ abstract class _AuthControllerBase with Store {
     } else {
       throw response;
     }
+  }
+
+  Future<void> createUser(FirebaseUser user) async {
+    if(!await _userRepository.exists(user.uid)) {
+      userModel = User(
+        name: user.displayName,
+        email: user.email,
+        photoUrl: user.photoUrl
+      );
+
+      userModel.id = user.uid;
+
+      await _userRepository.create(userModel);
+    }
+  }
+
+  Future<DefaultResponse> getUser() async {
+    return await _authRepository.getUser();
   }
 }

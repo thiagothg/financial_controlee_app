@@ -23,7 +23,9 @@ class AppThemeLight implements IThemeAppInterface {
       ),
       iconTheme: IconThemeData(
         color: Colors.white
-      )
+      ),
+      accentColor: ColorsConst.primaryColor,
+      backgroundColor: Colors.white,
     );
   }
 

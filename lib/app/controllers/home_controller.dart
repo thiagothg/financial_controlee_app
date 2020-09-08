@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
 
@@ -14,7 +13,7 @@ abstract class _HomeControllerBase with Store {
   AuthController auth = Modular.get();
 
   @observable
-  User userModel = User();
+  UserModel userModel = UserModel();
   
   _HomeControllerBase() {
     autorun((_){

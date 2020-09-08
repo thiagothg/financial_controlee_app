@@ -6,25 +6,25 @@ import '../models/user_model.dart';
 
 import 'firebase_repository_base.dart';
 
-class UserRepository extends FirebaseRepositoyBase<User> {
+class UserRepository extends FirebaseRepositoyBase<UserModel> {
   
   @override
   String get collection => 'users';
 
   @override
-  User Function(DocumentSnapshot document) get fromMap
-    => (document) => User.fromMap(document);
+  UserModel Function(DocumentSnapshot document) get fromMap
+    => (document) => UserModel.fromMap(document);
 
   Future<bool> exists(String id) async {
     var doc = await firestore.collection(collection)
-        .document(id).get();
+        .doc(id).get();
     return doc.exists;
   }
 
-  Future<void> create(User model) async {
+  Future<void> create(UserModel model) async {
     model.setCreateTime();
     model.setUpdateTime();
     await firestore.collection(collection)
-        .document(model.id).setData(model.toMap());
+        .doc(model.id).set(model.toMap());
   }
 }

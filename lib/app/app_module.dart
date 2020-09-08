@@ -1,10 +1,11 @@
-import 'controllers/year/goals_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
 import 'app_controller.dart';
 import 'app_widget.dart';
 import 'controllers/splash_controller.dart';
+import 'controllers/year/create_goals_controller.dart';
+import 'controllers/year/goals_controller.dart';
 import 'core/consts/routers_const.dart';
 import 'core/interface/shared_repository_interface.dart';
 import 'core/repositories/local_storage_hive.dart';
@@ -23,6 +24,7 @@ import 'shared/auth/repositories/auth_repository_interface.dart';
 class AppModule extends MainModule {
   @override
   List<Bind> get binds => [
+        Bind((i) => CreateGoalsController()),
         Bind((i) => GoalsController()),
         Bind((i) => AppController()),
         Bind<ISharedRepositoryInterface>(
@@ -36,13 +38,13 @@ class AppModule extends MainModule {
       ];
 
   @override
-  List<Router> get routers => [
-        Router(RoutersConst.splash, module: SplashModule()),
-        Router(RoutersConst.login,
+  List<ModularRouter> get routers => [
+        ModularRouter(RoutersConst.splash, module: SplashModule()),
+        ModularRouter(RoutersConst.login,
             module: LoginModule(), transition: TransitionType.noTransition),
-        Router(RoutersConst.home, module: HomeModule()),
-        Router(RoutersConst.register, module: SignUpModule()),
-        Router(RoutersConst.welcome, module: WelcomeModule()),
+        ModularRouter(RoutersConst.home, module: HomeModule()),
+        ModularRouter(RoutersConst.register, module: SignUpModule()),
+        ModularRouter(RoutersConst.welcome, module: WelcomeModule()),
       ];
 
   @override

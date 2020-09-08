@@ -1,14 +1,14 @@
-import 'package:financialcontroleeapp/app/controllers/dashboard_controller.dart';
-import 'package:financialcontroleeapp/app/controllers/year_goal_controller.dart';
-import 'package:financialcontroleeapp/app/screens/tabs/dashboard/dashboard_page.dart';
-import 'package:financialcontroleeapp/app/controllers/year/goals_controller.dart';
-import 'package:financialcontroleeapp/app/screens/tabs/year_goal/pages/goals/goals_page.dart';
-import 'package:financialcontroleeapp/app/screens/tabs/year_goal/year_goal_page.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
+import '../controllers/dashboard_controller.dart';
 import '../controllers/home_controller.dart';
+import '../controllers/year/goals_controller.dart';
+import '../controllers/year_goal_controller.dart';
 import '../core/consts/routers_const.dart';
 import '../screens/home/home_page.dart';
+import '../screens/tabs/dashboard/dashboard_page.dart';
+import '../screens/tabs/year_goal/pages/goals/goals_page.dart';
+import '../screens/tabs/year_goal/year_goal_page.dart';
 
 
 class HomeModule extends ChildModule {
@@ -21,11 +21,11 @@ class HomeModule extends ChildModule {
       ];
 
   @override
-  List<Router> get routers => [
-    Router(RoutersConst.home, child: (_, args) => HomePage()),
-    Router(RoutersConst.dashboard, child: (_, args) => DashboardPage()),
-    Router(RoutersConst.year, child: (_, args) => YearGoalPage()),
-    Router(RoutersConst.goals, child: (_, args) => GoalsPage()),
+  List<ModularRouter> get routers => [
+    ModularRouter(RoutersConst.home, child: (_, args) => HomePage()),
+    ModularRouter(RoutersConst.dashboard, child: (_, args) => DashboardPage()),
+    ModularRouter(RoutersConst.year, child: (_, args) => YearGoalPage()),
+    ModularRouter(RoutersConst.goals, child: (_, args) => GoalsPage()),
 
   ];
 

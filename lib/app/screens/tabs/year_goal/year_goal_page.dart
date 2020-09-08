@@ -1,11 +1,9 @@
-import 'package:financialcontroleeapp/app/screens/tabs/year_goal/components/custom_navigation_bar.dart';
-import 'package:financialcontroleeapp/app/screens/tabs/year_goal/pages/goals/goals_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
-import '../../../controllers/home_controller.dart';
 import '../../../controllers/year_goal_controller.dart';
 import '../../../shared/widgets/drawer/custom_drawer.dart';
+import 'pages/goals/goals_page.dart';
 
 class YearGoalPage extends StatefulWidget {
   final String title;
@@ -24,30 +22,57 @@ class _YearGoalPageState
   Widget build(BuildContext context) {
     return Scaffold(
       drawer: CustomDrawer(),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      floatingActionButton: FloatingActionButton(
+        onPressed: () { 
+          // Modular.to.pushNamed(route);
+        },
+        tooltip: 'add goal',
+        child: Icon(Icons.add),
+        elevation: 2.0,
+      ),
       bottomNavigationBar: AnimatedBuilder(
         animation: controller.pageController,
         builder: (context, snapshot) {
-          return BottomNavigationBar(
-            currentIndex: controller.pageController?.page?.round() ?? 0,
-            onTap: (index) {
-              controller.pageController.jumpToPage(index);
-            },
-            selectedItemColor: Colors.amber[800],
-            items: [
-              BottomNavigationBarItem(
+          return BottomAppBar(
+            clipBehavior: Clip.antiAliasWithSaveLayer,
+            shape: CircularNotchedRectangle(),
+            child: BottomNavigationBar(
+              currentIndex: controller.pageController?.page?.round() ?? 0,
+              onTap: (index) {
+                controller.pageController.jumpToPage(index);
+              },
+              items: [
+                BottomNavigationBarItem(
                   icon: Icon(Icons.home),
                   title: Text('Goals'),
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(Icons.add),
-                title: Text('Add'),
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(Icons.school),
-                title: Text('About'),
-              ),  
-            ],
+                ),
+                BottomNavigationBarItem(
+                  icon: Icon(Icons.school),
+                  title: Text('About'),
+                ),  
+              ],
+
+            ),
           );
+          // return BottomNavigationBar(
+            
+          //   selectedItemColor: Colors.amber[800],
+          //   items: [
+          //     BottomNavigationBarItem(
+          //         icon: Icon(Icons.home),
+          //         title: Text('Goals'),
+          //     ),
+          //     BottomNavigationBarItem(
+          //       icon: Icon(Icons.add),
+          //       title: Text('Add'),
+          //     ),
+          //     BottomNavigationBarItem(
+          //       icon: Icon(Icons.school),
+          //       title: Text('About'),
+          //     ),  
+          //   ],
+          // );
         }
       ),
       appBar: AppBar(
@@ -57,7 +82,6 @@ class _YearGoalPageState
         controller: controller.pageController,
         children: [
           GoalsPage(),
-          Container(),
           Container(),
         ],
       )

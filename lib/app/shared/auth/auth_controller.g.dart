@@ -27,13 +27,13 @@ mixin _$AuthController on _AuthControllerBase, Store {
   final _$userAtom = Atom(name: '_AuthControllerBase.user');
 
   @override
-  FirebaseUser get user {
+  User get user {
     _$userAtom.reportRead();
     return super.user;
   }
 
   @override
-  set user(FirebaseUser value) {
+  set user(User value) {
     _$userAtom.reportWrite(value, super.user, () {
       super.user = value;
     });
@@ -42,13 +42,13 @@ mixin _$AuthController on _AuthControllerBase, Store {
   final _$userModelAtom = Atom(name: '_AuthControllerBase.userModel');
 
   @override
-  User get userModel {
+  UserModel get userModel {
     _$userModelAtom.reportRead();
     return super.userModel;
   }
 
   @override
-  set userModel(User value) {
+  set userModel(UserModel value) {
     _$userModelAtom.reportWrite(value, super.userModel, () {
       super.userModel = value;
     });

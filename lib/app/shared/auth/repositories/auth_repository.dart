@@ -21,8 +21,8 @@ class AuthRepository implements IAuthRepository {
       await _auth.signInWithEmailAndPassword(
           email: email.trim(), password: password.trim());
 
-      return ResponseBuilder.success<FirebaseUser>(
-          object: await _auth.currentUser());
+      return ResponseBuilder.success<User>(
+          object: await _auth.currentUser);
     } on PlatformException catch (e) {
       print(e);
       var message = RegisterErrorInterceptor().handleAuthError(e.code);
@@ -49,7 +49,7 @@ class AuthRepository implements IAuthRepository {
       final googleAuth =
           await googleUser.authentication;
 
-      final credential = GoogleAuthProvider.getCredential(
+      final credential = GoogleAuthProvider.credential(
         accessToken: googleAuth.accessToken,
         idToken: googleAuth.idToken,
       );
@@ -57,7 +57,7 @@ class AuthRepository implements IAuthRepository {
       final user =
           (await _auth.signInWithCredential(credential)).user;
 
-      return ResponseBuilder.success<FirebaseUser>(
+      return ResponseBuilder.success<User>(
           object: user, message: 'Logou com sucesso');
     } on Exception catch (e) {
       return ResponseBuilder.failed(
@@ -68,8 +68,8 @@ class AuthRepository implements IAuthRepository {
   @override
   Future<DefaultResponse> getUser() async {
     try {
-      return ResponseBuilder.success<FirebaseUser>(
-          object: await _auth.currentUser());
+      return ResponseBuilder.success<User>(
+          object: await _auth.currentUser);
     } on Exception catch (e) {
       return ResponseBuilder.failed(object: e, message: e.toString());
     }
@@ -94,7 +94,7 @@ class AuthRepository implements IAuthRepository {
               email: email.trim(), password: password.trim())
           .then(
         (auth) {
-          return ResponseBuilder.success<FirebaseUser>(object: auth.user);
+          return ResponseBuilder.success<User>(object: auth.user);
         },
       );
     } on Exception catch (e) {

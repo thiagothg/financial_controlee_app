@@ -13,15 +13,15 @@ class FirebaseRepositoyBase<Model extends BaseModel>
 
   FirebaseRepositoyBase({this.fromMap, this.collection}) {
     collection ?? '${Model.toString().toLowerCase()}s';
-    collectionReference = Firestore.instance.collection(collection);
-    firestore = Firestore.instance;
+    collectionReference = FirebaseFirestore.instance.collection(collection);
+    firestore = FirebaseFirestore.instance;
   }
 
   final Model Function(DocumentSnapshot document) fromMap;
 
   String collection;
   CollectionReference collectionReference;
-  Firestore firestore;
+  FirebaseFirestore firestore;
 
   @override
   Future<DefaultResponse> add(Model model) async {
@@ -32,7 +32,7 @@ class FirebaseRepositoyBase<Model extends BaseModel>
       var document = await collection.add(model.toMap());
 
       return ResponseBuilder.success<String>(
-          object: document.documentID);
+          object: document.id);
     } on Exception catch (e) {
       return ResponseBuilder.failed(object: e, message: e.toString());
     }
@@ -42,7 +42,7 @@ class FirebaseRepositoyBase<Model extends BaseModel>
   Future<DefaultResponse> delete(String documentId) async {
     try {
       var collection = collectionReference;
-      await collection.document(documentId).delete();
+      await collection.doc(documentId).delete();
 
       return ResponseBuilder.success();
     } on Exception catch (e) {
@@ -79,8 +79,8 @@ class FirebaseRepositoyBase<Model extends BaseModel>
     try {
       var collection = collectionReference;
       var list = <Model>[];
-      var querySnapshot = await collection.getDocuments();
-      for (var element in await querySnapshot.documents) {
+      var querySnapshot = await collection.get();
+      for (var element in await querySnapshot.docs) {
         list.add(fromMap(element));
       }
       return await ResponseBuilder.success<List<Model>>(
@@ -94,7 +94,7 @@ class FirebaseRepositoyBase<Model extends BaseModel>
   Future<DefaultResponse> getById(String documentId) async {
     try {
       var collection = collectionReference;
-      var snapshot = await collection.document(documentId).get();
+      var snapshot = await collection.doc(documentId).get();
 
       return await ResponseBuilder.success<Model>(
           object: fromMap(snapshot));
@@ -109,7 +109,7 @@ class FirebaseRepositoyBase<Model extends BaseModel>
       model.setUpdateTime();
       var collection = collectionReference;
       await collection
-        .document(model.documentId()).updateData(model.toMap());
+        .doc(model.documentId()).update(model.toMap());
 
       return await ResponseBuilder.success();
     } on Exception catch (e) {

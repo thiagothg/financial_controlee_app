@@ -10,8 +10,8 @@ class WelcomeModule extends ChildModule {
       ];
 
   @override
-  List<Router> get routers => [
-        Router(Modular.initialRoute, child: (_, args) => WelcomePage()),
+  List<ModularRouter> get routers => [
+        ModularRouter(Modular.initialRoute, child: (_, args) => WelcomePage()),
       ];
 
   static Inject get to => Inject<WelcomeModule>.of();

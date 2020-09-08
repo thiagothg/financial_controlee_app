@@ -14,7 +14,7 @@ abstract class _DrawerMenuControllerBase with Store {
   AuthController auth = Modular.get();
 
   @observable
-  User userModel = User();
+  UserModel userModel = UserModel();
   
   _DrawerMenuControllerBase() {
     autorun((_){

@@ -1,11 +1,16 @@
-import 'package:financialcontroleeapp/app/shared/store/page_store.dart';
+import 'dart:async';
+
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:get_it/get_it.dart';
-import 'app/app_module.dart';
 
-void main() {
+import 'app/app_module.dart';
+import 'app/shared/store/page_store.dart';
+
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   setLocators();
 
   runApp(ModularApp(module: AppModule()));

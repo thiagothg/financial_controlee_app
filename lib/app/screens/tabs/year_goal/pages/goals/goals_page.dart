@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+
 import '../../../../../controllers/year/goals_controller.dart';
+import '../../../../../models/goal_model.dart';
+import 'widgets/goal_card.dart';
 
 class GoalsPage extends StatefulWidget {
   final String title;
@@ -16,11 +19,19 @@ class _GoalsPageState extends ModularState<GoalsPage, GoalsController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       appBar: AppBar(
-        title: Text(widget.title),
+        elevation: 0,
+        backgroundColor: Colors.transparent,
+        title: Text(widget.title,
+          style: Theme.of(context).textTheme.headline3,
+        ),
       ),
-      body: Column(
-        children: <Widget>[],
+      body: ListView.builder(
+        itemCount: GoalModel.list.length,
+        itemBuilder: (_, index) {
+          return GoalCard(model: GoalModel.list[index],);
+        },
       ),
     );
   }

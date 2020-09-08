@@ -33,13 +33,18 @@ class _SplashPageState extends ModularState<SplashPage, SplashController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
       body: Center(
         child: Column(
-          children: <Widget>[
-            FlutterLogo(),
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            FlutterLogo(
+              size: 50,
+            ),
+            SizedBox(height: 20),
+            Text('Controle-see app',
+              textAlign: TextAlign.center,
+              style: Theme.of(context).textTheme.headline4,
+            )
           ],
         ),
       ),

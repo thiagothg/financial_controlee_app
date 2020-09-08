@@ -1,14 +1,12 @@
-import 'package:financialcontroleeapp/app/screens/tabs/dashboard/dashboard_page.dart';
-import 'package:financialcontroleeapp/app/screens/tabs/year_goal/year_goal_page.dart';
-import 'package:financialcontroleeapp/app/shared/store/page_store.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mobx/mobx.dart';
 
 import '../../controllers/home_controller.dart';
-import '../../modules/dashboard_module.dart';
-import '../../modules/year_goal_module.dart';
+import '../../shared/store/page_store.dart';
+import '../tabs/dashboard/dashboard_page.dart';
+import '../tabs/year_goal/year_goal_page.dart';
 
 class HomePage extends StatefulWidget {
   final String title;

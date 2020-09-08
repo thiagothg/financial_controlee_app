@@ -11,10 +11,10 @@ class BaseModel implements IBaseModelInterface {
 
   @override
   BaseModel.fromMap(DocumentSnapshot document) {
-    id = document.documentID;
-    isActive = document.data["isActive"];
-    createdAt = document.data["createdAt"];
-    updatedAt = document.data["updatedAt"];
+    id = document.id;
+    isActive = document.data()["isActive"];
+    createdAt = document.data()["createdAt"];
+    updatedAt = document.data()["updatedAt"];
   }
 
   @override

@@ -9,7 +9,6 @@ abstract class _YearGoalControllerBase with Store {
   
   final  pageController = PageController();
 
-  @override
   void dispose() {
     pageController.dispose();
   }

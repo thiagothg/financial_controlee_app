@@ -12,13 +12,13 @@ mixin _$DrawerMenuController on _DrawerMenuControllerBase, Store {
   final _$userModelAtom = Atom(name: '_DrawerMenuControllerBase.userModel');
 
   @override
-  User get userModel {
+  UserModel get userModel {
     _$userModelAtom.reportRead();
     return super.userModel;
   }
 
   @override
-  set userModel(User value) {
+  set userModel(UserModel value) {
     _$userModelAtom.reportWrite(value, super.userModel, () {
       super.userModel = value;
     });

@@ -34,17 +34,17 @@ abstract class _AuthControllerBase with Store {
   AuthStatus status = AuthStatus.loading;
 
   @observable
-  FirebaseUser user;
+  User user;
 
   @observable
-  User userModel = User();
+  UserModel userModel = UserModel();
 
   @action
   void setUser(DefaultResponse result) {
     if(result.success && result.object != null) {
       status = AuthStatus.login;
       user = result.object;
-      userModel = User.toModelFirebaseUser(user);
+      userModel = UserModel.toModelFirebaseUser(user);
      
       print(userModel);
     } else {
@@ -58,7 +58,7 @@ abstract class _AuthControllerBase with Store {
    await _authRepository.getGoogleLogin().then((result) async {
      if(result.success) {
       await createUser(result.object);
-       
+      userModel = UserModel.toModelFirebaseUser(user);
       Modular.to.pushReplacementNamed(RoutersConst.home);
      } else {
         final snackBar = SnackBar(
@@ -101,12 +101,12 @@ abstract class _AuthControllerBase with Store {
     }
   }
 
-  Future<void> createUser(FirebaseUser user) async {
+  Future<void> createUser(User user) async {
     if(!await _userRepository.exists(user.uid)) {
-      userModel = User(
+      userModel = UserModel(
         name: user.displayName,
         email: user.email,
-        photoUrl: user.photoUrl
+        photoUrl: user.photoURL
       );
 
       userModel.id = user.uid;

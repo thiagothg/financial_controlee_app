@@ -1,10 +1,9 @@
-import 'package:financialcontroleeapp/app/shared/auth/repositories/auth_repository_interface.dart';
-import 'package:financialcontroleeapp/app/shared/store/page_store.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:get_it/get_it.dart';
 
 import '../../../controllers/home_controller.dart';
+import '../../store/page_store.dart';
 import 'widgets/drawer_tile.dart';
 
 
@@ -69,7 +68,7 @@ class _CustomDrawerState
                 text: "Debts",
                 page: 1,
                 onTap: () {
-                  pageStore.changePage(1);
+                  pageStore.changePage(2);
                 }
               ),
               Divider(),

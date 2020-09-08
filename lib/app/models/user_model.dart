@@ -3,24 +3,24 @@ import 'package:firebase_auth/firebase_auth.dart';
 
 import 'base_model.dart';
 
-class User extends BaseModel {
+class UserModel extends BaseModel {
   String name;
   String bio;
   String photoUrl;
   String email;
 
-  User({this.name, this.bio, this.photoUrl, this.email});
+  UserModel({this.name, this.bio, this.photoUrl, this.email});
 
-  User.fromMap(DocumentSnapshot document) : super.fromMap(document) {
-    name = document.data["name"];
-    bio = document.data["bio"];
-    photoUrl = document.data["photoUrl"];
-    email = document.data["email"];
+  UserModel.fromMap(DocumentSnapshot document) : super.fromMap(document) {
+    name = document.data()["name"];
+    bio = document.data()["bio"];
+    photoUrl = document.data()["photoUrl"];
+    email = document.data()["email"];
   }
 
-  User.toModelFirebaseUser(FirebaseUser data) {
+  UserModel.toModelFirebaseUser(User data) {
     name = data.displayName;
-    photoUrl = data.photoUrl;
+    photoUrl = data.photoURL;
     email = data.email;
     id = data.uid; 
   }

@@ -1,7 +1,6 @@
 import 'package:flutter_modular/flutter_modular.dart';
 
 import '../controllers/sign_up_controller.dart';
-import '../core/consts/routers_const.dart';
 import '../screens/sign_up/sign_up_page.dart';
 
 
@@ -13,7 +12,7 @@ class SignUpModule extends ChildModule {
 
   @override
   List<ModularRouter> get routers => [
-    ModularRouter(RoutersConst.register, child: (_, args) => SignUpPage()),
+    ModularRouter(Modular.initialRoute, child: (_, args) => SignUpPage()),
   ];
 
   static Inject get to => Inject<SignUpModule>.of();

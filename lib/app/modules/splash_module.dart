@@ -1,7 +1,6 @@
 import 'package:flutter_modular/flutter_modular.dart';
 
 import '../controllers/splash_controller.dart';
-import '../core/consts/routers_const.dart';
 import '../screens/splash/splash_page.dart';
 
 class SplashModule extends ChildModule {
@@ -12,7 +11,7 @@ class SplashModule extends ChildModule {
 
   @override
   List<ModularRouter> get routers => [
-        ModularRouter(RoutersConst.splash, child: (_, args) => SplashPage()),
+        ModularRouter(Modular.initialRoute, child: (_, args) => SplashPage()),
       ];
 
   static Inject get to => Inject<SplashModule>.of();

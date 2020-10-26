@@ -103,10 +103,6 @@ class _CustomDrawerState
 Widget _buildDrawerBack(BuildContext context) => Container(
   decoration: BoxDecoration(
     gradient: LinearGradient(
-      colors: [
-        Theme.of(context).accentColor,
-        Theme.of(context).backgroundColor
-      ],
       begin: Alignment.topCenter,
       end: Alignment.bottomCenter
     )

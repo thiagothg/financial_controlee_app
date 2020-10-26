@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animation_progress_bar/flutter_animation_progress_bar.dart';
 
+import '../../../../../../core/consts/routers_const.dart';
 import '../../../../../../models/goal_model.dart';
 
 class GoalCard extends StatelessWidget {
@@ -14,7 +15,8 @@ class GoalCard extends StatelessWidget {
     var _size = MediaQuery.of(context).size;
     return GestureDetector(
       onTap: () {
-        
+        Navigator.of(context).pushNamed(RoutersConst.goalDetail, 
+          arguments: model);
       },
       child: Card(
         elevation: 5,
@@ -24,7 +26,6 @@ class GoalCard extends StatelessWidget {
         color: Theme.of(context).cardTheme.color,
         child: Container(
           padding: EdgeInsets.symmetric(vertical: 20, horizontal: 20),
-          height: _size.height * 0.28,
           width: _size.width,
           child: Column(
             children: [
@@ -56,7 +57,7 @@ class GoalCard extends StatelessWidget {
                   Text('Ends at',
                     style: Theme.of(context).textTheme.bodyText1,
                   ),
-                  Text(model.dateEnd,
+                  Text(model?.dateEnd?.toDate().toString(),
                     style: Theme.of(context).textTheme.bodyText1,
                   ),
                 ],

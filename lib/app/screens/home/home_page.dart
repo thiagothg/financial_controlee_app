@@ -4,9 +4,9 @@ import 'package:get_it/get_it.dart';
 import 'package:mobx/mobx.dart';
 
 import '../../controllers/home_controller.dart';
+import '../../modules/dashboard_module.dart';
+import '../../modules/year/year_goal_module.dart';
 import '../../shared/store/page_store.dart';
-import '../tabs/dashboard/dashboard_page.dart';
-import '../tabs/year_goal/year_goal_page.dart';
 
 class HomePage extends StatefulWidget {
   final String title;
@@ -35,8 +35,8 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
       controller: pageStore.pageController,
       physics: NeverScrollableScrollPhysics(),
       children: [
-        DashboardPage(),
-        YearGoalPage(),
+        DashboardModule(),
+        RouterOutlet(module: YearGoalModule()),
         Container(color: Colors.red),
         Container(color: Colors.yellow),
         Container(color: Colors.blue)

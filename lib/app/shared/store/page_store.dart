@@ -13,6 +13,7 @@ abstract class _PageStore with Store {
   @observable
   int page = 0;
 
+  // ignore: use_setters_to_change_properties
   @action
   void changePage(int index) => page = index;
 }

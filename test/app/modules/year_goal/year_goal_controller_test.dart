@@ -1,7 +1,7 @@
 import 'package:flutter_modular/flutter_modular_test.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-import 'package:financialcontroleeapp/app/modules/year_goal_module.dart';
+import 'package:financialcontroleeapp/app/modules/year/year_goal_module.dart';
 
 void main() {
   initModule(YearGoalModule());

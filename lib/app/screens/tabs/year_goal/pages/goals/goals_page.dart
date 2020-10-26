@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
 import '../../../../../controllers/year/goals_controller.dart';
@@ -27,11 +28,41 @@ class _GoalsPageState extends ModularState<GoalsPage, GoalsController> {
           style: Theme.of(context).textTheme.headline3,
         ),
       ),
-      body: ListView.builder(
-        itemCount: GoalModel.list.length,
-        itemBuilder: (_, index) {
-          return GoalCard(model: GoalModel.list[index],);
-        },
+      body: Observer(
+        builder: (_) {
+          return StreamBuilder<List<GoalModel>>(
+            stream: controller.goals,
+            builder: (context, snapshot) {
+              print(snapshot.connectionState);
+              if(snapshot.hasError) {
+                return Text('Error');
+              } else {
+                switch (snapshot.connectionState) {
+                  case ConnectionState.none:
+                    break;
+                  case ConnectionState.waiting:
+                    return Center(child: CircularProgressIndicator());
+                    break;
+                  case ConnectionState.active:
+                  case ConnectionState.done:
+                    print(snapshot.data.length);
+                    if(snapshot.data.length > 0) {
+                      return ListView.builder(
+                        itemCount: snapshot.data.length,
+                        itemBuilder: (_, index) {
+                          return GoalCard(model: snapshot.data[index],);
+                        },
+                      );
+                    } else {
+                      return Text('no');
+                    }
+                    break;
+                }
+                return Container();
+              }
+            }
+          );
+        }
       ),
     );
   }

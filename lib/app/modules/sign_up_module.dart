@@ -1,7 +1,7 @@
 import 'package:flutter_modular/flutter_modular.dart';
 
 import '../controllers/sign_up_controller.dart';
-import '../screens/sign_up/sign_up_page.dart';
+import '../views/sign_up/sign_up_page.dart';
 
 
 class SignUpModule extends ChildModule {

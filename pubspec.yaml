@@ -7,6 +7,7 @@ environment:
   sdk: ">=2.1.0 <3.0.0"
 
 dependencies:
+  hasura_connect: ^1.2.1
   circular_check_box: ^1.0.4
   percent_indicator: ^2.1.7+4
   adaptive_dialog: ^0.9.0

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
 import '../controllers/dashboard_controller.dart';
-import '../screens/tabs/dashboard/dashboard_page.dart';
+import '../views/tabs/dashboard/dashboard_page.dart';
 
 
 class DashboardModule extends WidgetModule {

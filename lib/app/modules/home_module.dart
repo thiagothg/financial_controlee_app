@@ -4,7 +4,7 @@ import '../controllers/dashboard_controller.dart';
 import '../controllers/home_controller.dart';
 import '../controllers/year/year_goal_controller.dart';
 import '../core/consts/routers_const.dart';
-import '../screens/home/home_page.dart';
+import '../views/home/home_page.dart';
 import 'dashboard_module.dart';
 import 'year/year_goal_module.dart';
 

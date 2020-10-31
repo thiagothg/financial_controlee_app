@@ -1,7 +1,7 @@
 import 'package:flutter_modular/flutter_modular.dart';
 
 import '../controllers/welcome_controller.dart';
-import '../screens/welcome/welcome_page.dart';
+import '../views/welcome/welcome_page.dart';
 
 class WelcomeModule extends ChildModule {
   @override

@@ -1,7 +1,7 @@
 import 'package:flutter_modular/flutter_modular.dart';
 
 import '../controllers/login_controller.dart';
-import '../screens/login/login_page.dart';
+import '../views/login/login_page.dart';
 
 
 class LoginModule extends ChildModule {

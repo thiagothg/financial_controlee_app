@@ -6,10 +6,10 @@ import '../../controllers/year/year_goal_controller.dart';
 import '../../core/consts/routers_const.dart';
 import '../../interfaces/goal_repository_interface.dart';
 import '../../repositories/goal_repository.dart';
-import '../../screens/tabs/year_goal/pages/config_goal_page.dart';
-import '../../screens/tabs/year_goal/pages/create_goals/create_goals_page.dart';
-import '../../screens/tabs/year_goal/pages/goal_detail/goal_detail_page.dart';
-import '../../screens/tabs/year_goal/year_goal_page.dart';
+import '../../views/tabs/year_goal/pages/config_goal_page.dart';
+import '../../views/tabs/year_goal/pages/create_goals/create_goals_page.dart';
+import '../../views/tabs/year_goal/pages/goal_detail/goal_detail_page.dart';
+import '../../views/tabs/year_goal/year_goal_page.dart';
 
 class YearGoalModule extends ChildModule {
   @override

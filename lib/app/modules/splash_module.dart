@@ -1,7 +1,7 @@
 import 'package:flutter_modular/flutter_modular.dart';
 
 import '../controllers/splash_controller.dart';
-import '../screens/splash/splash_page.dart';
+import '../views/splash/splash_page.dart';
 
 class SplashModule extends ChildModule {
   @override

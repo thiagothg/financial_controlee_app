@@ -1,11 +1,14 @@
 import 'dart:async';
 
+import 'package:financialcontroleeapp/app/shared/utils/global_scaffold.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
+import 'package:progress_dialog/progress_dialog.dart';
 
 import '../core/consts/routers_const.dart';
 import '../shared/auth/auth_controller.dart';
+import 'package:loading_animations/loading_animations.dart';
 
 part 'login_controller.g.dart';
 
@@ -16,6 +19,12 @@ abstract class _LoginControllerBase with Store {
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
   
+  @observable
+  BuildContext context;
+
+  @observable
+  ProgressDialog pr;
+
   @observable
   bool loading = false;
 
@@ -42,7 +51,7 @@ abstract class _LoginControllerBase with Store {
   @computed
   bool get isEmailValid =>
     RegExp(r"^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,253}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,253}[a-zA-Z0-9])?)*$")
-      .hasMatch(email);
+      .hasMatch(email.trim());
 
   @computed
   bool get isPasswordValid => password.length >= 6;
@@ -66,7 +75,8 @@ abstract class _LoginControllerBase with Store {
   @action
   Future<void> login() async {
     loading = true;
-
+    
+    pr.show();
     await auth.loginEmail(email, password)
       .then((result) async {
       
@@ -76,13 +86,58 @@ abstract class _LoginControllerBase with Store {
         await Future.delayed(Duration(seconds: 2));
 
         loading = false;
-       
-        scaffoldKey.currentState.showSnackBar(SnackBar(
+        pr.hide();
+        GlobalScaffold.instance.showSnackBar(SnackBar(
           content: Text(result.message),
           duration: Duration(seconds: 2),
-          //backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+          backgroundColor: Theme.of(context).errorColor,
         ));
       }
     });
+  }
+
+  @action 
+  Future<void> forgetPassword() async {
+    if(email.isNotEmpty) {
+      await pr.show();
+      var result = await auth.forgetPassword(email.trim());
+      await pr.hide();
+      if(result.success) {
+         GlobalScaffold.instance.showSnackBar(SnackBar(
+          content: Text('Email enviado com sucesso'),
+          duration: Duration(seconds: 2),
+          backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+        ));
+      } else {
+        // print(result.);
+         GlobalScaffold.instance.showSnackBar(SnackBar(
+          content: Text(result.message),
+          duration: Duration(seconds: 2),
+          backgroundColor: Theme.of(context).errorColor,
+        ));
+      }
+    } else {
+      GlobalScaffold.instance.showSnackBar(SnackBar(
+        content: Text('Preencha o email'),
+        duration: Duration(seconds: 2),
+        backgroundColor: Theme.of(context).errorColor,
+      ));
+    }
+  }
+
+  void signUpScreen() {
+    // Modular.to.pushNamed('/register');
+    Navigator.of(context).pushNamed(RoutersConst.register);
+  }
+
+  @action
+  Future loginWithFace() async {
+    try {
+      loading = true;
+      await auth.loginWithFacebook();
+     } on Exception catch (e) {
+      loading = false;
+      print(e);
+    }
   }
 }

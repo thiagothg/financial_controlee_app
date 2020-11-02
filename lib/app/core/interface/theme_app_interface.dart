@@ -2,6 +2,6 @@ import 'package:flutter/material.dart';
 
 abstract class IThemeAppInterface {
   
-  ThemeData getTheme();
+  ThemeData getTheme(BuildContext context);
   String themeToString();
 }

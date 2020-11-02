@@ -13,9 +13,7 @@ class SignUpController = _SignUpControllerBase with _$SignUpController;
 
 abstract class _SignUpControllerBase with Store {
   AuthController auth = Modular.get();
-  
-  final scaffoldKey = GlobalKey<ScaffoldState>();
-  
+    
   @observable
   bool loading = false;
 
@@ -95,11 +93,11 @@ abstract class _SignUpControllerBase with Store {
 
         loading = false;
        
-        scaffoldKey.currentState.showSnackBar(SnackBar(
-          content: Text(result.message),
-          duration: Duration(seconds: 2),
-          //backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-        ));
+        // scaffoldKey.currentState.showSnackBar(SnackBar(
+        //   content: Text(result.message),
+        //   duration: Duration(seconds: 2),
+        //   //backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+        // ));
       }
     });
   }

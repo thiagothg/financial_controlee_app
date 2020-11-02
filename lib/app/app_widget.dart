@@ -16,7 +16,7 @@ class AppWidget extends StatelessWidget {
         return MaterialApp(
           navigatorKey: Modular.navigatorKey,
           title: 'Flutter Slidy',
-          theme: Modular.get<AppController>().themeApp.getTheme(),
+          theme: Modular.get<AppController>().themeApp.getTheme(context),
           themeMode: Modular.get<AppController>().themeMode,
           initialRoute: RoutersConst.splash,
           onGenerateRoute: Modular.generateRoute,
@@ -42,6 +42,7 @@ class AppWidget extends StatelessWidget {
           },
           builder: (context, child) {
             return Scaffold(
+              backgroundColor: Colors.white,
               key: GlobalScaffold.instance.scaffkey,
               body: child,
             );

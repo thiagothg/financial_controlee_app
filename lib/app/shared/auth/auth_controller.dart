@@ -2,6 +2,7 @@
 
 import 'dart:async';
 
+import 'package:financialcontroleeapp/app/core/errors/register_error_interceptor.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -84,8 +85,6 @@ abstract class _AuthControllerBase with Store {
   Future<DefaultResponse> loginEmail(String email, String password) async {
     var result = await _authRepository
         .getEmailPasswordLogin(email: email.trim(), password: password.trim());
-    print(result.message);
-    //RegisterErrorInterceptor().handleAuthError(result.object);
     return result;
   }
 
@@ -117,5 +116,26 @@ abstract class _AuthControllerBase with Store {
 
   Future<DefaultResponse> getUser() async {
     return await _authRepository.getUser();
+  }
+
+  Future<DefaultResponse> forgetPassword(String email) async {
+    return await _authRepository.forgetPassword(email);
+  }
+
+  @action
+  Future loginWithFacebook() async {
+   await _authRepository.getFacebookLogin().then((result) async {
+     if(result.success) {
+      await createUser(result.object);
+      userModel = UserModel.toModelFirebaseUser(user);
+      Modular.to.pushReplacementNamed(RoutersConst.home);
+     } else {
+        final snackBar = SnackBar(
+         content: Text(result.message.toString())
+        );
+        GlobalScaffold.instance.showSnackBar(snackBar);
+        print(result);
+     }
+   });
   }
 }

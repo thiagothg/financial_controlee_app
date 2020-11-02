@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import '../consts/colors.conts.dart';
 import '../interface/theme_app_interface.dart';
@@ -7,12 +8,12 @@ import '../interface/theme_app_interface.dart';
 
 class AppThemeLight implements IThemeAppInterface {
   @override
-  ThemeData getTheme() {
+  ThemeData getTheme(BuildContext context) {
     return ThemeData(
       fontFamily: 'Google',
       scaffoldBackgroundColor: Colors.grey[100],
-      primaryColor: Colors.blue[800],//ColorsConst.primaryColor,
-      // primaryColorLight: ColorsConst.primaryLightColor,
+      primaryColor: ColorsConst.primaryColor,
+      primaryColorLight: ColorsConst.primaryLightColor,
       // buttonColor: ColorsConst.primaryColor,
       
       buttonTheme: ButtonThemeData(
@@ -34,14 +35,8 @@ class AppThemeLight implements IThemeAppInterface {
         ),
 
       ),
-      textTheme: TextTheme(
-        headline6: TextStyle(
-          fontWeight: FontWeight.w600,
-          color: Colors.black87
-        ),
-        bodyText1: TextStyle(
-          color: Colors.grey[700]
-        )
+      textTheme: GoogleFonts.cantarellTextTheme(
+        Theme.of(context).textTheme
       ),
       bottomAppBarTheme: BottomAppBarTheme(
 

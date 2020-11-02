@@ -22,17 +22,18 @@ class RegisterErrorInterceptor implements IErrorInterceptor {
 
   @override
   String handleAuthError(String error) {
+    print(error);
     switch (error) {
-      case "ERROR_INVALID_EMAIL":
+      case "invalid-email":
         return "Your email address appears to be malformed.";
         break;
-      case "ERROR_WRONG_PASSWORD":
+      case "wrong-password":
         return "Your password is wrong.";
         break;
-      case "ERROR_USER_NOT_FOUND":
+      case "user-not-found":
         return "User with this email doesn't exist.";
         break;
-      case "ERROR_USER_DISABLED":
+      case "user-disabled":
         return "User with this email has been disabled.";
         break;
       case "ERROR_TOO_MANY_REQUESTS":

@@ -7,6 +7,11 @@ environment:
   sdk: ">=2.1.0 <3.0.0"
 
 dependencies:
+  flutter_login_facebook: ^0.3.0
+  progress_dialog: ^1.2.4
+  loading_animations: ^2.1.0
+  font_awesome_flutter: ^8.10.0
+  google_fonts: ^1.1.1
   hasura_connect: ^1.2.1
   circular_check_box: ^1.0.4
   percent_indicator: ^2.1.7+4

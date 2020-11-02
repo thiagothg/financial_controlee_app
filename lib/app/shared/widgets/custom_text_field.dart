@@ -17,11 +17,9 @@ class CustomTextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var _size = MediaQuery.of(context).size;
     return Container(
       margin: EdgeInsets.symmetric(vertical: 5),
-      // padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-      width: _size.width * 0.8,
+      width: double.infinity,
       decoration: BoxDecoration(
         color: Theme.of(context).primaryColorLight,
         borderRadius: BorderRadius.circular(29),
@@ -29,7 +27,7 @@ class CustomTextField extends StatelessWidget {
       padding: prefix != null 
         ? EdgeInsets.symmetric(horizontal: 10, vertical: 5)
         : const EdgeInsets.only(left: 16),
-      child: TextField(
+      child: TextFormField(
         controller: controller,
         obscureText: obscure,
         keyboardType: textInputType,

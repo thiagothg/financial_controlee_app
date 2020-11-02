@@ -31,6 +31,36 @@ mixin _$LoginController on _LoginControllerBase, Store {
               name: '_LoginControllerBase.loginPressed'))
           .value;
 
+  final _$contextAtom = Atom(name: '_LoginControllerBase.context');
+
+  @override
+  BuildContext get context {
+    _$contextAtom.reportRead();
+    return super.context;
+  }
+
+  @override
+  set context(BuildContext value) {
+    _$contextAtom.reportWrite(value, super.context, () {
+      super.context = value;
+    });
+  }
+
+  final _$prAtom = Atom(name: '_LoginControllerBase.pr');
+
+  @override
+  ProgressDialog get pr {
+    _$prAtom.reportRead();
+    return super.pr;
+  }
+
+  @override
+  set pr(ProgressDialog value) {
+    _$prAtom.reportWrite(value, super.pr, () {
+      super.pr = value;
+    });
+  }
+
   final _$loadingAtom = Atom(name: '_LoginControllerBase.loading');
 
   @override
@@ -107,6 +137,22 @@ mixin _$LoginController on _LoginControllerBase, Store {
     return _$loginAsyncAction.run(() => super.login());
   }
 
+  final _$forgetPasswordAsyncAction =
+      AsyncAction('_LoginControllerBase.forgetPassword');
+
+  @override
+  Future<void> forgetPassword() {
+    return _$forgetPasswordAsyncAction.run(() => super.forgetPassword());
+  }
+
+  final _$loginWithFaceAsyncAction =
+      AsyncAction('_LoginControllerBase.loginWithFace');
+
+  @override
+  Future<dynamic> loginWithFace() {
+    return _$loginWithFaceAsyncAction.run(() => super.loginWithFace());
+  }
+
   final _$_LoginControllerBaseActionController =
       ActionController(name: '_LoginControllerBase');
 
@@ -146,6 +192,8 @@ mixin _$LoginController on _LoginControllerBase, Store {
   @override
   String toString() {
     return '''
+context: ${context},
+pr: ${pr},
 loading: ${loading},
 email: ${email},
 password: ${password},

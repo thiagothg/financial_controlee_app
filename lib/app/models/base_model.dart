@@ -21,8 +21,10 @@ class BaseModel implements IBaseModelInterface {
   Map toMap() {
     var map = <String, dynamic>{};
     map['isActive'] = isActive;
-    map['createdAt'] = createdAt;
-    map['updatedAt'] = updatedAt;
+    map['id'] = id;
+    
+    // map['createdAt'] = createdAt.toDate().toString();
+    // map['updatedAt'] = updatedAt.toDate().toString();
 
     return map;
   }
@@ -32,7 +34,7 @@ class BaseModel implements IBaseModelInterface {
     id = data['uid'];
     isActive = data["isActive"];
     createdAt = data["createdAt"];
-    updatedAt = data["updatedAt"];
+    // updatedAt = data["updatedAt"];
   }
 
   @override

@@ -40,7 +40,7 @@ class AppModule extends MainModule {
     Bind((i) => LocalStorafeHive()),
     Bind<IAuthRepository>((i) => AuthRepository()),
     Bind((i) => AuthController()),
-    Bind<FirebaseRepositoyBase>((i) => UserRepository()),
+    Bind<FirebaseRepositoyBase>((i) => UserRepository(i.get())),
     Bind<ITodoRepositoryInterface>((i) => TodoHasuraRepository(i.get())),
     Bind((i) => HasuraConnect(HasuraConfig.hasuraUrl)),
   ];

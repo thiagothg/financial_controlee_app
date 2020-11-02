@@ -28,8 +28,9 @@ class UserModel extends BaseModel {
   @override
   Map toMap() {
     var map = super.toMap();
-    map['name'] = name;
-    map['bio'] = bio;
+    
+    map['name'] = name;    
+    // map['bio'] = bio;
     map['photoUrl'] = photoUrl;
     map['email'] = email;
     return map;

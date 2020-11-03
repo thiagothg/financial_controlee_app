@@ -24,13 +24,6 @@ mixin _$GoalsController on _GoalsControllerBase, Store {
     });
   }
 
-  final _$getGoalsAsyncAction = AsyncAction('_GoalsControllerBase.getGoals');
-
-  @override
-  Future<void> getGoals() {
-    return _$getGoalsAsyncAction.run(() => super.getGoals());
-  }
-
   @override
   String toString() {
     return '''

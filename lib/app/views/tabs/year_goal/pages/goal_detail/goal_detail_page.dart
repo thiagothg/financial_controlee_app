@@ -24,8 +24,6 @@ class _GoalDetailPageState
 
   @override
   Widget build(BuildContext context) {
-    var _size = MediaQuery.of(context).size;
-    print('teste: ${widget.model.weeksGoal.length}');
     return Scaffold(
       appBar: AppBar(
         title: Column(
@@ -67,7 +65,10 @@ class _GoalDetailPageState
             child: ListView.separated(
               itemCount: widget.model.weeksGoal.length,
               separatorBuilder: (_, index) {
-                return Container();
+                return SizedBox(
+                  height: 5,
+                  child: Divider(height: 3)
+                );
               }, 
               itemBuilder: (_, index) {
                 return GoalItem(

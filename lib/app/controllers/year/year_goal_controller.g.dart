@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'year/year_goal_controller.dart';
+part of 'year_goal_controller.dart';
 
 // **************************************************************************
 // StoreGenerator

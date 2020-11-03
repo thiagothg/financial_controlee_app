@@ -1,17 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../controllers/sign_up_controller.dart';
-import '../../core/consts/assets_const.dart';
-import '../../shared/widgets/custom_icon_button.dart';
-import '../../shared/widgets/custom_text_field.dart';
-import '../../shared/widgets/login/already_have_an_account_acheck.dart';
-import '../../shared/widgets/login/rounded_button.dart';
-import '../login/widgets/background.dart';
-import '../login/widgets/or_divider.dart';
-import '../login/widgets/social_icon.dart';
 
 class SignUpPage extends StatefulWidget {
   final String title;

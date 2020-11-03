@@ -1,4 +1,3 @@
-import 'package:financialcontroleeapp/app/modules/splash_module.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:hasura_connect/hasura_connect.dart';
@@ -17,9 +16,8 @@ import 'interfaces/todo_repository_interface.dart';
 import 'modules/home_module.dart';
 import 'modules/login_module.dart';
 import 'modules/sign_up_module.dart';
-import 'modules/todo_module.dart';
+import 'modules/splash_module.dart';
 import 'modules/welcome_module.dart';
-import 'repositories/firebase_repository_base.dart';
 import 'repositories/todo_repository.dart';
 import 'repositories/user_repository.dart';
 import 'shared/auth/auth_controller.dart';
@@ -40,7 +38,7 @@ class AppModule extends MainModule {
     Bind((i) => LocalStorafeHive()),
     Bind<IAuthRepository>((i) => AuthRepository()),
     Bind((i) => AuthController()),
-    Bind<FirebaseRepositoyBase>((i) => UserRepository(i.get())),
+    Bind((i) => UserRepository(i.get())),
     Bind<ITodoRepositoryInterface>((i) => TodoHasuraRepository(i.get())),
     Bind((i) => HasuraConnect(HasuraConfig.hasuraUrl)),
   ];

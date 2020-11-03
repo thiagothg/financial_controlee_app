@@ -48,6 +48,7 @@ class _CustomDrawerState
                 page: 0,
                 onTap: () {
                   pageStore.changePage(0);
+                  Navigator.pop(context);
                 },
               ),
               Divider(),
@@ -58,6 +59,7 @@ class _CustomDrawerState
                 page: 1,
                 onTap: () {
                   pageStore.changePage(1);
+                  Navigator.pop(context);
                 }
               ),
               Divider(),
@@ -69,6 +71,7 @@ class _CustomDrawerState
                 page: 1,
                 onTap: () {
                   pageStore.changePage(2);
+                  Navigator.pop(context);
                 }
               ),
               Divider(),
@@ -80,6 +83,7 @@ class _CustomDrawerState
                 page: 2,
                 onTap: () {
                   pageStore.changePage(3);
+                  Navigator.pop(context);
                 }
               ),
               Divider(),
@@ -99,12 +103,3 @@ class _CustomDrawerState
     );
   }
 }
-
-Widget _buildDrawerBack(BuildContext context) => Container(
-  decoration: BoxDecoration(
-    gradient: LinearGradient(
-      begin: Alignment.topCenter,
-      end: Alignment.bottomCenter
-    )
-  ),
-);

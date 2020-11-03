@@ -35,7 +35,8 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
       controller: pageStore.pageController,
       physics: NeverScrollableScrollPhysics(),
       children: [
-        DashboardModule(),
+        RouterOutlet(module: DashboardModule()),
+        // DashboardModule(),
         RouterOutlet(module: YearGoalModule()),
         Container(color: Colors.red),
         Container(color: Colors.yellow),

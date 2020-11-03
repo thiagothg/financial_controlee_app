@@ -64,15 +64,13 @@ class HeaderWidget extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text('R\$ ${model.qtdSaved.toString()}'
-                    ' / R\$ ${model.moneyStart.toString()}',
+                  Text('${model.getMoneyFormat(model.qtdSaved)}'
+                    ' / ${model.getMoneyFormat(model.moneyEnd)}',
                     style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.bold
                     ),
                   ),
-                  
-
                 ]
               ),
             ),

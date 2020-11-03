@@ -24,7 +24,7 @@ class AppThemeLight implements IThemeAppInterface {
         textTheme: ButtonTextTheme.primary
       ),
       iconTheme: IconThemeData(
-        color: Colors.white
+        // color: Colors.white
       ),
       accentColor: ColorsConst.primaryColor,
       backgroundColor: Colors.white,
@@ -37,6 +37,10 @@ class AppThemeLight implements IThemeAppInterface {
       ),
       textTheme: GoogleFonts.cantarellTextTheme(
         Theme.of(context).textTheme
+      ).copyWith(
+        headline6: TextStyle(
+          color: ColorsConst.primaryColor
+        )
       ),
       bottomAppBarTheme: BottomAppBarTheme(
 

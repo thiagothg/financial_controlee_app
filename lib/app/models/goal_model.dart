@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:money2/money2.dart';
 
 import 'base_model.dart';
 import 'goal_week_model.dart';
@@ -27,16 +28,20 @@ class GoalModel extends BaseModel {
     this.weeksGoal
   });
 
-  GoalModel.fromMap(DocumentSnapshot document) : super.fromMap(document) {
-    title = document.data()["title"];
-    moneyStart = document.data()["moneyStart"] + 0.0;
-    moneyEnd = document.data()["moneyEnd"] + 0.0;
-    dateStart = document.data()["dateStart"];
-    dateEnd = document.data()["dateEnd"];
-    progress = document.data()["progress"];
-    qtdSaved = document.data()["qtdSaved"] + 0.0;
+  final Currency _currency = Currency.create('BRL', 2, 
+    // symbol: r'R$',  
+    // pattern: 'S 0,00',
+  );
 
-    userUid = document.data()["userUid"];
+  GoalModel.fromMap(Map<String, dynamic> json) : super.fromMap(json) {
+    title = json["title"];
+    moneyStart = json["moneyStart"] + 0.0;
+    moneyEnd = json["moneyEnd"] + 0.0;
+    dateStart = Timestamp.fromDate(DateTime.parse(json["dateStart"]));
+    dateEnd = Timestamp.fromDate(DateTime.parse(json["dateEnd"]));
+    progress = json["progress"];
+    qtdSaved = json["qtdSaved"] + 0.0;
+    userUid = json["userId"];
   }
 
   GoalModel.toModelFirebaseUser(User data) {
@@ -54,6 +59,15 @@ class GoalModel extends BaseModel {
     map['dateStart'] = dateStart;
     map['userUid'] = userUid;
     return map;
+  }
+
+  String getMoneyFormat(double qtd) {
+    return Money.from(qtd, _currency).toString();
+  }
+
+  String getRemainWeeks() {
+    var diff = dateEnd.toDate().difference(DateTime.now());
+    return (diff.inDays ~/ 7).toString();
   }
 
   static List<GoalModel> list = [

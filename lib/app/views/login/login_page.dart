@@ -1,19 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:loading_animations/loading_animations.dart';
 import 'package:progress_dialog/progress_dialog.dart';
 
 import '../../controllers/login_controller.dart';
 import '../../core/consts/assets_const.dart';
-import '../../core/consts/routers_const.dart';
 import '../../shared/widgets/custom_icon_button.dart';
 import '../../shared/widgets/custom_text_field.dart';
-import '../../shared/widgets/login/already_have_an_account_acheck.dart';
 import '../../shared/widgets/login/rounded_button.dart';
-import 'widgets/background.dart';
 import 'widgets/or_divider.dart';
 import 'widgets/social_icon.dart';
 

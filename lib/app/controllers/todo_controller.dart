@@ -1,7 +1,8 @@
-import 'package:financialcontroleeapp/app/interfaces/todo_repository_interface.dart';
-import 'package:financialcontroleeapp/app/models/todo_model.dart';
-import 'package:mobx/mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:mobx/mobx.dart';
+
+import '../interfaces/todo_repository_interface.dart';
+import '../models/todo_model.dart';
 
 part 'todo_controller.g.dart';
 

@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:financialcontroleeapp/app/shared/utils/global_scaffold.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
@@ -8,7 +7,7 @@ import 'package:progress_dialog/progress_dialog.dart';
 
 import '../core/consts/routers_const.dart';
 import '../shared/auth/auth_controller.dart';
-import 'package:loading_animations/loading_animations.dart';
+import '../shared/utils/global_scaffold.dart';
 
 part 'login_controller.g.dart';
 

@@ -21,8 +21,23 @@ class _CreateGoalsPageState
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: Column(
-        children: <Widget>[],
+      body: Padding(
+        padding: const EdgeInsets.all(15.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            SizedBox(height: 50),
+            Text('What is your next goal?',
+              style: Theme.of(context).textTheme.headline5.copyWith(
+                fontWeight: FontWeight.bold
+              ),
+            ),
+            SizedBox(height: 20),
+            Text('What do you'),
+
+            TextFormField()
+          ],
+        ),
       ),
     );
   }

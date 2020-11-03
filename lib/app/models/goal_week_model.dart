@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:money2/money2.dart';
 
 import 'base_model.dart';
 
@@ -16,11 +17,17 @@ class GoalWeek extends BaseModel {
     this.saved,
   });
 
-  GoalWeek.fromMap(DocumentSnapshot document) : super.fromMap(document) {
-    title = document.data()["title"];
-    money = document.data()["money"] + 0.0;
-    date = document.data()["date"];
-    saved = document.data()["saved"];
+  final Currency _currency = Currency.create('BRL', 2, 
+    // symbol: r'R$',  
+    // pattern: 'S 0,00',
+  );
+
+  GoalWeek.fromMap(Map<String, dynamic> json) : super.fromMap(json) {
+    title = json["week"];
+    money = json["money"] + 0.0;
+    date = Timestamp.fromDate(DateTime.parse(json["date"]));
+    saved = json["saved"];
+    // saved = document.data()["saved"];
   }
 
   GoalWeek.toModelFirebaseUser(User data) {
@@ -38,6 +45,10 @@ class GoalWeek extends BaseModel {
     map['date'] = date;
     map['saved'] = saved;
     return map;
+  }
+
+  String getMoneyFormat(double qtd) {
+    return Money.from(qtd, _currency).toString();
   }
 
   static List<GoalWeek> list = [

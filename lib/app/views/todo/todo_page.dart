@@ -1,8 +1,8 @@
-import 'package:financialcontroleeapp/app/models/todo_model.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+
 import '../../controllers/todo_controller.dart';
+import '../../models/todo_model.dart';
 import 'widgets/item_tile.dart';
 
 class TodoPage extends StatefulWidget {

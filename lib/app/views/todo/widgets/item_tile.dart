@@ -1,8 +1,8 @@
-import 'package:financialcontroleeapp/app/controllers/home_controller.dart';
-import 'package:financialcontroleeapp/app/controllers/todo_controller.dart';
-import 'package:financialcontroleeapp/app/models/todo_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+
+import '../../../controllers/todo_controller.dart';
+import '../../../models/todo_model.dart';
 
 class ItemTile extends StatelessWidget {
   final TodoModel model;

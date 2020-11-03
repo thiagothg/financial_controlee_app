@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:intl/intl.dart';
 
 import 'app_controller.dart';
 import 'core/consts/routers_const.dart';
@@ -9,6 +10,7 @@ import 'core/localization/app_localizations.dart';
 import 'shared/utils/global_scaffold.dart';
 
 class AppWidget extends StatelessWidget {
+  
   @override
   Widget build(BuildContext context) {
     return Observer(
@@ -41,6 +43,7 @@ class AppWidget extends StatelessWidget {
             return supportedLocales.first;
           },
           builder: (context, child) {
+            Intl.defaultLocale = 'pt_BR';
             return Scaffold(
               backgroundColor: Colors.white,
               key: GlobalScaffold.instance.scaffkey,

@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import '../../../../../controllers/year/goals_controller.dart';
 import '../../../../../models/goal_model.dart';
+import '../../../../../shared/widgets/error_widget.dart';
 import 'widgets/goal_card.dart';
 
 class GoalsPage extends StatefulWidget {
@@ -28,41 +29,61 @@ class _GoalsPageState extends ModularState<GoalsPage, GoalsController> {
           style: Theme.of(context).textTheme.headline3,
         ),
       ),
-      body: Observer(
-        builder: (_) {
-          return StreamBuilder<List<GoalModel>>(
-            stream: controller.goals,
-            builder: (context, snapshot) {
-              print(snapshot.connectionState);
-              if(snapshot.hasError) {
-                return Text('Error');
-              } else {
-                switch (snapshot.connectionState) {
-                  case ConnectionState.none:
-                    break;
-                  case ConnectionState.waiting:
-                    return Center(child: CircularProgressIndicator());
-                    break;
-                  case ConnectionState.active:
-                  case ConnectionState.done:
-                    print(snapshot.data.length);
-                    if(snapshot.data.length > 0) {
-                      return ListView.builder(
-                        itemCount: snapshot.data.length,
-                        itemBuilder: (_, index) {
-                          return GoalCard(model: snapshot.data[index],);
-                        },
-                      );
-                    } else {
-                      return Text('no');
-                    }
-                    break;
+      body: StreamBuilder<List<GoalModel>>(
+        stream: controller.getGoals(),
+        builder: (context, snapshot) {
+          if(snapshot.hasError) {
+            print(snapshot.error);
+            return ErrorPage();
+          } else {
+            switch (snapshot.connectionState) {
+              case ConnectionState.none:
+                break;
+              case ConnectionState.waiting:
+                return Center(child: CircularProgressIndicator());
+                break;
+              case ConnectionState.active:
+              case ConnectionState.done:
+                if(snapshot.data.length > 0) {
+                  return ListView.builder(
+                    itemCount: snapshot.data.length,
+                    itemBuilder: (_, index) {
+                      return GoalCard(model: snapshot.data[index],);
+                    },
+                  );
+                } else {
+                  return emptyList();
                 }
-                return Container();
-              }
+                break;
             }
-          );
+            return Text('Error');
+          }
         }
+      ),
+    );
+  }
+
+  Widget emptyList() {
+    return Padding(
+      padding: const EdgeInsets.all(15.0),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Icon(FontAwesomeIcons.bullseye,
+                color: Theme.of(context).primaryColor,
+              ),
+              SizedBox(width: 10),
+              Text('Nao tem nenhum objetivo cadastro.',
+                style: Theme.of(context).textTheme.headline6,
+                textAlign: TextAlign.center,
+              ),
+            ],
+          )
+        ],
       ),
     );
   }

@@ -16,4 +16,4 @@ abstract class IBaseModelInterface {
   void setCreateTime();
 
   void setUpdateTime();
-}
+} 

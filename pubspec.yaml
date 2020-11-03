@@ -7,6 +7,8 @@ environment:
   sdk: ">=2.1.0 <3.0.0"
 
 dependencies:
+  intl: ^0.16.1
+  money2: ^1.4.3
   flutter_login_facebook: ^0.3.0
   progress_dialog: ^1.2.4
   loading_animations: ^2.1.0

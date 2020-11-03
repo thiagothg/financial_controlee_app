@@ -17,7 +17,7 @@ class YearGoalModule extends ChildModule {
     Bind((i) => YearGoalController()),
     Bind((i) => CreateGoalsController()),
     Bind((i) => GoalDetailController()),
-    Bind<IGoalRepositoryInterface>((i) => GoalRepository()),
+    Bind<IGoalRepositoryInterface>((i) => GoalRepository(i.get())),
 
   ];
 

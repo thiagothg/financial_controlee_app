@@ -1,11 +1,8 @@
 import 'dart:async';
 
 
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:financialcontroleeapp/app/models/todo_model.dart';
-import '../core/responses/response_default.dart';
+import '../models/todo_model.dart';
 
-import 'base_model_interface.dart';
 
 
 abstract class ITodoRepositoryInterface {

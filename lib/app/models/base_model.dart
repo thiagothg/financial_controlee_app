@@ -10,11 +10,16 @@ class BaseModel implements IBaseModelInterface {
   BaseModel();
 
   @override
-  BaseModel.fromMap(DocumentSnapshot document) {
-    id = document.id;
-    isActive = document.data()["isActive"];
-    createdAt = document.data()["createdAt"];
-    updatedAt = document.data()["updatedAt"];
+  BaseModel.fromMap(Map<String, dynamic> json) {
+    id = json['id'];
+    isActive = (json.containsKey('isActive')) ? json["isActive"] : null;
+
+    if(json.containsKey('createdAt')) {
+      var parsedDate = DateTime.parse(json["createdAt"]);
+      createdAt = Timestamp.fromDate(parsedDate);
+    }
+    
+    // updatedAt = document.data()["updatedAt"];
   }
 
   @override
@@ -31,9 +36,9 @@ class BaseModel implements IBaseModelInterface {
 
    @override
   BaseModel.fromData(Map<String, dynamic>  data) {
-    id = data['uid'];
+    id = data['id'];
     isActive = data["isActive"];
-    createdAt = data["createdAt"];
+    createdAt = data["createdAt"]; 
     // updatedAt = data["updatedAt"];
   }
 
@@ -51,4 +56,5 @@ class BaseModel implements IBaseModelInterface {
 
   @override
   void setUpdateTime() => updatedAt = Timestamp.now();
+  
 }

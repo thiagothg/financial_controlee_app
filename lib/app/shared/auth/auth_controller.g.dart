@@ -27,13 +27,13 @@ mixin _$AuthController on _AuthControllerBase, Store {
   final _$userAtom = Atom(name: '_AuthControllerBase.user');
 
   @override
-  User get user {
+  User? get user {
     _$userAtom.reportRead();
     return super.user;
   }
 
   @override
-  set user(User value) {
+  set user(User? value) {
     _$userAtom.reportWrite(value, super.user, () {
       super.user = value;
     });
@@ -54,6 +54,13 @@ mixin _$AuthController on _AuthControllerBase, Store {
     });
   }
 
+  final _$setUserAsyncAction = AsyncAction('_AuthControllerBase.setUser');
+
+  @override
+  Future<void> setUser(DefaultResponse<dynamic> result) {
+    return _$setUserAsyncAction.run(() => super.setUser(result));
+  }
+
   final _$loginWithGoogleAsyncAction =
       AsyncAction('_AuthControllerBase.loginWithGoogle');
 
@@ -68,20 +75,6 @@ mixin _$AuthController on _AuthControllerBase, Store {
   @override
   Future<dynamic> loginWithFacebook() {
     return _$loginWithFacebookAsyncAction.run(() => super.loginWithFacebook());
-  }
-
-  final _$_AuthControllerBaseActionController =
-      ActionController(name: '_AuthControllerBase');
-
-  @override
-  void setUser(DefaultResponse<dynamic> result) {
-    final _$actionInfo = _$_AuthControllerBaseActionController.startAction(
-        name: '_AuthControllerBase.setUser');
-    try {
-      return super.setUser(result);
-    } finally {
-      _$_AuthControllerBaseActionController.endAction(_$actionInfo);
-    }
   }
 
   @override

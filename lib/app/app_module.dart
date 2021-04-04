@@ -1,60 +1,71 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:hasura_connect/hasura_connect.dart';
+import 'package:shared_preferences_cache_interceptor/shared_preferences_cache_interceptor.dart';
 
 import 'app_controller.dart';
-import 'app_widget.dart';
+import 'controllers/home_controller.dart';
 import 'controllers/splash_controller.dart';
-import 'controllers/year/create_goals_controller.dart';
 import 'controllers/year/goals_controller.dart';
 import 'core/consts/app_conts.dart';
 import 'core/consts/routers_const.dart';
-import 'core/interface/shared_repository_interface.dart';
 import 'core/repositories/local_storage_hive.dart';
 import 'core/repositories/shared_repository.dart';
-import 'interfaces/todo_repository_interface.dart';
 import 'modules/home_module.dart';
 import 'modules/login_module.dart';
 import 'modules/sign_up_module.dart';
 import 'modules/splash_module.dart';
 import 'modules/welcome_module.dart';
+import 'modules/year/year_goal_module.dart';
 import 'repositories/todo_repository.dart';
 import 'repositories/user_repository.dart';
 import 'shared/auth/auth_controller.dart';
 import 'shared/auth/repositories/auth_repository.dart';
-import 'shared/auth/repositories/auth_repository_interface.dart';
+import 'views/tabs/year_goal/pages/create_goals/create_goals_page.dart';
 
-class AppModule extends MainModule {
+class AppModule extends Module {
+
+  final cacheInterceptor = SharedPreferencesCacheInterceptor();
+
   @override
   List<Bind> get binds => [
+    Bind.singleton((i) => AppController()),
+    Bind.lazySingleton((i) => HomeController()),
+    // Bind.lazySingleton((i) => CreateGoalsController()),
+    Bind.lazySingleton((i) => GoalsController(i.get())),
+    Bind.lazySingleton((i) => SplashController),
+    Bind.lazySingleton((i) => AuthController()),    
+    Bind.singleton((i) => SharedRepository()),
+    Bind.singleton((i) => AuthRepository()),
+    Bind.lazySingleton((i) => LocalStorafeHive()),
+    Bind.singleton((i) => UserRepository(i.get())),
+    Bind.lazySingleton((i) =>  HasuraConnect(HasuraConfig.hasuraUrl,
+      interceptors: [cacheInterceptor],
+      // reconnectionAttemp: 3,
+      headers: {
+        'hasura_key_admin': 'ga0RGNYHvNM5d0SLGQfpQWAPGJ8='
+      }
+    )),
+    Bind.singleton((i) => TodoHasuraRepository(i.get())),
 
-    Bind((i) => CreateGoalsController()),
-    Bind((i) => GoalsController()),
-    Bind((i) => AppController()),
-    Bind<ISharedRepositoryInterface>(
-      (i) => SharedRepository(),
-    ),
-    Bind((i) => SplashController()),
-    Bind((i) => LocalStorafeHive()),
-    Bind<IAuthRepository>((i) => AuthRepository()),
-    Bind((i) => AuthController()),
-    Bind((i) => UserRepository(i.get())),
-    Bind<ITodoRepositoryInterface>((i) => TodoHasuraRepository(i.get())),
-    Bind((i) => HasuraConnect(HasuraConfig.hasuraUrl)),
   ];
 
   @override
-  List<ModularRouter> get routers => [
-    ModularRouter(RoutersConst.splash, module: SplashModule()),
-    ModularRouter(RoutersConst.login,
+  List<ModularRoute> get routes => [
+    ModuleRoute(RoutersConst.splash, module: SplashModule()),
+    ModuleRoute(RoutersConst.login,
         module: LoginModule(), transition: TransitionType.noTransition),
-    ModularRouter(RoutersConst.home, module: HomeModule()),
-    ModularRouter(RoutersConst.register, module: SignUpModule()),
-    ModularRouter(RoutersConst.welcome, module: WelcomeModule()),
+    ModuleRoute(RoutersConst.home, module: HomeModule()),
+    ModuleRoute(RoutersConst.register, module: SignUpModule()),
+    ModuleRoute(RoutersConst.welcome, module: WelcomeModule()),
+
+    //temp
+    ModuleRoute(RoutersConst.year, module: YearGoalModule()),
+
+    ChildRoute('/${RoutersConst.goalsCreate}',
+      duration: Duration(milliseconds: 400),
+      child: (_, args) => CreateGoalsPage(),
+      transition: TransitionType.downToUp
+    ),
+
   ];
-
-  @override
-  Widget get bootstrap => AppWidget();
-
-  static Inject get to => Inject<AppModule>.of();
 }

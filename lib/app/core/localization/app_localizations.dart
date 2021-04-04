@@ -6,11 +6,12 @@ import 'package:flutter/services.dart';
 import 'app_localization_delegate.dart';
 
 class AppLocalizations {
-  final Locale locale;
+  late final Locale locale;
 
   AppLocalizations(this.locale);
 
-  Map<String, dynamic> _localizationsStrings; // Mudança de String para Dynamic
+  // Mudança de String para Dynamic
+  late Map<String, dynamic> _localizationsStrings; 
 
   Future<bool> load() async {
     var jsonString =
@@ -25,7 +26,7 @@ class AppLocalizations {
   }
 
   String translate(String key,
-      {Map<String, String> params, String defaultValue = ''}) {
+      { required Map<String, String> params, String defaultValue = ''}) {
     var value; 
     // Modificação do método para pegar json concatenado com . por nível
 
@@ -56,7 +57,7 @@ class AppLocalizations {
     return value ?? defaultValue;
   }
 
-  static AppLocalizations of(BuildContext context) {
+  static Future<AppLocalizations?> of(BuildContext context) async {
     return Localizations.of<AppLocalizations>(context, AppLocalizations);
   }
 

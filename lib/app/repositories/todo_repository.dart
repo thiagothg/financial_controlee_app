@@ -16,13 +16,14 @@ class TodoHasuraRepository implements ITodoRepositoryInterface  {
 
   @override
   Stream<List<TodoModel>> getTodos() async* {
-    yield* connect.subscription(todosQuery)
-      .map((event) {
+    yield* await connect.subscription(todosQuery)
+    .then((res) async {
+      return res.map((event) {
         return (event['data']['TB_TODOS'] as List).map((e) {
           return TodoModel.fromJson(e);
         }).toList();
       });
-    
+    });
    
     // yield* connect.subscription(todosQuery)
     //   .then((result) async {

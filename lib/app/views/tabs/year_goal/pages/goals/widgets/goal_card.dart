@@ -9,7 +9,7 @@ class GoalCard extends StatelessWidget {
 
   final GoalModel model;
 
-  GoalCard({Key key, this.model}) : super(key: key);
+  GoalCard({Key? key, required this.model}) : super(key: key);
   
   @override
   Widget build(BuildContext context) {
@@ -34,7 +34,7 @@ class GoalCard extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(model.title,
-                    style: Theme.of(context).textTheme.headline6.copyWith(
+                    style: Theme.of(context).textTheme.headline6?.copyWith(
                       fontWeight: FontWeight.bold
                     ),
                   ),
@@ -46,12 +46,12 @@ class GoalCard extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text('Remaingn weeks',
-                    style: Theme.of(context).textTheme.bodyText1.copyWith(
+                    style: Theme.of(context).textTheme.bodyText1?.copyWith(
                       fontWeight: FontWeight.bold
                     ),
                   ),
                   Text(model.getRemainWeeks(),
-                    style: Theme.of(context).textTheme.bodyText1.copyWith(
+                    style: Theme.of(context).textTheme.bodyText1?.copyWith(
                       fontWeight: FontWeight.bold
                     ),
                   ),
@@ -62,12 +62,12 @@ class GoalCard extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text('Ends at',
-                    style: Theme.of(context).textTheme.bodyText1.copyWith(
+                    style: Theme.of(context).textTheme.bodyText1?.copyWith(
                       fontWeight: FontWeight.bold
                     ),
                   ),
-                  Text(DateFormat.yMd().format(model?.dateEnd?.toDate()),
-                    style: Theme.of(context).textTheme.bodyText1.copyWith(
+                  Text(DateFormat.yMd().format(model.dateEnd),
+                    style: Theme.of(context).textTheme.bodyText1?.copyWith(
                       fontWeight: FontWeight.bold
                     ),
                   ),

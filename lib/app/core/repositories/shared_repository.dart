@@ -15,7 +15,7 @@ class SharedRepository implements ISharedRepositoryInterface {
 
   @override
   String readUserInfo() {
-    return null;
+    return '';
   }
 
   @override
@@ -30,13 +30,10 @@ class SharedRepository implements ISharedRepositoryInterface {
         switch (value) {
           case themeModeDark:
               return ThemeMode.dark;
-            break;
           case themeModeLight:
               return ThemeMode.light;
-            break;
           default:
             return ThemeMode.light;
-          break;
         }
       }
     );

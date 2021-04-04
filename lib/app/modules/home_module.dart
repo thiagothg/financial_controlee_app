@@ -9,7 +9,7 @@ import 'dashboard_module.dart';
 import 'year/year_goal_module.dart';
 
 
-class HomeModule extends ChildModule {
+class HomeModule extends Module {
   @override
   List<Bind> get binds => [
     Bind((i) => HomeController()),
@@ -18,13 +18,17 @@ class HomeModule extends ChildModule {
   ];
 
   @override
-  List<ModularRouter> get routers => [
-    ModularRouter(Modular.initialRoute, child: (_, args) => HomePage()),
-    ModularRouter(RoutersConst.dashboard, module: DashboardModule()),
-    ModularRouter(RoutersConst.year, module: YearGoalModule()),
-    // ModularRouter(RoutersConst.goals, child: (_, args) => GoalsPage()),
+  List<ModularRoute> get routes => [
+    ChildRoute(Modular.initialRoute, 
+      child: (_, args) => HomePage(),
+      children: [
+        ModuleRoute(RoutersConst.dashboard, module: DashboardModule()),
+        ModuleRoute(RoutersConst.year, module: YearGoalModule()),
+        ModuleRoute(RoutersConst.goals, module: YearGoalModule()),
+      ]  
+    ),
 
   ];
 
-  static Inject get to => Inject<HomeModule>.of();
+  // static Inject get to => Inject<HomeModule>.of();
 }

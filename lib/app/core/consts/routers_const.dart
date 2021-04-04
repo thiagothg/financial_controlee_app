@@ -11,7 +11,7 @@ class RoutersConst {
 
   static const String year = '/home/year';
   static const String goals = '/home/goals';
-  static const String goalsCreate = '/home/year/goal-create';
+  static const String goalsCreate = 'goal-create';
   static const String goalDetail = '/home/year/goal-detail';
   
 

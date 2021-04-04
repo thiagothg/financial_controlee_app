@@ -73,7 +73,7 @@ abstract class _SignUpControllerBase with Store {
       .hasMatch(email);
   
   @computed
-  Function get loginPressed =>
+  Function? get loginPressed =>
       (isEmailValid && isPasswordValid 
         && isConfirmPasswordValid && isNameValid && !loading) ? register : null;
 

@@ -51,5 +51,5 @@ class NavigationItem {
   final Text title;
 
 
-  NavigationItem({this.icon, this.title});
+  NavigationItem({ required this.icon, required this.title});
 }

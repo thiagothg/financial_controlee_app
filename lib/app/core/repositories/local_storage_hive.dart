@@ -10,8 +10,9 @@ class LocalStorafeHive implements ILocalStorage {
 
   _init() async {
       var path = Directory.current.path;
-      Hive.init(path);
-      var box = Hive.openBox('open');
+      
+      Hive.init('${path}hive/');
+      var box = await Hive.openBox('open');
       _instance.complete(box);
   }
 

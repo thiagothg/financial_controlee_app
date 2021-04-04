@@ -9,7 +9,7 @@ import 'widgets/background.dart';
 
 class WelcomePage extends StatefulWidget {
   final String title;
-  const WelcomePage({Key key, this.title = "Welcome"}) : super(key: key);
+  const WelcomePage({Key? key, this.title = "Welcome"}) : super(key: key);
 
   @override
   _WelcomePageState createState() => _WelcomePageState();

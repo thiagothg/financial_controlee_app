@@ -1,44 +1,43 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:financialcontroleeapp/app/core/consts/app_conts.dart';
+import 'package:intl/number_symbols_data.dart';
+import 'package:json_annotation/json_annotation.dart';
 import 'package:money2/money2.dart';
 
 import 'base_model.dart';
 
+part 'goal_week_model.g.dart';
+
+@JsonSerializable()
 class GoalWeek extends BaseModel {
-  int title;
+  @JsonKey(name: 'title')
+  String? title;
+  @JsonKey(name: 'week')
+  int week;
+  @JsonKey(name: 'money')
   double money;
-  Timestamp date;
+  @JsonKey(name: 'date')
+  DateTime date;
+  @JsonKey(name: 'saved')
   bool saved;
+  @JsonKey(name: 'year_goal_id', includeIfNull: false)
+  String? yearGoalId;
 
   GoalWeek({
-    this.title, 
-    this.money, 
-    this.date, 
-    this.saved,
+    required this.title, 
+    required this.money, 
+    required this.date, 
+    required this.saved,
+    this.yearGoalId,
+    required this.week,
   });
 
-  final Currency _currency = Currency.create('BRL', 2, 
-    // symbol: r'R$',  
-    // pattern: 'S 0,00',
-  );
+  factory GoalWeek.fromJson(Map<String, dynamic> json) =>
+      _$GoalWeekFromJson(json);
 
-  GoalWeek.fromMap(Map<String, dynamic> json) : super.fromMap(json) {
-    title = json["week"];
-    money = json["money"] + 0.0;
-    date = Timestamp.fromDate(DateTime.parse(json["date"]));
-    saved = json["saved"];
-    // saved = document.data()["saved"];
-  }
-
-  GoalWeek.toModelFirebaseUser(User data) {
-    // name = data.displayName;
-    // photoUrl = data.photoUrl;
-    // email = data.email;
-    // id = data.uid; 
-  }
+  Map<String, dynamic> toJson() => _$GoalWeekToJson(this);
 
   @override
-  Map toMap() {
+  Map<String, dynamic> toMap() {
     var map = super.toMap();
     map['title'] = title;
     map['money'] = money;
@@ -48,27 +47,7 @@ class GoalWeek extends BaseModel {
   }
 
   String getMoneyFormat(double qtd) {
-    return Money.from(qtd, _currency).toString();
+    var currency = L10n.getCurrency();
+    return '${currency.format(qtd)}';
   }
-
-  static List<GoalWeek> list = [
-    GoalWeek(
-      title: 1,
-      money: 5,
-      // date: '22/01/2020',
-      saved: true,
-    ),
-    GoalWeek(
-      title: 2,
-      money: 10,
-      // date: '01/02/2020',
-      saved: false,
-    ),
-    GoalWeek(
-      title: 3,
-      money: 15,
-      // date: '08/02/2020',
-      saved: true,
-    ),
-  ];
 }

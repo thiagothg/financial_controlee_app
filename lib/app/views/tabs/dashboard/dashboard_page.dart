@@ -8,7 +8,7 @@ import '../../../shared/widgets/drawer/custom_drawer.dart';
 
 class DashboardPage extends StatefulWidget {
   final String title;
-  const DashboardPage({Key key, this.title = "Dashboard"}) : super(key: key);
+  const DashboardPage({Key? key, this.title = "Dashboard"}) : super(key: key);
 
   @override
   _DashboardPageState createState() => _DashboardPageState();

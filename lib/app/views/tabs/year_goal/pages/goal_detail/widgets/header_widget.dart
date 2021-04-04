@@ -1,4 +1,7 @@
+import 'package:financialcontroleeapp/app/controllers/year/goals_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 
 import '../../../../../../models/goal_model.dart';
@@ -7,7 +10,9 @@ class HeaderWidget extends StatelessWidget {
 
   final GoalModel model;
 
-  const HeaderWidget({Key key, this.model}) : super(key: key);
+  HeaderWidget({Key? key, required this.model}) : super(key: key);
+
+  final GoalsController controller = Modular.get();
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +35,8 @@ class HeaderWidget extends StatelessWidget {
           ),
         ],
       ),
-      child: Column(
+      child: Observer(builder: (_) {
+        return Column(
         // mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
@@ -41,8 +47,8 @@ class HeaderWidget extends StatelessWidget {
               animationDuration: 1200,
               radius: 120.0,
               lineWidth: 15.0,
-              percent: model.progress.round() / 100,
-              center: Text("${model.progress.toString()}%"),
+              percent: controller.getProgress.round() / 100,
+              center: Text("${controller.getProgress.toString()}%"),
               progressColor: Colors.green,
               circularStrokeCap: CircularStrokeCap.butt,
               backgroundColor: Theme.of(context).disabledColor,
@@ -51,7 +57,7 @@ class HeaderWidget extends StatelessWidget {
             //   verticalDirection: VerticalDirection.up,
             //   progressColor: Theme.of(context).indicatorColor,
             //   animatedDuration: Duration(milliseconds: 2000),
-            //   size: 20,
+            //   s;})ize: 20,
             //   backgroundColor: Theme.of(context).disabledColor,
             //   currentValue: model.progress,
             //   displayText: '%'
@@ -76,7 +82,8 @@ class HeaderWidget extends StatelessWidget {
             ),
           ),
         ]
-      ),
+      );
+      })
     );
   }
 }

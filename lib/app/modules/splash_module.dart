@@ -3,16 +3,16 @@ import 'package:flutter_modular/flutter_modular.dart';
 import '../controllers/splash_controller.dart';
 import '../views/splash/splash_page.dart';
 
-class SplashModule extends ChildModule {
+class SplashModule extends Module {
   @override
   List<Bind> get binds => [
-        Bind((i) => SplashController()),
-      ];
+    Bind((i) => SplashController()),
+  ];
 
   @override
-  List<ModularRouter> get routers => [
-        ModularRouter(Modular.initialRoute, child: (_, args) => SplashPage()),
-      ];
+  List<ModularRoute> get routes => [
+    ChildRoute(Modular.initialRoute, child: (_, args) => SplashPage()),
+  ];
 
-  static Inject get to => Inject<SplashModule>.of();
+  // static Inject get to => Inject<SplashModule>.of();
 }

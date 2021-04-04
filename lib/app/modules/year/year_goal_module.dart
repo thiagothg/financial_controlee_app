@@ -1,45 +1,47 @@
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:hasura_connect/hasura_connect.dart';
 
-import '../../controllers/year/create_goals_controller.dart';
-import '../../controllers/year/goal_detail_controller.dart';
 import '../../controllers/year/year_goal_controller.dart';
-import '../../core/consts/routers_const.dart';
-import '../../interfaces/goal_repository_interface.dart';
 import '../../repositories/goal_repository.dart';
+import '../../views/tabs/year_goal/pages/about/about_page.dart';
 import '../../views/tabs/year_goal/pages/config_goal_page.dart';
-import '../../views/tabs/year_goal/pages/create_goals/create_goals_page.dart';
 import '../../views/tabs/year_goal/pages/goal_detail/goal_detail_page.dart';
+import '../../views/tabs/year_goal/pages/goals/goals_page.dart';
 import '../../views/tabs/year_goal/year_goal_page.dart';
 
-class YearGoalModule extends ChildModule {
+class YearGoalModule extends Module {
   @override
   List<Bind> get binds => [
-    Bind((i) => YearGoalController()),
-    Bind((i) => CreateGoalsController()),
-    Bind((i) => GoalDetailController()),
-    Bind<IGoalRepositoryInterface>((i) => GoalRepository(i.get())),
+    // Bind.factory((i) => CreateGoalsController()),
+    Bind.lazySingleton((i) => YearGoalController()),
+
+    // Bind.lazySingleton((i) => GoalDetailController()),
+    Bind.lazySingleton((i) => GoalRepository(i.get<HasuraConnect>())),
+    
 
   ];
 
-  static Inject get to => Inject<YearGoalModule>.of();
-
   @override
-  List<ModularRouter> get routers => [
-    ModularRouter(Modular.initialRoute, child: (_, args) => YearGoalPage()),
-    ModularRouter('/second', child: (_, args) => ConfigGoalPage()),
+  List<ModularRoute> get routes => [
+    ChildRoute('/', 
+      child: (_, args) => YearGoalPage(),
+      children: [
+        ChildRoute('/goal', child: (_, __) => GoalsPage()),
+        ChildRoute('/about', child: (_, __) => AboutPage()),
 
-    ModularRouter(RoutersConst.goalsCreate,
-      duration: Duration(milliseconds: 400),
-      child: (_, args) => CreateGoalsPage(),
-      transition: TransitionType.downToUp
-    ),
-    
-    ModularRouter(RoutersConst.goalDetail,
-      duration: Duration(milliseconds: 400),
-      child: (_, args) => GoalDetailPage(
-        model: args.data,
-      ),
-      transition: TransitionType.downToUp
+        
+        ChildRoute('/second', child: (_, args) => ConfigGoalPage()),
+        
+        ChildRoute('/goal-detail',
+          duration: Duration(milliseconds: 400),
+          child: (_, args) => GoalDetailPage(
+            model: args.data,
+          ),
+          transition: TransitionType.downToUp
+        ),
+
+        // WildcardRoute(child: (_, args) => UnknownPage()),
+      ]
     ),
   ];
 

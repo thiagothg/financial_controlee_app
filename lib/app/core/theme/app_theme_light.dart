@@ -13,9 +13,15 @@ class AppThemeLight implements IThemeAppInterface {
       fontFamily: 'Google',
       scaffoldBackgroundColor: Colors.grey[100],
       primaryColor: ColorsConst.primaryColor,
-      primaryColorLight: ColorsConst.primaryLightColor,
+      primaryColorLight: Colors.deepPurple.shade50,
+        //ColorsConst.primaryLightColor,
       // buttonColor: ColorsConst.primaryColor,
-      
+      colorScheme: ColorScheme.fromSwatch(
+        primarySwatch: Colors.deepPurple,
+        primaryColorDark: ColorsConst.primaryColor,
+        accentColor: ColorsConst.primaryColor,
+        errorColor: Colors.red.shade900
+      ),
       buttonTheme: ButtonThemeData(
         height: 50,
         minWidth: double.infinity,
@@ -40,7 +46,10 @@ class AppThemeLight implements IThemeAppInterface {
       ).copyWith(
         headline6: TextStyle(
           color: ColorsConst.primaryColor
-        )
+        ),
+        subtitle2: TextStyle(
+          decoration: TextDecoration.none
+        ),
       ),
       bottomAppBarTheme: BottomAppBarTheme(
 
@@ -49,9 +58,14 @@ class AppThemeLight implements IThemeAppInterface {
       indicatorColor: Colors.green,
       disabledColor: Colors.black12,
       floatingActionButtonTheme: FloatingActionButtonThemeData(
-        backgroundColor: Colors.blue[800]
+        backgroundColor: ColorsConst.primaryColor
       ),
-      splashColor: Colors.blue[800]
+      splashColor: Colors.deepPurple.shade800,
+      errorColor: Colors.red.shade900,
+      inputDecorationTheme: InputDecorationTheme(
+        // labelStyle: 
+      ),
+    
     );
   }
 

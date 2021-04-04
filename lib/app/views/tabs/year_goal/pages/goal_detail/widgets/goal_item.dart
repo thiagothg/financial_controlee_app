@@ -1,4 +1,4 @@
-import 'package:circular_check_box/circular_check_box.dart';
+// import 'package:circular_check_box/circular_check_box.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
@@ -8,7 +8,7 @@ import '../../../../../../models/goal_week_model.dart';
 class GoalItem extends StatefulWidget {
   final GoalWeek model;
 
-  const GoalItem({Key key, this.model}) : super(key: key);
+  const GoalItem({Key? key, required this.model}) : super(key: key);
 
   @override
   _GoalItemState createState() => _GoalItemState();
@@ -17,18 +17,25 @@ class GoalItem extends StatefulWidget {
 class _GoalItemState extends State<GoalItem> {
   @override
   Widget build(BuildContext context) {
+    print(widget.model.saved);
     return ListTile(
-      leading: CircularCheckBox(
-        value: widget.model.saved,
-        materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-        checkColor: Colors.white,
-        activeColor: Theme.of(context).primaryColor,
-        disabledColor: Colors.grey,
-        onChanged: (x) {
-          widget.model.saved = !widget.model.saved;
-          setState(() {  });
-        }
-      ),
+      key: UniqueKey(),
+      // leading: CheckboxListTile(
+      //   value: false,
+      //   title: Text('a'),
+      //   onChanged: (x) {
+      //     widget.model.saved = !widget.model.saved;
+      //     setState(() {  });
+      //   }
+      // ),
+      // CircularCheckBox(
+      //  
+      //   materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+      //   checkColor: Colors.white,
+      //   activeColor: Theme.of(context).primaryColor,
+      //   disabledColor: Colors.grey,
+
+      // ),
       title: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -44,7 +51,7 @@ class _GoalItemState extends State<GoalItem> {
                 size: 20,
               ),
               SizedBox(width: 10),
-              Text(DateFormat.yMd().format(widget.model?.date?.toDate()),
+              Text(DateFormat.yMd().format(widget.model.date),
                 style: TextStyle(
                   fontSize: 13
                 ),
@@ -54,13 +61,13 @@ class _GoalItemState extends State<GoalItem> {
         ],
       ),
       trailing: Container(
-        width: MediaQuery.of(context).size.width * 0.2,
+        width: MediaQuery.of(context).size.width * 0.3,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.end,
           mainAxisSize: MainAxisSize.max,
           children: [
             Icon(FontAwesomeIcons.moneyBillWave,
-                color: Theme.of(context).primaryColor,
+              color: Theme.of(context).primaryColor,
               size: 15,
             ),
             SizedBox(width: 10),

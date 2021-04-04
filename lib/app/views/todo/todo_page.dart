@@ -7,7 +7,7 @@ import 'widgets/item_tile.dart';
 
 class TodoPage extends StatefulWidget {
   final String title;
-  const TodoPage({Key key, this.title = "Todo"}) : super(key: key);
+  const TodoPage({Key? key, this.title = "Todo"}) : super(key: key);
 
   @override
   _TodoPageState createState() => _TodoPageState();
@@ -33,38 +33,41 @@ class _TodoPageState extends ModularState<TodoPage, TodoController> {
               child: CircularProgressIndicator(),
             );
           } else if(snapshot.hasError) {
-            print(controller.todoList.error);
+            print(controller.todoList?.error);
             return Center(
-              child: RaisedButton(
+              child: ElevatedButton(
                 onPressed: controller.getList,
                 child: Text('Error'),
               ),
             );
           }
-          print(snapshot.data.length);
-          return ListView.builder(
-            itemCount: snapshot.data.length,
-            itemBuilder: (_, index) {
-              var model = snapshot.data[index];
-              return ItemTile(
-                model: model,
-                onTap: () {
-                  _showDialog(model);
-                },
-              );
-            },
-          ); 
+          if(snapshot.data != null) {
+            print(snapshot.data?.length);
+            return ListView.builder(
+              itemCount: snapshot.data?.length,
+              itemBuilder: (_, index) {
+                var model = snapshot.data?[index] ?? TodoModel();
+                return ItemTile(
+                  model: model,
+                  onTap: () {
+                    _showDialog(model);
+                  },
+                );
+              },
+            ); 
+          } else {
+            return Container();
+          }
         }
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: _showDialog,
+        onPressed: _showDialog(TodoModel()),
         child: Icon(Icons.add),
       ),
     );
   }
 
-  _showDialog([TodoModel model]) {
-    model ??= TodoModel();
+  _showDialog(TodoModel model) {
     showDialog(
       context: context,
       builder: (_) {
@@ -79,13 +82,13 @@ class _TodoPageState extends ModularState<TodoPage, TodoController> {
             ),
           ),
           actions: <Widget>[
-            FlatButton(
+            TextButton(
               onPressed: () {
                 Modular.to.pop();
               },
               child: Text('Cancelar'),
             ),
-            FlatButton(
+            TextButton(
               onPressed: () async {
                 await controller.save(model);
                 Modular.to.pop();

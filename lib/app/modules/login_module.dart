@@ -4,16 +4,16 @@ import '../controllers/login_controller.dart';
 import '../views/login/login_page.dart';
 
 
-class LoginModule extends ChildModule {
+class LoginModule extends Module {
   @override
   List<Bind> get binds => [
-        Bind((i) => LoginController()),
-      ];
+    Bind.lazySingleton((i) => LoginController()),
+  ];
 
   @override
-  List<ModularRouter> get routers => [
-        ModularRouter(Modular.initialRoute, child: (_, args) => LoginPage()),
-      ];
+  List<ModularRoute> get routes => [
+    ChildRoute(Modular.initialRoute, child: (_, args) => LoginPage()),
+  ];
 
-  static Inject get to => Inject<LoginModule>.of();
+  // static Inject get to => Inject<LoginModule>.of();
 }

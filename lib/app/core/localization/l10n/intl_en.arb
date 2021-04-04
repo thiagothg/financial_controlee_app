@@ -1,0 +1,20 @@
+{
+  "@@locale": "en",
+  "introWelcome": "Welcome {firstName}",
+  "@introWelcome": {
+    "description": "Welcome {firstName}",
+    "placeholders": {
+      "firstName": {}
+    }
+  },
+  "titleYearAbout": "About",
+  "@titleYearAbout": {},
+  "titleYearGoal": "Year Goal",
+  "@titleYearGoal": {
+    "description": "Year Goal"
+  },
+  "titleYearGoals": "Goals",
+  "@titleYearGoals": {
+    "description": "Goals Year"
+  }
+}

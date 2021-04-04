@@ -8,7 +8,7 @@ import 'widgets/drawer_tile.dart';
 
 
 class CustomDrawer extends StatefulWidget {
-  const CustomDrawer({Key key}) : super(key: key);
+  const CustomDrawer({Key? key}) : super(key: key);
 
   @override
   _CustomDrawerState createState() => _CustomDrawerState();
@@ -35,7 +35,7 @@ class _CustomDrawerState
                 currentAccountPicture: CircleAvatar(
                   child: (controller.userModel.photoUrl == null) 
                   ? Image.network(
-                    controller.userModel.photoUrl,
+                    controller.userModel.photoUrl!,
                     
                   ) : Text(controller.userModel.name.substring(0,1)),
                 ),
@@ -49,6 +49,7 @@ class _CustomDrawerState
                 onTap: () {
                   pageStore.changePage(0);
                   Navigator.pop(context);
+                  // Modular.to.pushReplacementNamed(RoutersConst.home);
                 },
               ),
               Divider(),

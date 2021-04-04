@@ -25,8 +25,11 @@ abstract class _AuthControllerBase with Store {
   final UserRepository _userRepository = Modular.get();
 
   _AuthControllerBase() {
-    _authRepository.getUser().then(setUser).catchError((e) {
-      print('ERRORRRRRR');
+    _authRepository.getUser()
+      .then(setUser)
+      .catchError((e) {
+        print('ERRORRRRRR');
+        print(e);
     });
   }
 
@@ -34,17 +37,28 @@ abstract class _AuthControllerBase with Store {
   AuthStatus status = AuthStatus.loading;
 
   @observable
-  User user;
+  User? user;
 
   @observable
-  UserModel userModel = UserModel();
+  UserModel userModel = UserModel(
+    name: '',
+    email: ''
+  );
 
   @action
-  void setUser(DefaultResponse result) {
+  Future<void> setUser(DefaultResponse result) async {
     if(result.success && result.object != null) {
       status = AuthStatus.login;
+  
       user = result.object;
-      userModel = UserModel.toModelFirebaseUser(user);
+      userModel = await _userRepository.get(result.object.uid)
+        .then<UserModel>((res) {
+          if(res.success) {
+            return res.object;
+          } else {
+           return UserModel.fromFirebaseUser(result.object);
+          }
+        });
      
       print(userModel);
     } else {
@@ -58,8 +72,8 @@ abstract class _AuthControllerBase with Store {
    await _authRepository.getGoogleLogin().then((result) async {
      if(result.success) {
       await createUser(result.object);
-      userModel = UserModel.toModelFirebaseUser(user);
-      Modular.to.pushReplacementNamed(RoutersConst.home);
+      userModel = UserModel.fromFirebaseUser(result.object);
+      Modular.to.pushReplacementNamed(RoutersConst.year);
      } else {
         final snackBar = SnackBar(
          content: Text(result.message.toString())
@@ -102,8 +116,8 @@ abstract class _AuthControllerBase with Store {
   Future<void> createUser(User user) async {
     if(!await _userRepository.exists(user.uid)) {
       userModel = UserModel(
-        name: user.displayName,
-        email: user.email,
+        name: user.displayName!,
+        email: user.email!,
         photoUrl: user.photoURL
       );
 
@@ -126,7 +140,7 @@ abstract class _AuthControllerBase with Store {
    await _authRepository.getFacebookLogin().then((result) async {
      if(result.success) {
       await createUser(result.object);
-      userModel = UserModel.toModelFirebaseUser(user);
+      userModel = UserModel.fromFirebaseUser(user!);
       Modular.to.pushReplacementNamed(RoutersConst.home);
      } else {
         final snackBar = SnackBar(

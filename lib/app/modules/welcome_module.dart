@@ -3,16 +3,19 @@ import 'package:flutter_modular/flutter_modular.dart';
 import '../controllers/welcome_controller.dart';
 import '../views/welcome/welcome_page.dart';
 
-class WelcomeModule extends ChildModule {
+class WelcomeModule extends Module {
   @override
   List<Bind> get binds => [
-        Bind((i) => WelcomeController()),
-      ];
+    Bind((i) => WelcomeController()),
+  ];
 
   @override
-  List<ModularRouter> get routers => [
-        ModularRouter(Modular.initialRoute, child: (_, args) => WelcomePage()),
-      ];
+  List<ModularRoute> get routes => [
+    ChildRoute(Modular.initialRoute, 
+      child: (_, args) => WelcomePage(),
+      children: []
+    ),
+  ];
 
-  static Inject get to => Inject<WelcomeModule>.of();
+  // static Inject get to => Inject<WelcomeModule>.of();
 }

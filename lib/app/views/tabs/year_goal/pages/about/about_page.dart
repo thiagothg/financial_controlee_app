@@ -5,7 +5,7 @@ import '../../../../../controllers/year/year_goal_controller.dart';
 
 class AboutPage extends StatefulWidget {
   final String title;
-  const AboutPage({Key key, this.title = "About"}) : super(key: key);
+  const AboutPage({Key? key, this.title = "About"}) : super(key: key);
 
   @override
   _AboutPageState createState() => _AboutPageState();

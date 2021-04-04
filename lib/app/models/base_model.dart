@@ -1,13 +1,28 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:json_annotation/json_annotation.dart';
 import '../interfaces/base_model_interface.dart';
 
+part 'base_model.g.dart';
+
+@JsonSerializable()
 class BaseModel implements IBaseModelInterface {
-  String id;
-  bool isActive = true;
-  Timestamp createdAt;
-  Timestamp updatedAt;
+  @JsonKey(name: 'id', includeIfNull: false)
+  String? id;
+  @JsonKey(name: 'is_active', includeIfNull: false)
+  bool? isActive;
+  @JsonKey(name: 'created_at', includeIfNull: false)
+  DateTime? createdAt;
+  @JsonKey(name: 'updated_at', includeIfNull: false)
+  DateTime? updatedAt;
 
   BaseModel();
+
+  factory BaseModel.fromJson(Map<String, dynamic> json) =>
+      _$BaseModelFromJson(json);
+
+  Map<String, dynamic> toJson() => _$BaseModelToJson(this);
+
+
 
   @override
   BaseModel.fromMap(Map<String, dynamic> json) {
@@ -15,15 +30,14 @@ class BaseModel implements IBaseModelInterface {
     isActive = (json.containsKey('isActive')) ? json["isActive"] : null;
 
     if(json.containsKey('createdAt')) {
-      var parsedDate = DateTime.parse(json["createdAt"]);
-      createdAt = Timestamp.fromDate(parsedDate);
+      createdAt = DateTime.parse(json["createdAt"]);
     }
     
     // updatedAt = document.data()["updatedAt"];
   }
 
   @override
-  Map toMap() {
+  Map<String, dynamic> toMap() {
     var map = <String, dynamic>{};
     map['isActive'] = isActive;
     map['id'] = id;
@@ -43,7 +57,7 @@ class BaseModel implements IBaseModelInterface {
   }
 
   @override
-  String documentId() => id;
+  String documentId() => id ?? '';
 
   @override
   void disableDocument() => isActive = false;
@@ -52,9 +66,20 @@ class BaseModel implements IBaseModelInterface {
   void enableDocument() => isActive = true;
 
   @override
-  void setCreateTime() => createdAt = Timestamp.now();
+  void setCreateTime() => createdAt = DateTime.now();
 
   @override
-  void setUpdateTime() => updatedAt = Timestamp.now();
+  void setUpdateTime() => updatedAt = DateTime.now();
+
+  @override
+  void setDocumentId(String idDoc) => id = idDoc;
+
+  DateTime dateTimeFromTimestamp(Timestamp timestamp) {
+    return timestamp.toDate();
+  }
+
+  @override
+  DateTime fromJsonTime(int int) 
+    => DateTime.fromMillisecondsSinceEpoch(int);
   
 }

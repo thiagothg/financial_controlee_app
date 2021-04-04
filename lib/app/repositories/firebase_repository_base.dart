@@ -11,17 +11,18 @@ import '../models/base_model.dart';
 class FirebaseRepositoyBase<Model extends BaseModel>
     implements IFirebaseRepositoryBaseInterface<Model> {
 
-  FirebaseRepositoyBase({this.fromMap, this.collection}) {
-    collection ?? '${Model.toString().toLowerCase()}s';
-    collectionReference = FirebaseFirestore.instance.collection(collection);
-    firestore = FirebaseFirestore.instance;
-  }
-
   final Model Function(DocumentSnapshot document) fromMap;
 
-  String collection;
-  CollectionReference collectionReference;
-  FirebaseFirestore firestore;
+  late String? collection;
+  late CollectionReference collectionReference;
+  late FirebaseFirestore firestore;
+  
+
+  FirebaseRepositoyBase({required this.fromMap, required this.collection}) {
+    collection ??= '${Model.toString().toLowerCase()}s';
+    collectionReference = FirebaseFirestore.instance.collection(collection!);
+    firestore = FirebaseFirestore.instance;
+  }
 
   @override
   Future<DefaultResponse> add(Model model) async {

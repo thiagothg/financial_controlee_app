@@ -6,7 +6,7 @@ import '../../controllers/splash_controller.dart';
 
 class SplashPage extends StatefulWidget {
   final String title;
-  const SplashPage({Key key, this.title = "Splash"}) : super(key: key);
+  const SplashPage({Key? key, this.title = "Splash"}) : super(key: key);
 
   @override
   _SplashPageState createState() => _SplashPageState();
@@ -14,7 +14,7 @@ class SplashPage extends StatefulWidget {
 
 class _SplashPageState extends ModularState<SplashPage, SplashController> {
   //use 'controller' variable to access controller
-  ReactionDisposer disposer;
+  late ReactionDisposer disposer;
 
  @override
   void initState() {

@@ -14,7 +14,7 @@ abstract class _TodoControllerBase with Store {
   final ITodoRepositoryInterface repository;
 
   @observable
-  ObservableStream<List<TodoModel>> todoList;
+  ObservableStream<List<TodoModel>>? todoList;
 
   _TodoControllerBase(this.repository) {
     getList();

@@ -99,5 +99,10 @@
 		<string>fbauth2</string>
 		<string>fbshareextension</string>
 	</array>
+	<key>CFBundleLocalizations</key>
+	<array>
+		<string>en</string>
+		<string>pt_BR</string>
+	</array>
 </dict>
 </plist>

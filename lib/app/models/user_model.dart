@@ -1,31 +1,35 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:json_annotation/json_annotation.dart';
 
 import 'base_model.dart';
 
+part 'user_model.g.dart';
+
+@JsonSerializable()
 class UserModel extends BaseModel {
-  String name;
-  String bio;
-  String photoUrl;
+  @JsonKey(name: 'name')
+  late String name;
+  @JsonKey(name: 'bio')
+  String? bio;
+  @JsonKey(name: 'photo_url')
+  String? photoUrl;
+  @JsonKey(name: 'email')
   String email;
 
-  UserModel({this.name, this.bio, this.photoUrl, this.email});
+  UserModel({
+    required this.name, 
+    this.bio, 
+    this.photoUrl, 
+    required this.email
+  });
 
-  UserModel.fromMap(Map<String, dynamic> json) : super.fromMap(json) {
-    name = json["name"];
-    bio = json["bio"];
-    photoUrl = json["photoUrl"];
-    email = json["email"];
-  }
+  factory UserModel.fromJson(Map<String, dynamic> json) =>
+      _$UserModelFromJson(json);
 
-  UserModel.toModelFirebaseUser(User data) {
-    name = data.displayName;
-    photoUrl = data.photoURL;
-    email = data.email;
-    id = data.uid; 
-  }
+  Map<String, dynamic> toJson() => _$UserModelToJson(this);
 
   @override
-  Map toMap() {
+  Map<String, dynamic> toMap() {
     var map = super.toMap();
     
     map['name'] = name;    
@@ -33,5 +37,18 @@ class UserModel extends BaseModel {
     map['photoUrl'] = photoUrl;
     map['email'] = email;
     return map;
+  }
+
+
+  static UserModel fromFirebaseUser(User data) {
+    var model = UserModel(
+      name: data.displayName!,
+      photoUrl: data.photoURL,
+      email: data.email!,
+      bio: data.phoneNumber
+    );
+    model.setCreateTime();
+    model.setDocumentId(data.uid);
+    return model;
   }
 }

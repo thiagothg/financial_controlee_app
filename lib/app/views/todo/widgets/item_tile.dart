@@ -8,13 +8,16 @@ class ItemTile extends StatelessWidget {
   final TodoModel model;
   final Function onTap;
 
-  const ItemTile({Key key, this.model, this.onTap}) : super(key: key);
+  const ItemTile({Key? key, 
+    required this.model, 
+    required this.onTap
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return ListTile(
       title: Text(model.title),
-      onTap: onTap,
+      onTap: () => onTap,
       leading: IconButton(
         icon: Icon(
           Icons.remove_circle_outline,
@@ -27,7 +30,7 @@ class ItemTile extends StatelessWidget {
       trailing: Checkbox(
         value: model.check,
         onChanged: (check) {
-          model.check = check;
+          model.check = check ?? model.check;
           Modular.get<TodoController>().save(model);
         },
       ),

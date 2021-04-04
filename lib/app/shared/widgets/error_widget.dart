@@ -18,7 +18,7 @@ class ErrorPage extends StatelessWidget {
               ),
               Container(
                 child: Text('Ocorreu Erro!',
-                  style: Theme.of(context).textTheme.headline6.copyWith(
+                  style: Theme.of(context).textTheme.headline6?.copyWith(
                     fontWeight: FontWeight.bold
                   ), 
                 ),

@@ -12,13 +12,13 @@ mixin _$TodoController on _TodoControllerBase, Store {
   final _$todoListAtom = Atom(name: '_TodoControllerBase.todoList');
 
   @override
-  ObservableStream<List<TodoModel>> get todoList {
+  ObservableStream<List<TodoModel>>? get todoList {
     _$todoListAtom.reportRead();
     return super.todoList;
   }
 
   @override
-  set todoList(ObservableStream<List<TodoModel>> value) {
+  set todoList(ObservableStream<List<TodoModel>>? value) {
     _$todoListAtom.reportWrite(value, super.todoList, () {
       super.todoList = value;
     });

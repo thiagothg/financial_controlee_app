@@ -1,30 +1,42 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:money2/money2.dart';
+import 'package:json_annotation/json_annotation.dart';
 
 import 'base_model.dart';
 import 'goal_week_model.dart';
 
-class GoalModel extends BaseModel {
+
+part 'goal_model.g.dart';
+
+@JsonSerializable(explicitToJson: true) //
+class GoalModel  extends BaseModel {
+  @JsonKey(name: 'title')
   String title;
+  @JsonKey(name: 'money_start')
   double moneyStart;
+  @JsonKey(name: 'user_id')
   String userUid;
+  @JsonKey(name: 'money_end')
   double moneyEnd;
-  Timestamp dateStart;
-  Timestamp dateEnd;
+  @JsonKey(name: 'date_start')
+  DateTime dateStart;
+  @JsonKey(name: 'date_end')
+  DateTime dateEnd;
+  @JsonKey(name: 'progress')
   int progress;
+  @JsonKey(name: 'qtd_saved')
   double qtdSaved;
-  List<GoalWeek> weeksGoal = [];
+  @JsonKey(name: 'TB_YEAR_GOAL_WEEKs')
+  List<GoalWeek>? weeksGoal = [];
 
   GoalModel({
-    this.title, 
-    this.moneyStart, 
-    this.dateStart, 
-    this.moneyEnd, 
-    this.dateEnd,
-    this.progress,
-    this.qtdSaved,
-    this.userUid,
+    required  this.title, 
+    required this.moneyStart, 
+    required this.dateStart, 
+    required this.moneyEnd, 
+    required this.dateEnd,
+    required this.progress,
+    required this.qtdSaved,
+    required this.userUid,
     this.weeksGoal
   });
 
@@ -33,31 +45,30 @@ class GoalModel extends BaseModel {
     // pattern: 'S 0,00',
   );
 
-  GoalModel.fromMap(Map<String, dynamic> json) : super.fromMap(json) {
-    title = json["title"];
-    moneyStart = json["moneyStart"] + 0.0;
-    moneyEnd = json["moneyEnd"] + 0.0;
-    dateStart = Timestamp.fromDate(DateTime.parse(json["dateStart"]));
-    dateEnd = Timestamp.fromDate(DateTime.parse(json["dateEnd"]));
-    progress = json["progress"];
-    qtdSaved = json["qtdSaved"] + 0.0;
-    userUid = json["userId"];
-  }
+  factory GoalModel.fromJson(Map<String, dynamic> json) =>
+      _$GoalModelFromJson(json);
 
-  GoalModel.toModelFirebaseUser(User data) {
-    // name = data.displayName;
-    // photoUrl = data.photoUrl;
-    // email = data.email;
-    // id = data.uid; 
-  }
+  Map<String, dynamic> toJson() => _$GoalModelToJson(this);
+
+
+  // GoalModel.fromMap(Map<String, dynamic> json) : super.fromMap(json)  {
+  //   title = json["title"];
+  //   moneyStart = json["moneyStart"] + 0.0;
+  //   moneyEnd = json["moneyEnd"] + 0.0;
+  //   // dateStart = Timestamp.fromDate(DateTime.parse(json["dateStart"]));
+  //   // dateEnd = Timestamp.fromDate(DateTime.parse(json["dateEnd"]));
+  //   progress = json["progress"];
+  //   qtdSaved = json["qtdSaved"] + 0.0;
+  //   userUid = json["userId"];
+  // }
 
   @override
-  Map toMap() {
+  Map<String, dynamic> toMap() {
     var map = super.toMap();
-    map['title'] = title;
-    map['moneyStart'] = moneyStart;
-    map['dateStart'] = dateStart;
-    map['userUid'] = userUid;
+    // map['title'] = title;
+    // map['moneyStart'] = moneyStart;
+    // map['dateStart'] = dateStart;
+    // map['userUid'] = userUid;
     return map;
   }
 
@@ -66,40 +77,8 @@ class GoalModel extends BaseModel {
   }
 
   String getRemainWeeks() {
-    var diff = dateEnd.toDate().difference(DateTime.now());
-    return (diff.inDays ~/ 7).toString();
+    var diff = dateEnd.difference(DateTime.now()).inDays;
+   
+    return (diff ~/ 7).toString();
   }
-
-  static List<GoalModel> list = [
-    GoalModel(
-      title: 'Viagem',
-      moneyStart: 12.0,
-      moneyEnd: 122.22,
-      // dateStart: '22/01/2020',
-      // dateEnd: '21/05/2020',
-      progress: 20,
-      qtdSaved: 50,
-      weeksGoal: GoalWeek.list
-    ),
-    GoalModel(
-      title: 'Viagem Tetse',
-      moneyStart: 12.0,
-      moneyEnd: 122.22,
-      // dateStart: '22/01/2020',
-      // dateEnd: '21/05/2020',
-      progress: 55,
-      qtdSaved: 50,
-      weeksGoal: []
-    ),
-    GoalModel(
-      title: 'Teste',
-      moneyStart: 12.0,
-      moneyEnd: 122.22,
-      // dateStart: '22/01/2020',
-      // dateEnd: '21/05/2020',
-      progress: 50,
-      qtdSaved: 50,
-      weeksGoal: []
-    ),
-  ];
 }

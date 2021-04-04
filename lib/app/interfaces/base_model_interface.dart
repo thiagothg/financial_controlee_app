@@ -16,4 +16,6 @@ abstract class IBaseModelInterface {
   void setCreateTime();
 
   void setUpdateTime();
+
+  void setDocumentId(String id);
 } 

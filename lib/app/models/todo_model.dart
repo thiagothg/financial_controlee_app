@@ -2,7 +2,7 @@ class TodoModel {
   String title;
   bool check;
   // DocumentReference reference;
-  String id;
+  String? id;
 
   TodoModel({this.title = '', this.check = false, this.id});
 

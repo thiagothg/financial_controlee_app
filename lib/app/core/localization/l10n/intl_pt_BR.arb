@@ -1,0 +1,20 @@
+{
+  "@@locale": "pt-BR",
+  "introWelcome": "Bem-vindo {firstName}",
+  "@introWelcome": {
+    "description": "Welcome {firstName}",
+    "placeholders": {
+      "firstName": {}
+    }
+  },
+  "titleYearAbout": "Sobre",
+  "@titleYearAbout": {},
+  "titleYearGoal": "Objetivo Ano",
+  "@titleYearGoal": {
+    "description": "Year Goal"
+  },
+  "titleYearGoals": "Objetivos",
+  "@titleYearGoals": {
+    "description": "Goals Year"
+  }
+}

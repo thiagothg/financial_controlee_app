@@ -6,6 +6,8 @@ class GlobalScaffold {
   final scaffkey = GlobalKey<ScaffoldState>();
 
   void showSnackBar(SnackBar snackBar) {
-    scaffkey.currentState.showSnackBar(snackBar);
+    ScaffoldMessenger.of(scaffkey.currentContext!)
+      .showSnackBar(snackBar);
+    // scaffkey.currentState?.showSnackBar(snackBar);
   }
 }

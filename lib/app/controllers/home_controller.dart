@@ -13,7 +13,10 @@ abstract class _HomeControllerBase with Store {
   AuthController auth = Modular.get();
 
   @observable
-  UserModel userModel = UserModel();
+  UserModel userModel = UserModel(
+    name: '',
+    email: ''
+  );
   
   _HomeControllerBase() {
     autorun((_){

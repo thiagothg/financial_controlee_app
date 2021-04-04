@@ -4,17 +4,17 @@ import '../controllers/dashboard_controller.dart';
 import '../views/tabs/dashboard/dashboard_page.dart';
 
 
-class DashboardModule extends ChildModule {
+class DashboardModule extends Module {
   @override
   List<Bind> get binds => [
     Bind((i) => DashboardController()),
   ];
 
-  static Inject get to => Inject<DashboardModule>.of();
+  // static Inject get to => Inject<DashboardModule>.of();
 
 
   @override
-  List<ModularRouter> get routers => [
-    ModularRouter(Modular.initialRoute, child: (_, args) => DashboardPage()),
+  List<ModularRoute> get routes => [
+    ChildRoute(Modular.initialRoute, child: (_, args) => DashboardPage()),
   ];
 }

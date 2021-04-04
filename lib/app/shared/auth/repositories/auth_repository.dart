@@ -18,7 +18,7 @@ class AuthRepository implements IAuthRepository {
 
   @override
   Future<DefaultResponse> getEmailPasswordLogin(
-      {String email, String password}) async {
+      {String email = '', String password = ''}) async {
      try {
       await _auth.signInWithEmailAndPassword(
           email: email.trim(), password: password.trim());
@@ -49,7 +49,7 @@ class AuthRepository implements IAuthRepository {
       );
 
       switch(res.status) {
-        case FacebookLoginStatus.Success:
+        case FacebookLoginStatus.success:
           print('It worked');
 
           //Get Token
@@ -57,27 +57,22 @@ class AuthRepository implements IAuthRepository {
 
           //Convert to Auth Credential
           final credential = FacebookAuthProvider
-            .credential(fbToken.token);
+            .credential('${fbToken?.token}');
 
           //User Credential to Sign in with Firebase
           final result = await _auth.signInWithCredential(credential);
 
-          print('${result.user.displayName} is now logged in');
+          print('${result.user?.displayName} is now logged in');
           return ResponseBuilder.success<User>(
             object: result.user, message: 'Logou com sucesso');
 
-          break;
-        case FacebookLoginStatus.Cancel:
+        case FacebookLoginStatus.cancel:
           print('The user canceled the login');
             throw('Cancel login Facebook');
-          break;
-        case FacebookLoginStatus.Error:
+        case FacebookLoginStatus.error:
           print('There was an error');
-           throw(res.error);
-          break;
-    }
-
-    throw('Ocorreu um erro');
+           throw('${res.error}');
+      }
     } on Exception catch (e) {
       return ResponseBuilder.failed(
           object: e, 
@@ -95,11 +90,11 @@ class AuthRepository implements IAuthRepository {
     try {
       final googleUser = await _googleSignIn.signIn();
       final googleAuth =
-          await googleUser.authentication;
+          await googleUser?.authentication;
 
       final credential = GoogleAuthProvider.credential(
-        accessToken: googleAuth.accessToken,
-        idToken: googleAuth.idToken,
+        accessToken: googleAuth?.accessToken,
+        idToken: googleAuth?.idToken,
       );
 
       final user =
@@ -135,7 +130,7 @@ class AuthRepository implements IAuthRepository {
 
   @override
   Future<DefaultResponse> registerEmailPassword(
-      {String email, String password}) async {
+      {String email = '', String password = ''}) async {
     try {
       return await _auth
           .createUserWithEmailAndPassword(

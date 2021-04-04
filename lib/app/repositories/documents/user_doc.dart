@@ -46,9 +46,14 @@ mutation DeleteTodo(\$id: uuid) {
 ''';
 
 const String userByIdQuery = ''' 
-query ControlleQuery(\$id: String!) {
-  control_app_TB_USERS_by_pk(id: \$id) {
+query User(\$id: String!) {
+  FINANCIAL_APP_TB_USERS_by_pk(id: \$id) {
+    create_at
+    email
     id
+    is_active
+    name
+    photo_url
   }
 }
 ''';

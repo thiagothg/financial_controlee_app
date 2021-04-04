@@ -5,16 +5,16 @@ class DrawerTile extends StatelessWidget {
   final IconData icon;
   final String text;
   final int page;
-  final Function onTap;
+  final GestureTapCallback? onTap;
   final bool highlighted;
 
   const DrawerTile({
-    Key key, 
-    @required this.icon, 
-    @required this.text, 
-    @required this.page, 
-    @required this.onTap, 
-    this.highlighted}) : super(key: key);
+    Key? key, 
+    required this.icon, 
+    required this.text, 
+    required this.page, 
+    required this.onTap, 
+    required this.highlighted}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

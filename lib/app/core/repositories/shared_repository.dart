@@ -11,7 +11,7 @@ class SharedRepository implements ISharedRepositoryInterface {
   static const themeMode = 'theme_mode';
   static const themeModeDark = 'ThemeMode.dark';
   static const themeModeLight = 'ThemeMode.light';
-
+  static const themeModeSystem = 'ThemeMode.system';
 
   @override
   String readUserInfo() {
@@ -33,15 +33,15 @@ class SharedRepository implements ISharedRepositoryInterface {
           case themeModeLight:
               return ThemeMode.light;
           default:
-            return ThemeMode.light;
+            return ThemeMode.system;
         }
       }
     );
   }
 
   @override
-  Future<bool> saveThemeMode(ThemeMode themeMode) async {
+  Future<bool> saveThemeMode(ThemeMode theme) async {
     return await LocalStorage.setValue<String>(
-        themeMode.toString(), themeMode.toString());
+        themeMode, theme.toString());
   }
 }

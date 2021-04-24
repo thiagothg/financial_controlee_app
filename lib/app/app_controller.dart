@@ -22,10 +22,10 @@ abstract class _AppControllerBase with Store {
   }
 
   @observable
-  IThemeAppInterface themeApp = AppThemeFactory.getTheme(ThemeMode.light);
+  IThemeAppInterface themeApp = AppThemeFactory.getTheme(ThemeMode.system);
 
   @observable
-  ThemeMode themeMode = ThemeMode.light;
+  ThemeMode themeMode = ThemeMode.system;
 
   @action
   Future<void> loadThemeData() async {

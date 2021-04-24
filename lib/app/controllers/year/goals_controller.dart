@@ -22,7 +22,7 @@ abstract class _GoalsControllerBase with Store implements Disposable  {
   final AuthController auth = Modular.get();
 
   _GoalsControllerBase(this.goalRepository) {
-    getGoals();
+
   }
 
   TextEditingController nameGoalController = TextEditingController();
@@ -38,7 +38,9 @@ abstract class _GoalsControllerBase with Store implements Disposable  {
   DateTime dateGoal = DateTime.now();
 
   @computed
-  bool get isDateValid => dateGoal.isAfter(DateTime.now());
+  bool get isDateValid => dateGoal.isAfter(
+    DateTime.now().subtract(Duration(days:1))
+  );
 
   @computed
   VoidCallback? get buttonPressed =>
@@ -48,7 +50,7 @@ abstract class _GoalsControllerBase with Store implements Disposable  {
   bool loading = false;
 
   @observable
-  ObservableList<GoalWeek>? _goals;
+  ObservableList<GoalWeek> _goals = <GoalWeek>[].asObservable();
 
   @observable
   int _progress = 0;
@@ -57,26 +59,21 @@ abstract class _GoalsControllerBase with Store implements Disposable  {
   int get getProgress => _progress;
 
   @computed
-  ObservableList<GoalWeek>? get goalsWeeks => _goals;
-
-  @observable
-  ObservableStream<List<GoalModel>>? stream;
+  ObservableList<GoalWeek> get goalsWeeks => _goals;
   
-  void getGoals() async {
-    stream = goalRepository.getGoals(auth.userModel.id!).asObservable();
-    print('teste');
+  Stream<List<GoalModel>> getGoals() async* {
+    yield* await goalRepository.getGoals(auth.userModel.id!).asObservable();
   }
 
   Future<void> setQtdGoal(String value) async {
-    var regExp = RegExp(r"[a-zA-Z]");
-    var p = double.tryParse(
-      value
-      .replaceAll(regExp, '')
-      .replaceAll(',', '')
-      .replaceAll('.', '').trim());
-    if(p != null) {
-      qtdGoal = p / 100;
+    var qtd = 0.0;
+    if(value.isNotEmpty) {
+      var currency = L10n.getCurrency();
+      var number = currency.parse(value);
+      qtd = number.toDouble();
     }
+
+    qtdGoal = qtd;
   }
 
   @action
@@ -174,22 +171,31 @@ abstract class _GoalsControllerBase with Store implements Disposable  {
   Future<void> updateWeek(GoalWeek goalWeek, GoalModel goalModel, int i) async {
     var por = 2;
     var progressWeek = 0;
+  
     if(goalWeek.saved) {
       progressWeek = goalModel.progress + por;
-      goalModel.progress = _progress;
+      goalModel.progress = progressWeek;
 
       var qtdSaved = goalModel.qtdSaved + goalWeek.money;
-      goalModel.qtdSaved =  qtdSaved;
+      goalModel.qtdSaved = qtdSaved;
     } else {
       progressWeek = goalModel.progress - por;
-      goalModel.progress = _progress;
+      goalModel.progress = progressWeek;
 
       var qtdSaved = goalModel.qtdSaved - goalWeek.money;
       goalModel.qtdSaved = qtdSaved;
     }
+  
     _progress = progressWeek;
-    _goals?[i].saved = goalWeek.saved;
-    await goalRepository.updateWeek(goalWeek, goalModel);
+    toggleDone(i);
+    // await goalRepository.updateWeek(goalWeek, goalModel);
+    print('after toggle ${_goals[i].saved}');
+  }
+
+  @action
+  void toggleDone(int i) {
+    goalsWeeks[i].saved = !_goals[i].saved;
+    print(goalsWeeks[i].saved);
   }
 
   void dispose() {

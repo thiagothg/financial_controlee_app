@@ -1,3 +1,4 @@
+import 'package:financialcontroleeapp/app/views/tabs/dashboard/dashboard_page.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
 import '../controllers/dashboard_controller.dart';
@@ -20,11 +21,9 @@ class HomeModule extends Module {
   @override
   List<ModularRoute> get routes => [
     ChildRoute(Modular.initialRoute, 
-      child: (_, args) => HomePage(),
+      child: (_, args) => DashboardPage(),
       children: [
         ModuleRoute(RoutersConst.dashboard, module: DashboardModule()),
-        ModuleRoute(RoutersConst.year, module: YearGoalModule()),
-        ModuleRoute(RoutersConst.goals, module: YearGoalModule()),
       ]  
     ),
 

@@ -30,11 +30,11 @@ mixin _$GoalsController on _GoalsControllerBase, Store {
       (_$getProgressComputed ??= Computed<int>(() => super.getProgress,
               name: '_GoalsControllerBase.getProgress'))
           .value;
-  Computed<ObservableList<GoalWeek>?>? _$goalsWeeksComputed;
+  Computed<ObservableList<GoalWeek>>? _$goalsWeeksComputed;
 
   @override
-  ObservableList<GoalWeek>? get goalsWeeks => (_$goalsWeeksComputed ??=
-          Computed<ObservableList<GoalWeek>?>(() => super.goalsWeeks,
+  ObservableList<GoalWeek> get goalsWeeks => (_$goalsWeeksComputed ??=
+          Computed<ObservableList<GoalWeek>>(() => super.goalsWeeks,
               name: '_GoalsControllerBase.goalsWeeks'))
       .value;
 
@@ -86,13 +86,13 @@ mixin _$GoalsController on _GoalsControllerBase, Store {
   final _$_goalsAtom = Atom(name: '_GoalsControllerBase._goals');
 
   @override
-  ObservableList<GoalWeek>? get _goals {
+  ObservableList<GoalWeek> get _goals {
     _$_goalsAtom.reportRead();
     return super._goals;
   }
 
   @override
-  set _goals(ObservableList<GoalWeek>? value) {
+  set _goals(ObservableList<GoalWeek> value) {
     _$_goalsAtom.reportWrite(value, super._goals, () {
       super._goals = value;
     });
@@ -110,21 +110,6 @@ mixin _$GoalsController on _GoalsControllerBase, Store {
   set _progress(int value) {
     _$_progressAtom.reportWrite(value, super._progress, () {
       super._progress = value;
-    });
-  }
-
-  final _$streamAtom = Atom(name: '_GoalsControllerBase.stream');
-
-  @override
-  ObservableStream<List<GoalModel>>? get stream {
-    _$streamAtom.reportRead();
-    return super.stream;
-  }
-
-  @override
-  set stream(ObservableStream<List<GoalModel>>? value) {
-    _$streamAtom.reportWrite(value, super.stream, () {
-      super.stream = value;
     });
   }
 
@@ -160,13 +145,26 @@ mixin _$GoalsController on _GoalsControllerBase, Store {
     return _$setGoalWeeksAsyncAction.run(() => super.setGoalWeeks(val));
   }
 
+  final _$_GoalsControllerBaseActionController =
+      ActionController(name: '_GoalsControllerBase');
+
+  @override
+  void toggleDone(int i) {
+    final _$actionInfo = _$_GoalsControllerBaseActionController.startAction(
+        name: '_GoalsControllerBase.toggleDone');
+    try {
+      return super.toggleDone(i);
+    } finally {
+      _$_GoalsControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
   @override
   String toString() {
     return '''
 qtdGoal: ${qtdGoal},
 dateGoal: ${dateGoal},
 loading: ${loading},
-stream: ${stream},
 isDateValid: ${isDateValid},
 buttonPressed: ${buttonPressed},
 getProgress: ${getProgress},

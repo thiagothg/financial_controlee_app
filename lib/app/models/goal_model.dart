@@ -1,13 +1,12 @@
-import 'package:money2/money2.dart';
 import 'package:json_annotation/json_annotation.dart';
 
+import '../core/consts/app_conts.dart';
 import 'base_model.dart';
 import 'goal_week_model.dart';
 
-
 part 'goal_model.g.dart';
 
-@JsonSerializable(explicitToJson: true) //
+@JsonSerializable(explicitToJson: true) 
 class GoalModel  extends BaseModel {
   @JsonKey(name: 'title')
   String title;
@@ -40,27 +39,10 @@ class GoalModel  extends BaseModel {
     this.weeksGoal
   });
 
-  final Currency _currency = Currency.create('BRL', 2, 
-    // symbol: r'R$',  
-    // pattern: 'S 0,00',
-  );
-
   factory GoalModel.fromJson(Map<String, dynamic> json) =>
       _$GoalModelFromJson(json);
 
   Map<String, dynamic> toJson() => _$GoalModelToJson(this);
-
-
-  // GoalModel.fromMap(Map<String, dynamic> json) : super.fromMap(json)  {
-  //   title = json["title"];
-  //   moneyStart = json["moneyStart"] + 0.0;
-  //   moneyEnd = json["moneyEnd"] + 0.0;
-  //   // dateStart = Timestamp.fromDate(DateTime.parse(json["dateStart"]));
-  //   // dateEnd = Timestamp.fromDate(DateTime.parse(json["dateEnd"]));
-  //   progress = json["progress"];
-  //   qtdSaved = json["qtdSaved"] + 0.0;
-  //   userUid = json["userId"];
-  // }
 
   @override
   Map<String, dynamic> toMap() {
@@ -73,7 +55,8 @@ class GoalModel  extends BaseModel {
   }
 
   String getMoneyFormat(double qtd) {
-    return Money.from(qtd, _currency).toString();
+    var currency = L10n.getCurrency();
+    return '${currency.format(qtd)}';
   }
 
   String getRemainWeeks() {

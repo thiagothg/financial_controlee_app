@@ -32,10 +32,9 @@ class _GoalsPageState extends ModularState<GoalsPage, GoalsController> {
       ),
       body: StreamBuilder<List<GoalModel>>(
         key: UniqueKey(),
-        stream: controller.stream,
+        stream: controller.getGoals(),
         builder: (context, snapshot) {
           if(snapshot.hasError) {
-            // print(snapshot.error);s
             return ErrorPage();
           } else {
             switch (snapshot.connectionState) {
@@ -53,8 +52,13 @@ class _GoalsPageState extends ModularState<GoalsPage, GoalsController> {
                       itemCount: snapshot.data?.length,
                       itemBuilder: (_, index) {
                         var item = snapshot.data?[index];
-                        return GoalCard(
-                          model: item!,
+                        return GestureDetector(
+                          onLongPress: () {
+                            
+                          },
+                          child: GoalCard(
+                            model: item!,
+                          ),
                         );
                       },
                     );
@@ -73,10 +77,6 @@ class _GoalsPageState extends ModularState<GoalsPage, GoalsController> {
 
   @override
   void dispose() {
-    print('dispose page');
-    controller.stream = null;
-    // controller.goalRepository.disposeConnection();
-
     super.dispose();
   }
 }

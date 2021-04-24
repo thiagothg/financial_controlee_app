@@ -11,7 +11,23 @@ abstract class _YearGoalControllerBase with Store implements Disposable {
   final  pageController = PageController();
 
   void dispose() {
-    pageController.dispose();
+    // pageController.dispose();
   }
+
+  @observable
+  int _selectedIndex = 0;
+
+  @computed
+  int get getSelectedIndex => _selectedIndex;
   
+  @action
+  void setSelectIndex(int index) {
+    if(Modular.to.path == '/home/year/goal') {
+      _selectedIndex = 0;
+    } else if (Modular.to.path == '/home/year/about') {
+      _selectedIndex = 1;
+    } else {
+      _selectedIndex = 0;
+    }
+  }
 }

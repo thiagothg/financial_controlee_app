@@ -1,10 +1,12 @@
 import 'package:currency_text_input_formatter/currency_text_input_formatter.dart';
+import 'package:financialcontroleeapp/app/core/consts/app_conts.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:form_field_validator/form_field_validator.dart';
+import 'package:intl/intl.dart';
 
 import '../../../../../controllers/year/goals_controller.dart';
 import '../../../../../shared/validators/create_year_goal_validators.dart';
@@ -92,7 +94,11 @@ class _CreateGoalsPageState
                       onChanged: controller.setQtdGoal,
                       enabled: !controller.loading,
                       inputFormatters: [
-                        CurrencyTextInputFormatter()
+                        CurrencyTextInputFormatter(
+                          locale: Intl.getCurrentLocale(),
+                          name: L10n.getCurrency().currencyName,
+                          symbol: L10n.getCurrency().currencySymbol
+                        )
                       ],
                       validator: MultiValidator([
                         RequiredValidator(errorText: 'valor is required'),

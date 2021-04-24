@@ -26,7 +26,7 @@ abstract class _HomeControllerBase with Store {
 
 
   void logoff() async {
-    await Modular.get<AuthController>().logout();
+    await auth.logout();
   }
 
 

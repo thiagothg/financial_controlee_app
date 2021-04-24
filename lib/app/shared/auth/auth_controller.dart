@@ -48,8 +48,6 @@ abstract class _AuthControllerBase with Store {
   @action
   Future<void> setUser(DefaultResponse result) async {
     if(result.success && result.object != null) {
-      status = AuthStatus.login;
-  
       user = result.object;
       userModel = await _userRepository.get(result.object.uid)
         .then<UserModel>((res) {
@@ -60,7 +58,7 @@ abstract class _AuthControllerBase with Store {
           }
         });
      
-      print(userModel);
+      status = AuthStatus.login;
     } else {
       status = AuthStatus.logoff;
     }

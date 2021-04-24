@@ -24,8 +24,14 @@ class _GoalDetailPageState
   //use 'controller' variable to access controller
 
   @override
-  Widget build(BuildContext context) {
+  void initState() {
     controller.setProgreess(widget.model.progress);
+    controller.setGoalWeeks(widget.model.weeksGoal!);
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Column(
@@ -54,48 +60,52 @@ class _GoalDetailPageState
               )),
         ],
       ),
-      body: Column(
-        children: <Widget>[
-          HeaderWidget(
-            model: widget.model,
-          ),
-          SizedBox(height: 20),
-          Expanded(
-            child: ListView.separated(
-              itemCount: widget.model.weeksGoal?.length ?? 0,
-              separatorBuilder: (_, index) {
-                return SizedBox(height: 5, child: Divider(height: 3));
-              },
-              itemBuilder: (_, index) {
-                var item = widget.model.weeksGoal?[index];
-                print(item?.saved);
+      body: Observer(builder: (_) {
+        return Column(
+          children: <Widget>[
+            HeaderWidget(model: widget.model),
+            SizedBox(height: 20),
+            Expanded(
+              child: ListView.separated(
+                itemCount: controller.goalsWeeks.length,
+                //widget.model.weeksGoal?.length ?? 0,
+                separatorBuilder: (_, index) {
+                  return SizedBox(height: 5, child: Divider(height: 3));
+                },
+                itemBuilder: (_, index) {
+                  // var item = widget.model.weeksGoal?[index];
+                  var item = controller.goalsWeeks[index];
 
-                return Observer(builder: (_) {
-                  return CheckboxListTile(
-                      activeColor: Theme.of(context).primaryColor,
-                      controlAffinity: ListTileControlAffinity.leading,
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(15)),
-                      value: controller.goalsWeeks?[index].saved ?? item?.saved,
-                      title: GoalItem(
-                        model: item!,
-                      ),
-                      onChanged: (x) async {
-                        item.saved = !item.saved;
-                        await controller.updateWeek(item, widget.model, index);
-                        // setState(() {
+                  // return Observer(builder: (_) {
+                  //   return CheckboxListTile(
+                  //     key: UniqueKey(),
+                  //     activeColor: Theme.of(context).primaryColor,
+                  //     controlAffinity: ListTileControlAffinity.leading,
+                  //     shape: RoundedRectangleBorder(
+                  //         borderRadius: BorderRadius.circular(15)),
+                  //     value: controller.goalsWeeks[index].saved,
+                  //     title: GoalItem(key: UniqueKey(), model: item),
+                  //     onChanged: (x) async {
+                  //       item.saved = !item.saved;
 
-                        // });
-                      });
-                });
-                // return GoalItem(
-                //   model: item!,
-                // );
-              },
-            ),
-          )
-        ],
-      ),
+                  //       await controller.updateWeek(item, widget.model, index);
+                  //       // setState(() {});
+                  //     });
+                  // });
+                  return GoalItem(
+                    model: item,
+                    index: index,
+                    onPressed: () {
+                      print(index);
+                      controller.toggleDone(index);
+                    },
+                  );
+                },
+              ),
+            )
+          ],
+        );
+      }),
     );
   }
 

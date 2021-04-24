@@ -15,9 +15,9 @@ abstract class _SplashControllerBase with Store {
   final auth = Modular.get<AuthController>();
 
   Future<void> verifyUserloggedIn() async {
-    await Future.delayed(Duration(seconds: 3));
+    await Future.delayed(Duration(seconds: 5));
     if (auth.status == AuthStatus.login) {
-      Modular.to.navigate('${RoutersConst.year}/goal');
+      Modular.to.navigate('${RoutersConst.home}');
     } else if (auth.status == AuthStatus.logoff) {
       Modular.to.pushReplacementNamed(RoutersConst.login);
     }

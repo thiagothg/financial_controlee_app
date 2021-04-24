@@ -1,9 +1,9 @@
-import 'package:financialcontroleeapp/app/controllers/year/goals_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 
+import '../../../../../../controllers/year/goals_controller.dart';
 import '../../../../../../models/goal_model.dart';
 
 class HeaderWidget extends StatelessWidget {
@@ -37,7 +37,6 @@ class HeaderWidget extends StatelessWidget {
       ),
       child: Observer(builder: (_) {
         return Column(
-        // mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           SizedBox(height: 15,),
@@ -53,15 +52,6 @@ class HeaderWidget extends StatelessWidget {
               circularStrokeCap: CircularStrokeCap.butt,
               backgroundColor: Theme.of(context).disabledColor,
             ),
-            // child: FAProgressBar(
-            //   verticalDirection: VerticalDirection.up,
-            //   progressColor: Theme.of(context).indicatorColor,
-            //   animatedDuration: Duration(milliseconds: 2000),
-            //   s;})ize: 20,
-            //   backgroundColor: Theme.of(context).disabledColor,
-            //   currentValue: model.progress,
-            //   displayText: '%'
-            // ),
           ),
           SizedBox(height: 30),
           Center(

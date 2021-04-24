@@ -100,7 +100,6 @@ class _LoginPageState extends ModularState<LoginPage, LoginController> {
                 SocalIcon(
                   iconSrc: AssetIconsConst.googleSvg,
                   press: () async {
-                    print('teste');
                     controller.loginWithGoogle();
                   },
                 ),

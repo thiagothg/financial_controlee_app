@@ -3,6 +3,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:get_it/get_it.dart';
 
 import '../../../controllers/home_controller.dart';
+import '../../../core/consts/routers_const.dart';
 import '../../store/page_store.dart';
 import 'widgets/drawer_tile.dart';
 
@@ -33,7 +34,7 @@ class _CustomDrawerState
                 accountName: Text(controller.userModel.name.toString()), 
                 accountEmail: Text(controller.userModel.email.toString()),
                 currentAccountPicture: CircleAvatar(
-                  child: (controller.userModel.photoUrl == null) 
+                  child: (controller.userModel.photoUrl != null) 
                   ? Image.network(
                     controller.userModel.photoUrl!,
                     
@@ -49,7 +50,7 @@ class _CustomDrawerState
                 onTap: () {
                   pageStore.changePage(0);
                   Navigator.pop(context);
-                  // Modular.to.pushReplacementNamed(RoutersConst.home);
+                  Modular.to.navigate(RoutersConst.home);
                 },
               ),
               Divider(),
@@ -61,6 +62,7 @@ class _CustomDrawerState
                 onTap: () {
                   pageStore.changePage(1);
                   Navigator.pop(context);
+                  Modular.to.navigate('${RoutersConst.year}/goal');
                 }
               ),
               Divider(),
@@ -73,6 +75,7 @@ class _CustomDrawerState
                 onTap: () {
                   pageStore.changePage(2);
                   Navigator.pop(context);
+                  Modular.to.navigate(RoutersConst.debts);
                 }
               ),
               Divider(),
@@ -85,6 +88,7 @@ class _CustomDrawerState
                 onTap: () {
                   pageStore.changePage(3);
                   Navigator.pop(context);
+                  Modular.to.navigate(RoutersConst.settings);
                 }
               ),
               Divider(),

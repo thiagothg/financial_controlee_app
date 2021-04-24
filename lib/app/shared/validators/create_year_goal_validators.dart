@@ -1,4 +1,5 @@
    
+import 'package:financialcontroleeapp/app/core/consts/app_conts.dart';
 import 'package:form_field_validator/form_field_validator.dart';
 
 class NameValidator extends TextFieldValidator {  
@@ -33,20 +34,13 @@ class QtdValidator extends TextFieldValidator {
     
   @override  
   bool isValid(String? value) {  
-    // return true if the value is valid according the your condition  
-    // return hasMatch(r'^((+|00)?218|0?)?(9[0-9]{8})$', '$value');  
-    var regExp = RegExp(r"[a-zA-Z]");
     var qtd = 0.0;
-
+    
     if(value != null) {
-      var p = double.tryParse(
-        value
-        .replaceAll(regExp, '')
-        .replaceAll(',', '')
-        .replaceAll('.', '').trim());
-      if(p != null) {
-        qtd = p / 100;
-      }
+      var currency = L10n.getCurrency();
+
+      var number = currency.parse(value);
+      qtd = number.toDouble();
     }
     return qtd >= 1.0;
   }  

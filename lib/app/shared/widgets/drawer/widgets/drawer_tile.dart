@@ -21,15 +21,15 @@ class DrawerTile extends StatelessWidget {
     return ListTile(
       leading: Icon(icon,
         color: highlighted 
-        ? Theme.of(context).primaryColor 
-        : Colors.black54,
+        ? Theme.of(context).disabledColor 
+        : Theme.of(context).textTheme.subtitle2?.color,
       ),
       title: Text(text,
         style: TextStyle(
           fontWeight: FontWeight.bold,
           color: highlighted 
-            ? Theme.of(context).primaryColor 
-            : Colors.black54,
+            ? Theme.of(context).disabledColor 
+            : Theme.of(context).textTheme.subtitle2?.color,
         ),
       ),
       onTap: onTap,

@@ -1,3 +1,4 @@
+import 'package:financialcontroleeapp/app/core/theme/app_theme_light.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -8,6 +9,7 @@ import 'package:intl/intl.dart';
 import 'app_controller.dart';
 import 'core/consts/routers_const.dart';
 import 'core/localization/generated/l10n.dart';
+import 'core/theme/app_theme_dark.dart';
 import 'shared/utils/global_scaffold.dart';
 
 class AppWidget extends StatelessWidget {
@@ -15,11 +17,14 @@ class AppWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Observer(
+      name: 'main',
+      key: UniqueKey(),
       builder: (_) {
         return MaterialApp(
-          // navigatorKey: Modular.navigatorKey,
           title: 'Flutter Slidy',
-          theme: Modular.get<AppController>().themeApp.getTheme(context),
+          darkTheme: AppThemeDark().getTheme(context),
+          theme: AppThemeLight().getTheme(context),
+          // theme: Modular.get<AppController>().themeApp.getTheme(context),
           themeMode: Modular.get<AppController>().themeMode,
           initialRoute: RoutersConst.splash,
           // onGenerateRoute: Modular.generateRoute,

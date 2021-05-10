@@ -78,7 +78,6 @@ class BaseModel implements IBaseModelInterface {
     return timestamp.toDate();
   }
 
-  @override
   DateTime fromJsonTime(int int) 
     => DateTime.fromMillisecondsSinceEpoch(int);
   

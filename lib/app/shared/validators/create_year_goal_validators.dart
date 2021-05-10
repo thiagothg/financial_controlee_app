@@ -1,6 +1,7 @@
    
-import 'package:financialcontroleeapp/app/core/consts/app_conts.dart';
 import 'package:form_field_validator/form_field_validator.dart';
+
+import '../../core/consts/app_conts.dart';
 
 class NameValidator extends TextFieldValidator {  
   // pass the error text to the super constructor  

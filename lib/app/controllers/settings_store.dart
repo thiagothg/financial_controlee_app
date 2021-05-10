@@ -1,7 +1,8 @@
-import 'package:financialcontroleeapp/app/app_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
+
+import '../app_controller.dart';
 
 part 'settings_store.g.dart';
 

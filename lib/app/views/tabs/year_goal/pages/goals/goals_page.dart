@@ -1,11 +1,10 @@
-import 'package:financialcontroleeapp/app/shared/widgets/helpers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import '../../../../../controllers/year/goals_controller.dart';
 import '../../../../../models/goal_model.dart';
 import '../../../../../shared/widgets/error_widget.dart';
+import '../../../../../shared/widgets/helpers.dart';
 import 'widgets/goal_card.dart';
 
 class GoalsPage extends StatefulWidget {

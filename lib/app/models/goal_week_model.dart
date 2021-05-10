@@ -1,7 +1,5 @@
-import 'package:financialcontroleeapp/app/core/consts/app_conts.dart';
-import 'package:intl/number_symbols_data.dart';
 import 'package:json_annotation/json_annotation.dart';
-import 'package:money2/money2.dart';
+import '../core/consts/app_conts.dart';
 
 import 'base_model.dart';
 

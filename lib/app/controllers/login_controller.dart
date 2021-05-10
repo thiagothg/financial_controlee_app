@@ -6,7 +6,6 @@ import 'package:mobx/mobx.dart';
 
 import '../core/consts/routers_const.dart';
 import '../shared/auth/auth_controller.dart';
-import '../shared/utils/global_scaffold.dart';
 
 part 'login_controller.g.dart';
 

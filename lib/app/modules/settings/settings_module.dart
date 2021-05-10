@@ -1,7 +1,7 @@
-import 'package:financialcontroleeapp/app/views/tabs/settings/pages/theme_page.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
 import '../../controllers/settings_store.dart';
+import '../../views/tabs/settings/pages/theme_page.dart';
 import '../../views/tabs/settings/settings_page.dart';
 
 class SettingsModule extends Module {

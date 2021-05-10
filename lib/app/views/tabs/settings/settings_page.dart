@@ -1,8 +1,8 @@
-import 'package:financialcontroleeapp/app/controllers/settings_store.dart';
-import 'package:financialcontroleeapp/app/shared/widgets/drawer/custom_drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
+import '../../../controllers/settings_store.dart';
+import '../../../shared/widgets/drawer/custom_drawer.dart';
 import 'widgets/notification_widget_page.dart';
 import 'widgets/settings_widget_page.dart';
 

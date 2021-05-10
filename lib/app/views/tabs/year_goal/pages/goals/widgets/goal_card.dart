@@ -1,10 +1,10 @@
-import 'package:financialcontroleeapp/app/controllers/year/goals_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animation_progress_bar/flutter_animation_progress_bar.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
 
+import '../../../../../../controllers/year/goals_controller.dart';
 import '../../../../../../core/consts/routers_const.dart';
 import '../../../../../../models/goal_model.dart';
 

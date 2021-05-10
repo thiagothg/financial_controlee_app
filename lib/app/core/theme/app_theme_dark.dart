@@ -1,6 +1,6 @@
 
-import 'package:financialcontroleeapp/app/core/consts/colors.conts.dart';
 import 'package:flutter/material.dart';
+
 import '../interface/theme_app_interface.dart';
 
 

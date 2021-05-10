@@ -21,9 +21,7 @@ abstract class _GoalsControllerBase with Store implements Disposable  {
   final IGoalRepositoryInterface goalRepository;
   final AuthController auth = Modular.get();
 
-  _GoalsControllerBase(this.goalRepository) {
-
-  }
+  _GoalsControllerBase(this.goalRepository);
 
   TextEditingController nameGoalController = TextEditingController();
   TextEditingController qtdGoalController = TextEditingController();
@@ -199,6 +197,7 @@ abstract class _GoalsControllerBase with Store implements Disposable  {
   }
 
   void dispose() {
+    // ignore: invalid_use_of_protected_member
     formKey.currentState?.dispose();
   }
 

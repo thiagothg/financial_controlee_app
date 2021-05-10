@@ -1,4 +1,3 @@
-import 'package:financialcontroleeapp/app/core/theme/app_theme_light.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -10,6 +9,7 @@ import 'app_controller.dart';
 import 'core/consts/routers_const.dart';
 import 'core/localization/generated/l10n.dart';
 import 'core/theme/app_theme_dark.dart';
+import 'core/theme/app_theme_light.dart';
 import 'shared/utils/global_scaffold.dart';
 
 class AppWidget extends StatelessWidget {

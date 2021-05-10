@@ -1,7 +1,7 @@
-import 'package:financialcontroleeapp/app/controllers/settings_store.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+
+import '../../../../controllers/settings_store.dart';
 
 class SettingsWidgetPage extends StatefulWidget {
   static const String routeName = '/settingsWidget';

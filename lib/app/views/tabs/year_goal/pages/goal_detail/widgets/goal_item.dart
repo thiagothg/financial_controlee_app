@@ -1,11 +1,11 @@
 // import 'package:circular_check_box/circular_check_box.dart';
-import 'package:financialcontroleeapp/app/controllers/year/goals_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
 
+import '../../../../../../controllers/year/goals_controller.dart';
 import '../../../../../../models/goal_week_model.dart';
 
 class GoalItem extends StatefulWidget {

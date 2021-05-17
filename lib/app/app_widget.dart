@@ -3,6 +3,7 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:get_it/get_it.dart';
 import 'package:intl/intl.dart';
 
 import 'app_controller.dart';
@@ -10,6 +11,7 @@ import 'core/consts/routers_const.dart';
 import 'core/localization/generated/l10n.dart';
 import 'core/theme/app_theme_dark.dart';
 import 'core/theme/app_theme_light.dart';
+import 'shared/layouts/main_app_scaffold.dart';
 import 'shared/utils/global_scaffold.dart';
 
 class AppWidget extends StatelessWidget {
@@ -50,10 +52,21 @@ class AppWidget extends StatelessWidget {
               Intl.defaultLocale = 'pt_BR';
               setStyleLoading(context);
 
-              return Scaffold(
-                backgroundColor: Colors.white,
-                key: GlobalScaffold.instance.scaffkey,
-                body: child,
+              // bool hasBootstrapped = appModel.hasBootstrapped;
+              var showSplash = false;
+              var route = Modular.to;
+
+              print(route.path);
+              // showSplash = (Modular.to.modulePath != RoutersConst.splash);
+
+              return MainAppScaffold(
+                showAppBar: showSplash,
+                pageNavigator: child!,
+                //               child: Scaffold(
+                //   backgroundColor: Colors.white,
+                //   key: GlobalScaffold.instance.scaffkey,
+                //   body: child,
+                // ),
               );
             },
           ),

@@ -1,3 +1,4 @@
+import 'package:financialcontroleeapp/app/shared/utils/device_info.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
@@ -18,11 +19,13 @@ abstract class _SettingsStoreBase with Store {
   @observable
   ThemeMode selectedRadio = ThemeMode.system;
 
+
   @computed
   String get getTheme => app.themeApp.themeToString();
 
   @computed
   ThemeMode get getSelectedRadio => selectedRadio;
+
 
   @action 
   Future<void> setTheme(ThemeMode theme) async {

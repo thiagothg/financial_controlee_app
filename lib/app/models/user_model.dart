@@ -15,12 +15,15 @@ class UserModel extends BaseModel {
   String? photoUrl;
   @JsonKey(name: 'email')
   String email;
+  @JsonKey(name: 'image')
+  String? image;
 
   UserModel({
     required this.name, 
     this.bio, 
     this.photoUrl, 
-    required this.email
+    required this.email,
+    this.image
   });
 
   factory UserModel.fromJson(Map<String, dynamic> json) =>
@@ -51,4 +54,8 @@ class UserModel extends BaseModel {
     model.setDocumentId(data.uid);
     return model;
   }
+
+  static String kDefaultImageUrl =
+      "https://images.unsplash.com/photo-1481627834876-b7833e8f5570?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=50&q=80";
+
 }

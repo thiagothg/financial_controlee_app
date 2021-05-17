@@ -1,15 +1,22 @@
+import 'dart:math';
+
+import 'package:financialcontroleeapp/app/core/theme/styles.dart';
+import 'package:financialcontroleeapp/app/shared/widgets/animated/animated_scale.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import '../../controllers/login_controller.dart';
 import '../../core/consts/assets_const.dart';
+import '../../core/core_packages.dart';
 import '../../shared/widgets/custom_icon_button.dart';
 import '../../shared/widgets/custom_text_field.dart';
 import '../../shared/widgets/login/rounded_button.dart';
 import 'widgets/or_divider.dart';
 import 'widgets/social_icon.dart';
+
 
 class LoginPage extends StatefulWidget {
   final String title;
@@ -36,16 +43,43 @@ class _LoginPageState extends ModularState<LoginPage, LoginController> {
 
   @override
   Widget build(BuildContext context) {
+    var portraitMode = context.widthPx < 800;
+
+    // Calculate how wide or tall we want the form to be. 
+    //Use golden ratio for nice aesthetics.
+    var formWidth = max(500, context.widthPx - context.widthPx / 1.618) + 0.0;
+    var formHeight = 
+      max(500, context.heightPx - context.heightPx / 1.618) + 0.0;
+
     styleProgress();
     size = MediaQuery.of(context).size;
-    return Scaffold(
-      key: controller.scaffoldKey,
-      body: SafeArea(
-        minimum: EdgeInsets.all(30),
-        child: SingleChildScrollView(
-          child: body()
+    return Flex(
+      // Switch from row to column when in portrait mode
+      direction: portraitMode ? Axis.vertical : Axis.horizontal,
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        // Let the device screen be flexible
+        // Flexible(
+        //   child: _DeviceScreens(portraitMode && false),
+        // ),
+
+        SizedBox(
+          width: formWidth,
+          height: formHeight,
+          child: SingleChildScrollView(
+            child: body(),
+          ),
         ),
-      )
+      ],
+      //   child: Scaffold(
+      //   key: controller.scaffoldKey,
+      //   body: SafeArea(
+      //     minimum: EdgeInsets.all(30),
+      //     child: SingleChildScrollView(
+      //       child: body()
+      //     ),
+      //   )
+      // ),
     );
   }
 
@@ -226,3 +260,99 @@ class _LoginPageState extends ModularState<LoginPage, LoginController> {
   }
 }
 
+
+class _DeviceScreens extends StatelessWidget {
+  const _DeviceScreens(this.portraitMode, {Key? key}) : super(key: key);
+  final bool portraitMode;
+
+  @override
+  Widget build(BuildContext context) {
+    return ClipRRect(
+      child: Container(
+        // color: theme.greyWeak,
+        width: double.infinity,
+        alignment: Alignment.center,
+        child: LayoutBuilder(
+          builder: (_, constraints) {
+            var offsetX = 0.0, offsetY = 0.0;
+            var width = portraitMode ? 500.0 : 1200.0;
+            var height = 1000.0;
+            List<Widget> images;
+            // if (portraitMode) {
+            //   images = [
+            //     _LandingPageImage("dashedLine-mobile.png", Offset(0, 0), height: 250, scaleOnHover: false),
+            //     // _LandingPageImage("tablet.png", Offset(0, 50), height: 350),
+            //     // _LandingPageImage("phone.png", Offset(50, 500), height: 650),
+            //     // _LandingPageImage("web.png", Offset(440, 600), height: 500),
+            //     // _LandingPageImage("laptop.png", Offset(550, 100), height: 400),
+            //   ];
+            // } else {
+            if (constraints.maxWidth < width) {
+              offsetX = - (width - constraints.maxWidth) / 2;
+            }
+            images = [
+              // _LandingPageImage("dashedLine-desktop.png", Offset(180, -400), height: 1300, scaleOnHover: false),
+              // _LandingPageImage("tablet.png", Offset(0, 50), height: 350),
+              // _LandingPageImage("phone.png", Offset(50, 500), height: 650),
+              // _LandingPageImage("web.png", Offset(440, 600), height: 500),
+              // _LandingPageImage("laptop.png", Offset(550, 100), height: 400),
+            ];
+            // }
+            return Transform.translate(
+              offset: Offset(offsetX, offsetY),
+              child: SizedBox(
+                width: width,
+                height: height,
+                child: Stack(clipBehavior: Clip.none, children: images),
+              ),
+            );
+          },
+        ),
+      ),
+    );
+  }
+}
+
+class _LandingPageImage extends StatelessWidget {
+  _LandingPageImage(
+    this.imagePath, 
+    this.offset, {Key? key, 
+      required this.height, 
+      this.scaleOnHover = true
+    }): super(key: key);
+    
+  final Offset offset;
+  final String imagePath;
+  final double height;
+  final bool scaleOnHover;
+  final ValueNotifier<bool> _isMouseOverNotifier = ValueNotifier(false);
+
+  @override
+  Widget build(BuildContext context) {
+    return ValueListenableBuilder(
+      valueListenable: _isMouseOverNotifier,
+      builder: (_, bool isMouseOver, __) {
+        var scale = isMouseOver ? 1.05 : 1.0;
+        return Positioned(
+          left: offset.dx,
+          top: offset.dy,
+          height: height,
+          child: AnimatedScale(
+            begin: 1,
+            end: scale,
+            duration: Times.fast,
+            curve: Curves.easeOut,
+            child: MouseRegion(
+              onEnter: (_) => _isMouseOverNotifier.value = true && scaleOnHover,
+              onExit: (_) => _isMouseOverNotifier.value = false,
+              child: Image.asset(
+                "assets/images/landing_page/$imagePath",
+                fit: BoxFit.fitHeight,
+              ),
+            ),
+          ),
+        );
+      },
+    );
+  }
+}

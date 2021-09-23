@@ -11,7 +11,7 @@
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>financialcontroleeapp</string>
+	<string>financial_controlee_app</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
@@ -41,6 +41,11 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSAllowsLocalNetworking</key>
+		<true/>
+	</dict>
 	<!-- Google Sign-in Section -->
 	<!-- End of the Google Sign-in Section -->
 	<key>CFBundleURLTypes</key>
@@ -70,39 +75,6 @@
 				<string>fb359084665320431</string>
 			</array>
 		</dict>
-	</array>
-
-	<key>FacebookAppID</key>
-
-	<!-- Replace "000000000000" with your Facebook App ID here. -->
-	<string>359084665320431</string>
-	<key>FacebookDisplayName</key>
-
-	<!-- Replace "YOUR_APP_NAME" with your Facebook App name. -->
-	<string>financialcontroleeapp</string>
-
-	<key>LSApplicationQueriesSchemes</key>
-	<array>
-		<string>fbapi</string>
-		<string>fbapi20130214</string>
-		<string>fbapi20130410</string>
-		<string>fbapi20130702</string>
-		<string>fbapi20131010</string>
-		<string>fbapi20131219</string>
-		<string>fbapi20140410</string>
-		<string>fbapi20140116</string>
-		<string>fbapi20150313</string>
-		<string>fbapi20150629</string>
-		<string>fbapi20160328</string>
-		<string>fbauth</string>
-		<string>fb-messenger-share-api</string>
-		<string>fbauth2</string>
-		<string>fbshareextension</string>
-	</array>
-	<key>CFBundleLocalizations</key>
-	<array>
-		<string>en</string>
-		<string>pt_BR</string>
 	</array>
 </dict>
 </plist>

@@ -1,13 +1,11 @@
-include: package:effective_dart/analysis_options.yaml
+include: package:flutter_lints/flutter.yaml
 
-# https://www.dartlang.org/guides/language/analysis-options
 analyzer:
-  errors:
-    todo: ignore
-    mixin_inherits_from_not_object: ignore
-    
+  # errors:
+  # mixin_inherits_from_not_object: ignore
+
 linter:
   rules:
     public_member_api_docs: false
-    avoid_function_literals_in_foreach_class: false
-    
+    prefer_const_constructors: false
+    # avoid_function_literals_in_foreach_class: false

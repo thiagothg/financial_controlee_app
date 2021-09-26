@@ -1,4 +1,3 @@
-import 'package:intl/intl.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 import '../base_model.dart';
@@ -21,12 +20,12 @@ class YearGoalChallenge extends BaseModel {
   @JsonKey(name: 'date_end')
   DateTime dateEnd;
   @JsonKey(name: 'progress')
-  int progress;
+  double progress;
   @JsonKey(name: 'qtd_saved')
   double qtdSaved;
   @JsonKey(includeIfNull: false)
   double total;
-  @JsonKey(name: 'TB_YEAR_GOAL_WEEKs')
+  @JsonKey(name: 'TB_YEAR_GOAL_WEEKs', toJson: customToJsonWeeks)
   List<YearGoalChallengeWeek>? weeksGoal = [];
 
   YearGoalChallenge(
@@ -44,7 +43,13 @@ class YearGoalChallenge extends BaseModel {
   factory YearGoalChallenge.fromJson(Map<String, dynamic> json) =>
       _$YearGoalChallengeFromJson(json);
 
+  @override
   Map<String, dynamic> toJson() => _$YearGoalChallengeToJson(this);
+
+  static Map<String, dynamic> customToJsonWeeks(
+      List<YearGoalChallengeWeek>? weeks) {
+    return {'data': weeks?.map((e) => e.toJson()).toList()};
+  }
 
   String getRemainWeeks() {
     var diff = dateEnd.difference(DateTime.now()).inDays;

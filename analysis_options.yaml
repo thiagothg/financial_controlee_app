@@ -6,6 +6,6 @@ analyzer:
 
 linter:
   rules:
-    public_member_api_docs: false
+    # public_member_api_docs: false
     prefer_const_constructors: false
     # avoid_function_literals_in_foreach_class: false

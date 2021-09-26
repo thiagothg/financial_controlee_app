@@ -1,3 +1,4 @@
+import 'package:financial_controlee_app/app/data/model/goals/year_goal_challenge_model.dart';
 import 'package:financial_controlee_app/app/global/utils/components/drawer/custom_drawer.dart';
 import 'package:financial_controlee_app/app/global/utils/components/loaders/refresh_widget.dart';
 import 'package:financial_controlee_app/app/routes/app_pages.dart';
@@ -27,10 +28,13 @@ class YearGoalChallengeView extends GetView<YearGoalChallengeController> {
             (listGoals) => ListView.builder(
                 itemCount: (listGoals as List).length,
                 itemBuilder: (_, index) {
-                  var item = listGoals[index];
+                  var item = listGoals[index] as YearGoalChallenge;
                   return InkWell(
                     child: YearGoalCard(
                       model: item,
+                      onDelete: () {
+                        controller.delete(item.id!);
+                      },
                     ),
                   );
                 }),

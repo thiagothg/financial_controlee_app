@@ -4,11 +4,13 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_localized_locales/flutter_localized_locales.dart';
 
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
 import 'app/global/bindings/initial_binding.dart';
+import 'app/global/core/localization/generated/l10n.dart';
 import 'app/routes/app_pages.dart';
 import 'app/theme/app_theme.dart';
 
@@ -25,35 +27,37 @@ Future<void> main() async {
 }
 
 class MyApp extends StatelessWidget {
-  MyApp({Key? key}) : super(key: key);
-
-  // final auth = Get.put(AuthController(
-
-  // ), permanent: true);
+  const MyApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    setStyleLoading(context);
     return GetMaterialApp(
       initialBinding: InitialBinding(),
       title: "Controllese-se",
-      initialRoute: AppPages.INITIAL,
+      initialRoute: AppPages.initial,
       getPages: AppPages.routes,
       theme: AppTheme.light,
       darkTheme: AppTheme.dark,
       themeMode: ThemeService().getThemeMode(),
       defaultTransition: Transition.fade,
       smartManagement: SmartManagement.full,
+      debugShowCheckedModeBanner: false,
       builder: EasyLoading.init(builder: (context, child) {
-        setStyleLoading(context);
         return MediaQuery(
           data: MediaQuery.of(context).copyWith(alwaysUse24HourFormat: true),
           child: child!,
         );
       }),
-      localizationsDelegates: [GlobalMaterialLocalizations.delegate],
-      supportedLocales: [
-        Locale('pt', 'BR'),
+      localizationsDelegates: const [
+        S.delegate,
+        GlobalCupertinoLocalizations.delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        LocaleNamesLocalizationsDelegate(),
       ],
+      supportedLocales: S.delegate.supportedLocales,
+      locale: Get.deviceLocale,
       unknownRoute: GetPage(
           name: '/notfound',
           page: () => Scaffold(

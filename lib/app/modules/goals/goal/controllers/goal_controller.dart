@@ -1,4 +1,3 @@
-import 'package:financial_controlee_app/app/data/repository/goals/year_goal_challenge_respository.dart';
 import 'package:financial_controlee_app/app/global/controllers/auth_controller.dart';
 import 'package:financial_controlee_app/app/global/utils/helpers/language_helper.dart';
 import 'package:financial_controlee_app/app/routes/app_pages.dart';
@@ -26,36 +25,14 @@ class GoalController extends GetxController {
 
   @override
   void onInit() {
-    print('onInit GoalController');
     loadData();
     super.onInit();
   }
 
   @override
-  void onReady() {
-    print('oonReadyn');
-    super.onReady();
-  }
+  void onClose() {}
 
-  @override
-  void onClose() {
-    print('onClose');
-  }
-
-  void loadData() async {
-    try {
-      isLoading(true);
-      // print(auth.user.value?.user.id);
-      // await goalRepository
-      //     .getGoals(auth.user.value!.user.id)
-      //     .then((val) => listGoals.assignAll(val));
-      // update();
-    } catch (e) {
-      print(e.toString());
-    } finally {
-      isLoading(false);
-    }
-  }
+  void loadData() async {}
 
   Future<void> selectDate(BuildContext context) async {
     var locale = L10n.getCurrentLocale();

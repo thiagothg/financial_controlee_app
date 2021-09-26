@@ -7,24 +7,23 @@ part of 'year_goal_challenge_week_model.dart';
 // **************************************************************************
 
 YearGoalChallengeWeek _$YearGoalChallengeWeekFromJson(
-    Map<String, dynamic> json) {
-  return YearGoalChallengeWeek(
-    title: json['title'] as String?,
-    money: (json['money'] as num).toDouble(),
-    date: DateTime.parse(json['date'] as String),
-    saved: json['saved'] as bool,
-    yearGoalId: json['year_goal_id'] as String?,
-    week: json['week'] as int,
-  )
-    ..id = json['id'] as String?
-    ..isActive = json['is_active'] as bool?
-    ..createdAt = json['created_at'] == null
-        ? null
-        : DateTime.parse(json['created_at'] as String)
-    ..updatedAt = json['updated_at'] == null
-        ? null
-        : DateTime.parse(json['updated_at'] as String);
-}
+        Map<String, dynamic> json) =>
+    YearGoalChallengeWeek(
+      title: json['title'] as String?,
+      money: (json['money'] as num).toDouble(),
+      date: DateTime.parse(json['date'] as String),
+      saved: json['saved'] as bool,
+      yearGoalId: json['year_goal_id'] as String?,
+      week: json['week'] as int,
+    )
+      ..id = json['id'] as String?
+      ..isActive = json['is_active'] as bool?
+      ..createdAt = json['created_at'] == null
+          ? null
+          : DateTime.parse(json['created_at'] as String)
+      ..updatedAt = json['updated_at'] == null
+          ? null
+          : DateTime.parse(json['updated_at'] as String);
 
 Map<String, dynamic> _$YearGoalChallengeWeekToJson(
     YearGoalChallengeWeek instance) {

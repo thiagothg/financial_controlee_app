@@ -1,7 +1,6 @@
 import 'package:currency_text_input_formatter/currency_text_input_formatter.dart';
-import 'package:financial_controlee_app/app/global/utils/helpers/language_helper.dart';
-import 'package:financial_controlee_app/app/modules/goals/goal/controllers/goal_controller.dart';
-import 'package:financial_controlee_app/app/modules/goals/year_goal_chalenge/controllers/year_goal_challenge_controller.dart';
+import '../../../../global/utils/helpers/language_helper.dart';
+import '../controllers/year_goal_challenge_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:form_field_validator/form_field_validator.dart';
@@ -18,6 +17,7 @@ class YearGoalChallengeAddView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: true,
       appBar: AppBar(
         title: Text('Add Goal'),
       ),
@@ -56,7 +56,6 @@ class YearGoalChallengeAddView extends StatelessWidget {
                     color: Theme.of(context).primaryColor,
                   ),
                   textInputType: TextInputType.numberWithOptions(decimal: true),
-                  // onChanged: controller.setQtdGoal,
                   // enabled: !controller.loading,
                   inputFormatters: [
                     CurrencyTextInputFormatter(
@@ -90,18 +89,23 @@ class YearGoalChallengeAddView extends StatelessWidget {
                 ),
                 Column(
                   mainAxisAlignment: MainAxisAlignment.end,
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    ElevatedButton(
+                    ElevatedButton.icon(
                       onPressed: () {
                         yearGoalController.goToPreviewView();
                       },
-                      child: Text(
+                      icon: Icon(FontAwesomeIcons.save),
+                      label: Text(
                         'Avançar',
                         style: TextStyle(
                             fontWeight: FontWeight.bold, fontSize: 18),
                       ),
                     ),
                   ],
+                ),
+                SizedBox(
+                  height: 10,
                 ),
               ],
             ),

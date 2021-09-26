@@ -1,18 +1,7 @@
 import 'package:get/get.dart';
 
 class DebtsController extends GetxController {
-  //TODO: Implement DebtsController
-
   final count = 0.obs;
-  @override
-  void onInit() {
-    super.onInit();
-  }
-
-  @override
-  void onReady() {
-    super.onReady();
-  }
 
   @override
   void onClose() {}

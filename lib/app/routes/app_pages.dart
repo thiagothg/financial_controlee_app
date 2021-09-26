@@ -1,5 +1,7 @@
 import 'package:financial_controlee_app/app/modules/goals/goal/bindings/goal_binding.dart';
 import 'package:financial_controlee_app/app/modules/goals/goal/views/goal_view.dart';
+import 'package:financial_controlee_app/app/modules/goals/year_goal_chalenge/views/year_goal_challenge_detail_view.dart';
+import 'package:financial_controlee_app/app/modules/settings/views/language_view.dart';
 import '../modules/goals/year_goal_chalenge/bindings/year_goal_challenge_binding.dart';
 import 'package:financial_controlee_app/app/modules/goals/year_goal_chalenge/views/year_goal_challenge_add_view.dart';
 import 'package:financial_controlee_app/app/modules/goals/year_goal_chalenge/views/year_goal_challenge_preview_view.dart';
@@ -25,7 +27,7 @@ part 'app_routes.dart';
 class AppPages {
   AppPages._();
 
-  static const INITIAL = Routes.SPLASH;
+  static const initial = Routes.SPLASH;
 
   static final routes = [
     GetPage(
@@ -77,6 +79,11 @@ class AppPages {
       page: () => YearGoalChallengePreviewView(),
       binding: YearGoalChalengeBinding(),
     ),
+    GetPage(
+      name: _Paths.YEAR_GOAL_CHALLENGE_DETAIL,
+      page: () => YearGoalChallengeDetailView(),
+      binding: YearGoalChalengeBinding(),
+    ),
     //SETTINGS
     GetPage(
       name: _Paths.SETTINGS,
@@ -86,6 +93,11 @@ class AppPages {
     GetPage(
       name: _Paths.SETTINGS_THEME,
       page: () => SettingsThemeView(),
+      binding: SettingsBinding(),
+    ),
+    GetPage(
+      name: _Paths.SETTINGS_LANGUAGE,
+      page: () => LanguageView(),
       binding: SettingsBinding(),
     ),
   ];

@@ -2,7 +2,9 @@ import 'package:financial_controlee_app/app/data/model/goals/year_goal_challenge
 import 'package:financial_controlee_app/app/data/model/goals/year_goal_challenge_week_model.dart';
 import 'package:financial_controlee_app/app/data/repository/goals/year_goal_challenge_respository.dart';
 import 'package:financial_controlee_app/app/global/controllers/auth_controller.dart';
+import 'package:financial_controlee_app/app/global/utils/components/snackbars/error_snackbar.dart';
 import 'package:financial_controlee_app/app/global/utils/helpers/language_helper.dart';
+import 'package:financial_controlee_app/app/global/utils/utils.dart';
 import 'package:financial_controlee_app/app/routes/app_pages.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -26,24 +28,17 @@ class YearGoalChallengeController extends GetxController with StateMixin {
       TextEditingController(text: DateFormat.yMd().format(DateTime.now()));
 
   Rx<DateTime> dateGoal = DateTime.now().obs;
+  RxDouble progress = 0.0.obs;
+  RxDouble qtdGoal = 0.0.obs;
 
   @override
   void onInit() {
-    print('onInit GoalController');
     loadData();
     super.onInit();
   }
 
   @override
-  void onReady() {
-    print('oonReadyn');
-    super.onReady();
-  }
-
-  @override
-  void onClose() {
-    print('onClose');
-  }
+  void onClose() {}
 
   void onRefresh() {
     change([], status: RxStatus.loading());
@@ -81,19 +76,58 @@ class YearGoalChallengeController extends GetxController with StateMixin {
     }
   }
 
-  Future<void> saveGoal() async {
+  Future<void> save() async {
     try {
-      // goalRepository.sa
+      EasyLoading.show(
+          status: 'saving...', maskType: EasyLoadingMaskType.black);
+
+      await goalRepository.save(goalModel.value!);
+      await Future.delayed(Duration(seconds: 1));
+
+      EasyLoading.dismiss();
+      await EasyLoading.showSuccess('Success');
+      Get.offNamedUntil(Routes.YEAR_GOAL_CHALLENGE, (route) => false);
+      // Get.defaultDialog(
+      //   title: 'Goal saved with su'
+      // );
 
     } catch (e) {
-      print(e.toString());
+      Utils.safePrint(e.toString());
+      EasyLoading.dismiss();
+      EasyLoading.showError('erro');
+    }
+  }
+
+  Future<void> delete(String id) async {
+    try {
+      EasyLoading.show(
+          status: 'deleting...', maskType: EasyLoadingMaskType.black);
+
+      await goalRepository.delete(id);
+      await Future.delayed(Duration(seconds: 1));
+      listGoals.removeWhere((e) => e.id == id);
+      change(listGoals, status: RxStatus.loadingMore());
+
+      EasyLoading.dismiss();
+      await EasyLoading.showSuccess('Success');
+      if (listGoals.isEmpty) {
+        change(null, status: RxStatus.empty());
+      }
+      // Get.offNamedUntil(Routes.YEAR_GOAL_CHALLENGE, (route) => false);
+    } catch (e) {
+      Utils.safePrint(e.toString());
+      EasyLoading.dismiss();
+      EasyLoading.showError('erro');
     }
   }
 
   Future<void> createGoal() async {
     var dateEnd = dateGoal.value.add(Duration(days: 365));
     var m = qtdGoalController.text
-        .replaceAll(L10n.getCurrency().currencySymbol, '');
+        .replaceAll(L10n.getCurrency().currencySymbol, '')
+        .trim()
+        .replaceAll(',', '.');
+
     var moneyStart = double.tryParse(m)!;
 
     var moneyEnd = moneyStart * 52;
@@ -104,7 +138,7 @@ class YearGoalChallengeController extends GetxController with StateMixin {
           date: dateGoal.value.add(Duration(days: 7 * i)),
           money: moneyStart + (moneyStart * i),
           saved: false,
-          title: 'Week $i',
+          title: '${i + 1}',
           week: i);
     });
 
@@ -134,8 +168,30 @@ class YearGoalChallengeController extends GetxController with StateMixin {
 
         Get.toNamed(Routes.YEAR_GOAL_CHALLENGE_PREVIEW);
       } catch (e) {
+        Utils.safePrint(e.toString());
         EasyLoading.dismiss();
+        SnackBars(
+          message: '',
+          title: 'Error',
+        ).errorSnackbar();
       }
     }
+  }
+
+  Future<void> toggle(
+      YearGoalChallengeWeek item, bool taggle, int index) async {
+    var progress = ((100 * item.money) / goalModel.value!.total);
+    if (taggle) {
+      goalModel.value!.qtdSaved += item.money;
+      goalModel.value!.progress += progress;
+    } else {
+      goalModel.value!.qtdSaved -= item.money;
+      goalModel.value!.progress -= progress;
+    }
+
+    goalModel.value!.weeksGoal![index].saved = taggle;
+    await goalRepository.updateGoalAndWeek(
+        goalModel.value!, goalModel.value!.weeksGoal![index]);
+    update();
   }
 }

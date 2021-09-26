@@ -19,6 +19,17 @@ class YearGoalChallengePreviewView extends StatelessWidget {
       appBar: AppBar(
         title: Text('Goal Review'),
         centerTitle: true,
+        actions: [
+          TextButton(
+              onPressed: () => yearGoalController.save(),
+              child: Text(
+                'Save',
+                style: Theme.of(context)
+                    .textTheme
+                    .button!
+                    .copyWith(color: Colors.white),
+              ))
+        ],
       ),
       body: Center(
         child: Padding(

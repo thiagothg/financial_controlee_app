@@ -1,9 +1,8 @@
-import 'package:dio/dio.dart';
-import 'package:financial_controlee_app/app/data/repository/auth/auth_repository.dart';
-import 'package:financial_controlee_app/app/global/controllers/app_controller.dart';
-import 'package:financial_controlee_app/app/global/controllers/auth_controller.dart';
-import 'package:financial_controlee_app/app/global/core/services/gql_client.dart';
-import 'package:financial_controlee_app/app/theme/theme_provider.dart';
+import '../../data/repository/auth/auth_repository.dart';
+import '../controllers/app_controller.dart';
+import '../controllers/auth_controller.dart';
+import '../core/services/gql_client.dart';
+import '../../theme/theme_provider.dart';
 import 'package:get/get.dart';
 
 class InitialBinding implements Bindings {

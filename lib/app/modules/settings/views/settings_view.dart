@@ -34,6 +34,19 @@ class SettingsView extends GetView<SettingsController> {
                     ),
                   ),
                 ),
+              ),
+              InkWell(
+                onTap: () {
+                  Get.toNamed(Routes.SETTINGS_LANGUAGE);
+                },
+                child: const Card(
+                  child: ListTile(
+                    title: Text(
+                      'Language',
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                ),
               )
             ],
           ),

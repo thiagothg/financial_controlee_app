@@ -6,6 +6,8 @@ import 'package:get/get.dart';
 import '../controllers/debts_controller.dart';
 
 class DebtsView extends GetView<DebtsController> {
+  const DebtsView({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

@@ -4,7 +4,7 @@ PODS:
     - FirebaseAuth (~> 8.6.0)
   - Firebase/CoreOnly (8.6.1):
     - FirebaseCore (= 8.6.1)
-  - firebase_auth (3.1.0):
+  - firebase_auth (3.1.1):
     - Firebase/Auth (~> 8.6.0)
     - Firebase/CoreOnly (~> 8.6.0)
     - firebase_core
@@ -86,7 +86,7 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   Firebase: e84d95f6d3a91f634abc384f0751c434cb3aecfa
-  firebase_auth: 944eea63ff2f184703c1fafb5a6461362ac3857a
+  firebase_auth: a1c05788846aca0e6fa8fa71409a7b6d19c159c5
   firebase_core: 9a84b9f2d3a597a3ddc716942bc7e47d6eb85649
   FirebaseAuth: 223adeeb2262b417532e89bf06a960e3a0a1e9e4
   FirebaseCore: a753c231801f04f5ccd10cc92119ad1b12a61165

@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 class CustomTextField extends StatelessWidget {
-  CustomTextField({
+  const CustomTextField({
+    Key? key,
     this.hint,
     this.prefix,
     this.suffix,
@@ -14,7 +15,7 @@ class CustomTextField extends StatelessWidget {
     this.onTap,
     this.inputFormatters,
     this.validator,
-  });
+  }) : super(key: key);
 
   final TextEditingController? controller;
   final String? hint;

@@ -48,7 +48,7 @@ class AuthController extends GetxController {
 
   @override
   void onReady() {
-    appController = Get.put(AppController());
+    appController = Get.find<AppController>();
     super.onReady();
   }
 
@@ -83,8 +83,6 @@ class AuthController extends GetxController {
       //     textConfirm: 'confirm');
 
     } catch (e) {
-      print(e);
-
       GetBar(
         messageText: Text("Error acuror"),
         duration: Duration(seconds: 5),

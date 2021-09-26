@@ -1,4 +1,6 @@
 import 'package:financial_controlee_app/app/global/utils/utils.dart';
+import 'package:financial_controlee_app/app/routes/app_pages.dart';
+import 'package:getwidget/getwidget.dart';
 
 import '../../../../../data/model/goals/year_goal_challenge_model.dart';
 import 'package:flutter/material.dart';
@@ -8,14 +10,16 @@ import 'package:intl/intl.dart';
 
 class YearGoalCard extends StatelessWidget {
   final YearGoalChallenge model;
-  const YearGoalCard({Key? key, required this.model}) : super(key: key);
+  final VoidCallback onDelete;
+
+  const YearGoalCard({Key? key, required this.model, required this.onDelete})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
+    return InkWell(
       onTap: () {
-        // Navigator.of(context).pushNamed(RoutersConst.goalDetail,
-        //   arguments: widget.model);
+        Get.toNamed(Routes.YEAR_GOAL_CHALLENGE_DETAIL, arguments: model);
       },
       child: Card(
         elevation: 5,
@@ -84,6 +88,17 @@ class YearGoalCard extends StatelessWidget {
                 ],
               ),
               SizedBox(height: 15),
+              GFProgressBar(
+                percentage: model.progress / 100,
+                lineHeight: 20,
+                progressBarColor: Theme.of(context).primaryColor,
+                animation: true,
+                child: Text(
+                  '${(model.progress).toInt()}%',
+                  textAlign: TextAlign.end,
+                  style: Theme.of(context).textTheme.button,
+                ),
+              ),
               // FAProgressBar(
               //   progressColor: Theme.of(context).indicatorColor,
               //   animatedDuration: Duration(milliseconds: 600),
@@ -124,17 +139,15 @@ class YearGoalCard extends StatelessWidget {
         padding: EdgeInsets.zero,
         iconSize: 32,
         onSelected: (val) {
-          print('selected');
           switch (val) {
             case 1: //Editar
 
               break;
             case 2: //Excluir
-
+              onDelete();
               break;
             default:
           }
-          print(val);
         },
         itemBuilder: (_) {
           return [
@@ -142,14 +155,12 @@ class YearGoalCard extends StatelessWidget {
               value: 1,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
+                children: const [
                   Icon(FontAwesomeIcons.edit),
                   SizedBox(width: 7),
-                  Container(
-                    child: Text(
-                      'Editar',
-                      style: TextStyle(fontWeight: FontWeight.bold),
-                    ),
+                  Text(
+                    'Editar',
+                    style: TextStyle(fontWeight: FontWeight.bold),
                   ),
                 ],
               ),
@@ -164,13 +175,11 @@ class YearGoalCard extends StatelessWidget {
                     color: Colors.red.shade800,
                   ),
                   SizedBox(width: 7),
-                  Container(
-                    child: Text(
-                      'Excluir',
-                      style: TextStyle(
-                          color: Colors.red.shade800,
-                          fontWeight: FontWeight.bold),
-                    ),
+                  Text(
+                    'Excluir',
+                    style: TextStyle(
+                        color: Colors.red.shade800,
+                        fontWeight: FontWeight.bold),
                   ),
                 ],
               ),

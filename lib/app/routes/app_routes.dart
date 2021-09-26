@@ -15,9 +15,11 @@ abstract class Routes {
   static const GOAL_PREVIEW = _Paths.GOAL_PREVIEW;
   static const SETTINGS = _Paths.SETTINGS;
   static const SETTINGS_THEME = _Paths.SETTINGS_THEME;
+  static const SETTINGS_LANGUAGE = _Paths.SETTINGS_LANGUAGE;
   static const YEAR_GOAL_CHALLENGE = _Paths.YEAR_GOAL_CHALLENGE;
   static const YEAR_GOAL_CHALLENGE_ADD = _Paths.YEAR_GOAL_CHALLENGE_ADD;
   static const YEAR_GOAL_CHALLENGE_PREVIEW = _Paths.YEAR_GOAL_CHALLENGE_PREVIEW;
+  static const YEAR_GOAL_CHALLENGE_DETAIL = _Paths.YEAR_GOAL_CHALLENGE_DETAIL;
 }
 
 abstract class _Paths {
@@ -33,6 +35,8 @@ abstract class _Paths {
   static const YEAR_GOAL_CHALLENGE = '/year-goal-challenge';
   static const YEAR_GOAL_CHALLENGE_ADD = '/year-goal-challenge-add';
   static const YEAR_GOAL_CHALLENGE_PREVIEW = '/year-goal-challenge-preview';
+  static const YEAR_GOAL_CHALLENGE_DETAIL = '/year-goal-challenge-detail';
   static const SETTINGS = '/settings';
   static const SETTINGS_THEME = '/settings-theme';
+  static const SETTINGS_LANGUAGE = '/settings-language';
 }

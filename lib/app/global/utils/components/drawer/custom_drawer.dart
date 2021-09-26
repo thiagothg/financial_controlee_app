@@ -1,6 +1,5 @@
-import 'package:financial_controlee_app/app/global/controllers/app_controller.dart';
-import 'package:financial_controlee_app/app/modules/home/controllers/home_controller.dart';
-import 'package:financial_controlee_app/app/routes/app_pages.dart';
+import '../../../controllers/app_controller.dart';
+import '../../../../routes/app_pages.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';

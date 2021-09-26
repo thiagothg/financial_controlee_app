@@ -10,11 +10,6 @@ class SplashController extends GetxController {
     super.onInit();
   }
 
-  @override
-  void onReady() {
-    super.onReady();
-  }
-
   Future<void> verifyAuth() async {
     await Future.delayed(const Duration(seconds: 3));
     await authController.verifyAuth();

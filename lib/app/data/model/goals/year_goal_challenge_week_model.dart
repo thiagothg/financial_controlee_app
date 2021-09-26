@@ -31,11 +31,6 @@ class YearGoalChallengeWeek extends BaseModel {
   factory YearGoalChallengeWeek.fromJson(Map<String, dynamic> json) =>
       _$YearGoalChallengeWeekFromJson(json);
 
+  @override
   Map<String, dynamic> toJson() => _$YearGoalChallengeWeekToJson(this);
-
-  String getMoneyFormat(double qtd) {
-    // var currency = L10n.getCurrency();
-    // return '${currency.format(qtd)}';
-    return '';
-  }
 }

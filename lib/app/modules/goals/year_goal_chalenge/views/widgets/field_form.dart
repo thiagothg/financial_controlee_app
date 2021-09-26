@@ -41,7 +41,7 @@ class FieldForm extends StatelessWidget {
 
     return Column(key: UniqueKey(), children: [
       Text(
-        '$text',
+        ' $text',
         style: Theme.of(context)
             .textTheme
             .headline5

@@ -1,26 +1,28 @@
-import 'package:financial_controlee_app/app/modules/goals/goal/bindings/goal_binding.dart';
-import 'package:financial_controlee_app/app/modules/goals/goal/views/goal_view.dart';
-import 'package:financial_controlee_app/app/modules/goals/year_goal_chalenge/views/year_goal_challenge_detail_view.dart';
-import 'package:financial_controlee_app/app/modules/settings/views/language_view.dart';
+import 'package:financial_controlee_app/app/modules/debts/views/tabs/borrowed/add_borrowed_page.dart';
+
+import '../modules/goals/goal/bindings/goal_binding.dart';
+import '../modules/goals/goal/views/goal_view.dart';
+import '../modules/goals/year_goal_chalenge/views/year_goal_challenge_detail_view.dart';
+import '../modules/settings/views/language_view.dart';
 import '../modules/goals/year_goal_chalenge/bindings/year_goal_challenge_binding.dart';
-import 'package:financial_controlee_app/app/modules/goals/year_goal_chalenge/views/year_goal_challenge_add_view.dart';
-import 'package:financial_controlee_app/app/modules/goals/year_goal_chalenge/views/year_goal_challenge_preview_view.dart';
-import 'package:financial_controlee_app/app/modules/goals/year_goal_chalenge/views/year_goal_challenge_view.dart';
+import '../modules/goals/year_goal_chalenge/views/year_goal_challenge_add_view.dart';
+import '../modules/goals/year_goal_chalenge/views/year_goal_challenge_preview_view.dart';
+import '../modules/goals/year_goal_chalenge/views/year_goal_challenge_view.dart';
 import 'package:get/get.dart';
 
 import '../modules/auth/login/bindings/login_binding.dart';
 import '../modules/auth/login/views/login_view.dart';
 import '../modules/auth/signup/bindings/signup_binding.dart';
 import '../modules/auth/signup/views/signup_view.dart';
-import 'package:financial_controlee_app/app/modules/debts/bindings/debts_binding.dart';
-import 'package:financial_controlee_app/app/modules/debts/views/debts_view.dart';
-import 'package:financial_controlee_app/app/modules/home/bindings/home_binding.dart';
-import 'package:financial_controlee_app/app/modules/home/views/home_view.dart';
-import 'package:financial_controlee_app/app/modules/settings/bindings/settings_binding.dart';
-import 'package:financial_controlee_app/app/modules/settings/views/settings_theme_view.dart';
-import 'package:financial_controlee_app/app/modules/settings/views/settings_view.dart';
-import 'package:financial_controlee_app/app/modules/splash/bindings/splash_binding.dart';
-import 'package:financial_controlee_app/app/modules/splash/views/splash_view.dart';
+import '../modules/debts/bindings/debts_binding.dart';
+import '../modules/debts/views/debts_view.dart';
+import '../modules/home/bindings/home_binding.dart';
+import '../modules/home/views/home_view.dart';
+import '../modules/settings/bindings/settings_binding.dart';
+import '../modules/settings/views/settings_theme_view.dart';
+import '../modules/settings/views/settings_view.dart';
+import '../modules/splash/bindings/splash_binding.dart';
+import '../modules/splash/views/splash_view.dart';
 
 part 'app_routes.dart';
 
@@ -50,10 +52,18 @@ class AppPages {
       page: () => HomeView(),
       binding: HomeBinding(),
     ),
+
+    /// DEBTS *************
     GetPage(
       name: _Paths.DEBTS,
       page: () => DebtsView(),
       binding: DebtsBinding(),
+    ),
+    GetPage(
+      name: _Paths.DEBTS_ADD,
+      page: () => AddBorrowedPage(),
+      binding: DebtsBinding(),
+      transition: Transition.rightToLeftWithFade,
     ),
 
     //Goal ********

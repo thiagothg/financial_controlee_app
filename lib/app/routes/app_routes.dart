@@ -1,3 +1,5 @@
+// ignore_for_file: constant_identifier_names
+
 part of 'app_pages.dart';
 // DO NOT EDIT. This is code generated via package:get_cli/get_cli.dart
 
@@ -8,7 +10,6 @@ abstract class Routes {
   static const NAME = _Paths.NAME;
   static const LOGIN = _Paths.LOGIN;
   static const SIGNUP = _Paths.SIGNUP;
-  static const DEBTS = _Paths.DEBTS;
   static const SPLASH = _Paths.SPLASH;
   static const GOAL = _Paths.GOAL;
   static const ADD_GOAL = _Paths.ADD_GOAL;
@@ -20,6 +21,8 @@ abstract class Routes {
   static const YEAR_GOAL_CHALLENGE_ADD = _Paths.YEAR_GOAL_CHALLENGE_ADD;
   static const YEAR_GOAL_CHALLENGE_PREVIEW = _Paths.YEAR_GOAL_CHALLENGE_PREVIEW;
   static const YEAR_GOAL_CHALLENGE_DETAIL = _Paths.YEAR_GOAL_CHALLENGE_DETAIL;
+  static const DEBTS = _Paths.DEBTS;
+  static const DEBTS_ADD = _Paths.DEBTS_ADD;
 }
 
 abstract class _Paths {
@@ -27,7 +30,6 @@ abstract class _Paths {
   static const NAME = '/name';
   static const LOGIN = '/login';
   static const SIGNUP = '/signup';
-  static const DEBTS = '/debts';
   static const SPLASH = '/splash';
   static const GOAL = '/goal';
   static const ADD_GOAL = '/add-goal';
@@ -36,6 +38,8 @@ abstract class _Paths {
   static const YEAR_GOAL_CHALLENGE_ADD = '/year-goal-challenge-add';
   static const YEAR_GOAL_CHALLENGE_PREVIEW = '/year-goal-challenge-preview';
   static const YEAR_GOAL_CHALLENGE_DETAIL = '/year-goal-challenge-detail';
+  static const DEBTS = '/debts';
+  static const DEBTS_ADD = '/debts-add';
   static const SETTINGS = '/settings';
   static const SETTINGS_THEME = '/settings-theme';
   static const SETTINGS_LANGUAGE = '/settings-language';

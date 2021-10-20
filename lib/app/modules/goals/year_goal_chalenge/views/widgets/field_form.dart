@@ -1,4 +1,4 @@
-import 'package:financial_controlee_app/app/global/utils/widgets/custom_text_field.dart';
+import '../../../../../global/utils/components/inputs/custom_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -12,7 +12,7 @@ class FieldForm extends StatelessWidget {
 
   final Widget? prefix;
   final Widget? suffix;
-  final bool? obscure;
+  final bool obscure;
   final TextInputType? textInputType;
   final Function()? onTap;
   final List<TextInputFormatter>? inputFormatters;
@@ -28,7 +28,7 @@ class FieldForm extends StatelessWidget {
       this.hint,
       this.inputFormatters,
       this.onTap,
-      this.obscure,
+      this.obscure = false,
       this.prefix,
       this.suffix,
       this.textInputType,
@@ -50,9 +50,9 @@ class FieldForm extends StatelessWidget {
       SizedBox(height: _size.height * 0.025),
       Text('$description'),
       SizedBox(height: _size.height * 0.025),
-      CustomTextField(
-        hint: hint,
-        controller: editingController,
+      CustomTextFormField(
+        hintText: hint,
+        editingController: editingController,
         prefix: prefix,
         onChanged: onChanged,
         enabled: enabled,

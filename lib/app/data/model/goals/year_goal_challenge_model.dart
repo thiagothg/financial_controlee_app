@@ -38,7 +38,9 @@ class YearGoalChallenge extends BaseModel {
       required this.qtdSaved,
       required this.userUid,
       this.weeksGoal,
-      this.total = 0.0});
+      this.total = 0.0,
+      required String id})
+      : super(id: id);
 
   factory YearGoalChallenge.fromJson(Map<String, dynamic> json) =>
       _$YearGoalChallengeFromJson(json);

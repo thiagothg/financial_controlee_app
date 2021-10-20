@@ -50,7 +50,7 @@ class YearGoalChallengeAddView extends StatelessWidget {
                   description:
                       'Now that you know what you want. It is time to say how much you want to stored per week.',
                   hint: 'Ex: US\$ 10.00 is a great option',
-                  editingController: yearGoalController.qtdGoalController,
+                  // editingController: yearGoalController.qtdGoalController,
                   prefix: Icon(
                     FontAwesomeIcons.dollarSign,
                     color: Theme.of(context).primaryColor,
@@ -63,10 +63,10 @@ class YearGoalChallengeAddView extends StatelessWidget {
                         name: L10n.getCurrency().currencyName,
                         symbol: L10n.getCurrency().currencySymbol)
                   ],
-                  validator: MultiValidator([
-                    RequiredValidator(errorText: 'valor is required'),
-                    // QtdValidator()
-                  ]),
+                  // validator: MultiValidator([
+                  //   RequiredValidator(errorText: 'valor is required'),
+                  //   // QtdValidator()
+                  // ]),
                 ),
                 InkWell(
                   onTap: () => yearGoalController.selectDate(context),

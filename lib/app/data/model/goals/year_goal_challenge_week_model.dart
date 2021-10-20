@@ -19,14 +19,15 @@ class YearGoalChallengeWeek extends BaseModel {
   @JsonKey(name: 'year_goal_id', includeIfNull: false)
   String? yearGoalId;
 
-  YearGoalChallengeWeek({
-    required this.title,
-    required this.money,
-    required this.date,
-    required this.saved,
-    this.yearGoalId,
-    required this.week,
-  });
+  YearGoalChallengeWeek(
+      {required this.title,
+      required this.money,
+      required this.date,
+      required this.saved,
+      this.yearGoalId,
+      required this.week,
+      required String id})
+      : super(id: id);
 
   factory YearGoalChallengeWeek.fromJson(Map<String, dynamic> json) =>
       _$YearGoalChallengeWeekFromJson(json);

@@ -1,11 +1,11 @@
-import 'package:financial_controlee_app/app/data/model/goals/year_goal_challenge_model.dart';
-import 'package:financial_controlee_app/app/data/model/goals/year_goal_challenge_week_model.dart';
-import 'package:financial_controlee_app/app/data/repository/goals/year_goal_challenge_respository.dart';
-import 'package:financial_controlee_app/app/global/controllers/auth_controller.dart';
-import 'package:financial_controlee_app/app/global/utils/components/snackbars/error_snackbar.dart';
-import 'package:financial_controlee_app/app/global/utils/helpers/language_helper.dart';
-import 'package:financial_controlee_app/app/global/utils/utils.dart';
-import 'package:financial_controlee_app/app/routes/app_pages.dart';
+import '../../../../data/model/goals/year_goal_challenge_model.dart';
+import '../../../../data/model/goals/year_goal_challenge_week_model.dart';
+import '../../../../data/repository/goals/year_goal_challenge_respository.dart';
+import '../../../../global/services/auth_service.dart';
+import '../../../../global/utils/components/snackbars/error_snackbar.dart';
+import '../../../../global/utils/helpers/language_helper.dart';
+import '../../../../global/utils/utils.dart';
+import '../../../../routes/app_pages.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
@@ -15,7 +15,7 @@ import 'package:intl/intl.dart';
 class YearGoalChallengeController extends GetxController with StateMixin {
   //Essential
   final goalRepository = Get.find<YearGoalChallangeRepository>();
-  final auth = Get.find<AuthController>();
+  final auth = Get.find<AuthService>();
 
   RxList<YearGoalChallenge> listGoals = <YearGoalChallenge>[].obs;
   RxBool isLoading = true.obs;
@@ -135,6 +135,7 @@ class YearGoalChallengeController extends GetxController with StateMixin {
     var weeks = List<YearGoalChallengeWeek>.generate(52, (i) {
       total = (moneyStart + (moneyStart * i)) + total;
       return YearGoalChallengeWeek(
+          id: '',
           date: dateGoal.value.add(Duration(days: 7 * i)),
           money: moneyStart + (moneyStart * i),
           saved: false,
@@ -143,6 +144,7 @@ class YearGoalChallengeController extends GetxController with StateMixin {
     });
 
     goalModel = YearGoalChallenge(
+            id: '',
             title: nameGoalController.text,
             qtdSaved: 0,
             moneyStart: moneyStart,

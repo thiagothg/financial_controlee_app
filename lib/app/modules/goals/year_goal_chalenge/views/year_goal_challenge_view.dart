@@ -1,7 +1,7 @@
-import 'package:financial_controlee_app/app/data/model/goals/year_goal_challenge_model.dart';
-import 'package:financial_controlee_app/app/global/utils/components/drawer/custom_drawer.dart';
-import 'package:financial_controlee_app/app/global/utils/components/loaders/refresh_widget.dart';
-import 'package:financial_controlee_app/app/routes/app_pages.dart';
+import '../../../../data/model/goals/year_goal_challenge_model.dart';
+import '../../../../global/utils/components/drawer/custom_drawer.dart';
+import '../../../../global/utils/components/loaders/refresh_widget.dart';
+import '../../../../routes/app_pages.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
@@ -33,7 +33,7 @@ class YearGoalChallengeView extends GetView<YearGoalChallengeController> {
                     child: YearGoalCard(
                       model: item,
                       onDelete: () {
-                        controller.delete(item.id!);
+                        controller.delete(item.id);
                       },
                     ),
                   );

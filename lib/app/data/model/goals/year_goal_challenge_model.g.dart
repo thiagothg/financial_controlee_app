@@ -21,8 +21,8 @@ YearGoalChallenge _$YearGoalChallengeFromJson(Map<String, dynamic> json) =>
               (e) => YearGoalChallengeWeek.fromJson(e as Map<String, dynamic>))
           .toList(),
       total: (json['total'] as num?)?.toDouble() ?? 0.0,
+      id: json['id'] as String,
     )
-      ..id = json['id'] as String?
       ..isActive = json['is_active'] as bool?
       ..createdAt = json['created_at'] == null
           ? null
@@ -32,7 +32,9 @@ YearGoalChallenge _$YearGoalChallengeFromJson(Map<String, dynamic> json) =>
           : DateTime.parse(json['updated_at'] as String);
 
 Map<String, dynamic> _$YearGoalChallengeToJson(YearGoalChallenge instance) {
-  final val = <String, dynamic>{};
+  final val = <String, dynamic>{
+    'id': instance.id,
+  };
 
   void writeNotNull(String key, dynamic value) {
     if (value != null) {
@@ -40,7 +42,6 @@ Map<String, dynamic> _$YearGoalChallengeToJson(YearGoalChallenge instance) {
     }
   }
 
-  writeNotNull('id', instance.id);
   writeNotNull('is_active', instance.isActive);
   writeNotNull('created_at', instance.createdAt?.toIso8601String());
   writeNotNull('updated_at', instance.updatedAt?.toIso8601String());

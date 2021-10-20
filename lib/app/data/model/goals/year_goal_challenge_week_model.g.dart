@@ -15,8 +15,8 @@ YearGoalChallengeWeek _$YearGoalChallengeWeekFromJson(
       saved: json['saved'] as bool,
       yearGoalId: json['year_goal_id'] as String?,
       week: json['week'] as int,
+      id: json['id'] as String,
     )
-      ..id = json['id'] as String?
       ..isActive = json['is_active'] as bool?
       ..createdAt = json['created_at'] == null
           ? null
@@ -27,7 +27,9 @@ YearGoalChallengeWeek _$YearGoalChallengeWeekFromJson(
 
 Map<String, dynamic> _$YearGoalChallengeWeekToJson(
     YearGoalChallengeWeek instance) {
-  final val = <String, dynamic>{};
+  final val = <String, dynamic>{
+    'id': instance.id,
+  };
 
   void writeNotNull(String key, dynamic value) {
     if (value != null) {
@@ -35,7 +37,6 @@ Map<String, dynamic> _$YearGoalChallengeWeekToJson(
     }
   }
 
-  writeNotNull('id', instance.id);
   writeNotNull('is_active', instance.isActive);
   writeNotNull('created_at', instance.createdAt?.toIso8601String());
   writeNotNull('updated_at', instance.updatedAt?.toIso8601String());

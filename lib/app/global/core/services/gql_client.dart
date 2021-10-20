@@ -1,5 +1,4 @@
-import 'package:financial_controlee_app/app/global/controllers/auth_controller.dart';
-import 'package:financial_controlee_app/app/global/core/conts/constants.dart';
+import 'package:financial_controlee_app/app/global/core/constants/constants.dart';
 import 'package:get/get.dart';
 import 'package:hasura_connect/hasura_connect.dart';
 

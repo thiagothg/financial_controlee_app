@@ -1,21 +1,21 @@
-import 'package:financial_controlee_app/app/data/model/user_model.dart';
-import 'package:financial_controlee_app/app/global/core/localization/generated/l10n.dart';
-import 'package:financial_controlee_app/app/theme/theme_provider.dart';
+import '../../data/model/user_model.dart';
+import '../core/localization/generated/l10n.dart';
+import '../../theme/theme_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
-import 'auth_controller.dart';
+import 'auth_service.dart';
 
-class AppController extends GetxController {
+class AppService extends GetxController {
   //Essencial
-  final auth = Get.find<AuthController>();
+  final auth = Get.find<AuthService>();
   final themeService = Get.find<ThemeService>();
-  final box = GetStorage('barberapp');
+  final box = GetStorage();
 
   PageController pageController = PageController();
   final page = 0.obs;
-  Rx<UserModel?> get getUser => Rx<UserModel?>(auth.user.value?.user);
+  Rx<User?> get getUser => Rx<User?>(auth.user.value?.user);
   Rx<Locale?> currentLocale = Get.locale.obs;
 
   @override

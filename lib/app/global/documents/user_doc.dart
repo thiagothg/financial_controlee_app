@@ -1,59 +1,17 @@
-const String usersQuery = ''' 
-subscription MySubscription {
-  TB_TODOS {
-    check
-    id
-    title
-    user_id
-  }
-}
-''';
-
-const String userInsertQuery = ''' 
-mutation ControlleMutation(
-    \$id: String!, 
-    \$name: String!,
-    \$email: String!,
-    \$photoUrl: String,
-    \$isActive: Boolean,
-  ) {
-  insert_control_app_TB_USERS_one(object: {
-      id: \$id,
-      name: \$name,
-      email: \$email,
-      photoUrl: \$photoUrl,
-      isActive: \$isActive,
-    }) {
-    id
-  }
-}
-''';
-
-const String userUpdateQuery = ''' 
-mutation UpdateTodo(\$id: uuid, \$title: String, \$check: Boolean) {
-  update_TB_TODOS(where: {id: {_eq: \$id}}, _set: {check: \$check, title: \$title}) {
-    affected_rows
-  }
-}
-''';
-
-const String userDeleteQuery = ''' 
-mutation DeleteTodo(\$id: uuid) {
-  delete_TB_TODOS(where: {id: {_eq: \$id}}) {
-    affected_rows
-  }
-}
-''';
-
-const String userByIdQuery = ''' 
-query User(\$id: String!) {
-  FINANCIAL_APP_TB_USERS_by_pk(id: \$id) {
-    create_at
+const String saveUserInfoMutation = ''' 
+mutation saveUserInfo(\$object: FINANCIAL_APP_TB_USERS_insert_input!) {
+  insert_FINANCIAL_APP_TB_USERS_one(
+    object: \$object, 
+    on_conflict: {
+      constraint: TB_USERS_pkey, 
+      update_columns: update_at
+  }) {
     email
     id
     is_active
     name
     photo_url
+    create_at
   }
 }
 ''';

@@ -1,18 +1,18 @@
-import 'package:financial_controlee_app/app/data/model/user_model.dart';
-import 'package:financial_controlee_app/app/data/provider/auth/auth_provider.dart';
-import 'package:financial_controlee_app/app/global/core/services/gql_client.dart';
+import '../../model/user_model.dart';
+import '../../provider/auth/auth_provider.dart';
+import '../../../global/core/services/gql_client.dart';
 import 'package:get/get.dart';
 
 class AuthRepository {
   final AuthProvider authProvider = AuthProvider(Get.find<GraphQLClient>());
 
   ///
-  Future<UserModel?> signup(String email, String password) async {
-    return await authProvider.signup(email, password);
+  Future<User?> signup(String email, String password, String name) async {
+    return await authProvider.signup(email, password, name);
   }
 
   ///
-  Future<UserModel?> login(String email, String password) async {
+  Future<User?> login(String email, String password) async {
     return await authProvider.login(email, password);
   }
 
@@ -20,7 +20,19 @@ class AuthRepository {
     authProvider.logout();
   }
 
-  Future<UserModel?> signInWithGoogle() async {
+  Future<User?> signInWithGoogle() async {
     return await authProvider.signInWithGoogle();
+  }
+
+  Future<void> forgotPassword(String email) async {
+    await authProvider.resetPassword(email);
+  }
+
+  Future<User?> signInWithfacebook() async {
+    return await authProvider.signInFacebook();
+  }
+
+  Future<User?> signInWithApple() async {
+    return await authProvider.signInApple();
   }
 }

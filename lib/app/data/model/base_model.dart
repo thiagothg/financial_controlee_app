@@ -5,7 +5,7 @@ part 'base_model.g.dart';
 @JsonSerializable()
 class BaseModel {
   @JsonKey(name: 'id', includeIfNull: false)
-  String? id;
+  String id;
   @JsonKey(name: 'is_active', includeIfNull: false)
   bool? isActive;
   @JsonKey(name: 'created_at', includeIfNull: false)
@@ -13,14 +13,14 @@ class BaseModel {
   @JsonKey(name: 'updated_at', includeIfNull: false)
   DateTime? updatedAt;
 
-  BaseModel();
+  BaseModel({required this.id, this.isActive, this.createdAt, this.updatedAt});
 
   factory BaseModel.fromJson(Map<String, dynamic> json) =>
       _$BaseModelFromJson(json);
 
   Map<String, dynamic> toJson() => _$BaseModelToJson(this);
 
-  String documentId() => id ?? '';
+  String documentId() => id;
 
   void disableDocument() => isActive = false;
 

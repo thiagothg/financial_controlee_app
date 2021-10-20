@@ -1,23 +1,26 @@
-class UserModel {
-  String id;
+import 'package:financial_controlee_app/app/data/model/base_model.dart';
+import 'package:json_annotation/json_annotation.dart';
+
+part 'user_model.g.dart';
+
+@JsonSerializable(explicitToJson: true)
+class User extends BaseModel {
+  @JsonKey(name: 'name')
   String name;
+  @JsonKey(name: 'email')
   String email;
+  @JsonKey(name: 'photo_url')
   String? urlImage;
 
-  UserModel(
-      {required this.id,
-      required this.name,
+  User(
+      {required this.name,
       required this.email,
-      this.urlImage});
+      this.urlImage,
+      required String id})
+      : super(id: id);
 
-  // UserModel.fromJson(Map<String, dynamic> json) {
-  //   this.id = json['id'];
-  //   this.name = json['name'];
-  // }
+  factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
 
-  // Map<String, dynamic> toJson() {
-  //   final Map<String, dynamic> data = new Map<String, dynamic>();
-  //   data['name'] = this.name;
-  //   return data;
-  // }
+  @override
+  Map<String, dynamic> toJson() => _$UserToJson(this);
 }

@@ -1,7 +1,7 @@
 import 'user_model.dart';
 
 class Auth {
-  UserModel user;
+  User user;
   String accessToken;
   String tokenType;
   int expiresIn;

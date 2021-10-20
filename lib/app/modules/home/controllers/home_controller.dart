@@ -1,12 +1,13 @@
+import '../../../global/services/auth_service.dart';
+
 import '../../../data/model/user_model.dart';
-import '../../../global/controllers/auth_controller.dart';
 import 'package:get/get.dart';
 
 class HomeController extends GetxController {
   //Essencial
-  final auth = Get.find<AuthController>();
+  final auth = Get.find<AuthService>();
 
-  Rx<UserModel?> get getUser => Rx<UserModel?>(auth.user.value?.user);
+  Rx<User?> get getUser => Rx<User?>(auth.user.value?.user);
 
   @override
   void onClose() {}

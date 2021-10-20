@@ -1,11 +1,12 @@
-import 'package:financial_controlee_app/app/theme/theme_provider.dart';
+import 'app/theme/theme_provider.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_localized_locales/flutter_localized_locales.dart';
-
+import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
@@ -21,7 +22,17 @@ Future<void> main() async {
   ///
   await Firebase.initializeApp();
 
-  await GetStorage.init();
+  await GetStorage.init('controlasseapp');
+
+  if (kIsWeb) {
+    // initialiaze the facebook javascript SDK
+    FacebookAuth.i.webInitialize(
+      appId: "1329834907365798", //<-- YOUR APP_ID
+      cookie: true,
+      xfbml: true,
+      version: "v9.0",
+    );
+  }
 
   runApp(MyApp());
 }

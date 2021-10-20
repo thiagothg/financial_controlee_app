@@ -1,13 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 ThemeData darkTheme = ThemeData(
+    // fontFamily: 'Google',
+    fontFamily: GoogleFonts.varelaRound().fontFamily,
     brightness: Brightness.dark,
     scaffoldBackgroundColor: Colors.black87,
-    highlightColor: Colors.transparent,
-    splashColor: Colors.transparent,
-    primaryColor: Colors.white,
+    // highlightColor: Colors.transparent,
+    // splashColor: Colors.transparent,
+    primaryColor: Colors.blueAccent,
     iconTheme: IconThemeData(color: Colors.white),
+    // textTheme: GoogleFonts.varelaRoundTextTheme(Get.textTheme).copyWith(
+    //     button: TextStyle(color: Colors.white),
+    //     headline1: TextStyle(color: Colors.white),
+    //     bodyText2: TextStyle(color: Colors.white)),
+    buttonTheme: ButtonThemeData(
+        textTheme: ButtonTextTheme.primary, buttonColor: Colors.white),
     floatingActionButtonTheme:
         FloatingActionButtonThemeData(backgroundColor: Colors.blueAccent),
     elevatedButtonTheme: ElevatedButtonThemeData(

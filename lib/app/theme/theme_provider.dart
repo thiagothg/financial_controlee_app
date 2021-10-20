@@ -26,7 +26,7 @@ class ThemeService implements IThemeService {
       case themeModeLight:
         return ThemeMode.light;
       default:
-        return ThemeMode.system;
+        return ThemeMode.light;
     }
   }
 

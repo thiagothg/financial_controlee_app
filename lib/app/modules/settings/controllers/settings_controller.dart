@@ -1,16 +1,14 @@
-import 'package:financial_controlee_app/app/global/controllers/app_controller.dart';
 import 'package:financial_controlee_app/app/global/core/localization/generated/l10n.dart';
-import 'package:financial_controlee_app/app/theme/theme_provider.dart';
+import 'package:financial_controlee_app/app/global/services/app_service.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:intl/intl.dart';
 
 class SettingsController extends GetxController {
   //Essencial
 
-  final appController = Get.find<AppController>();
-  final box = GetStorage('barberapp');
+  final appController = Get.find<AppService>();
+  final box = GetStorage();
 
   Rx<ThemeMode?> radio = Rx<ThemeMode?>(null);
   List<Map<String, dynamic>> themes = [

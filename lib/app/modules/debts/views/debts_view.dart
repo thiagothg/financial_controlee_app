@@ -1,9 +1,12 @@
-import 'package:financial_controlee_app/app/global/utils/components/drawer/custom_drawer.dart';
+import '../../../global/utils/components/drawer/custom_drawer.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import 'package:get/get.dart';
 
 import '../controllers/debts_controller.dart';
+import 'tabs/borrowed/borrowed_tab_view.dart';
+import 'lent_tab_view.dart';
 
 class DebtsView extends GetView<DebtsController> {
   const DebtsView({Key? key}) : super(key: key);
@@ -13,15 +16,20 @@ class DebtsView extends GetView<DebtsController> {
     return Scaffold(
       drawer: CustomDrawer(),
       appBar: AppBar(
-        title: Text('DebtsView'),
+        title: Text('Debts'),
         centerTitle: true,
-      ),
-      body: Center(
-        child: Text(
-          'DebtsView is working',
-          style: TextStyle(fontSize: 20),
+        bottom: TabBar(
+          controller: controller.tabController,
+          tabs: controller.myTabs,
         ),
+        actions: [
+          IconButton(onPressed: () {}, icon: Icon(FontAwesomeIcons.history)),
+        ],
       ),
+      body: TabBarView(controller: controller.tabController, children: [
+        BorrowedTabView(),
+        LentTabView(),
+      ]),
     );
   }
 }

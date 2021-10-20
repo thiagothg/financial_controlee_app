@@ -9,12 +9,18 @@ class SnackBars {
   const SnackBars({Key? key, required this.title, required this.message});
 
   void errorSnackbar() {
-    Get.snackbar(
-      title,
-      message,
-      snackPosition: SnackPosition.BOTTOM,
-      icon: Icon(FontAwesomeIcons.exclamationCircle),
-      backgroundColor: Get.theme.errorColor,
-    );
+    Get.snackbar(title, message,
+        snackPosition: SnackPosition.BOTTOM,
+        icon: Icon(FontAwesomeIcons.exclamationCircle, color: Colors.white),
+        backgroundColor: Get.theme.errorColor,
+        colorText: Colors.white);
+  }
+
+  void successSnackbar() {
+    Get.snackbar(title, message,
+        snackPosition: SnackPosition.BOTTOM,
+        icon: Icon(FontAwesomeIcons.exclamationCircle),
+        backgroundColor: Get.theme.primaryColor,
+        colorText: Colors.white);
   }
 }

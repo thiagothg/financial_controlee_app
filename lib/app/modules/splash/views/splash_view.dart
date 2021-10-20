@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 import 'package:get/get.dart';
 
@@ -10,29 +11,27 @@ class SplashView extends GetView<SplashController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: GetBuilder<SplashController>(
-        init: Get.find<SplashController>(),
-        initState: (_) {},
-        builder: (_) {
-          return Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              FlutterLogo(
-                size: Get.mediaQuery.size.width * .7,
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              Center(
-                child: Text(
-                  'Controllese-se',
-                  style: TextStyle(fontSize: 20),
+      body: SafeArea(
+        child: GetBuilder<SplashController>(
+          init: Get.find<SplashController>(),
+          initState: (_) {},
+          builder: (_) {
+            return Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Center(
+                  child: SvgPicture.asset(
+                      Get.isDarkMode
+                          ? 'assets/images/logo_branco.svg'
+                          : 'assets/images/logo.svg',
+                      height: Get.mediaQuery.size.height * .2,
+                      semanticsLabel: 'logo'),
                 ),
-              ),
-            ],
-          );
-        },
+              ],
+            );
+          },
+        ),
       ),
     );
   }

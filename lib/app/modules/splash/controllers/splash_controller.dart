@@ -1,8 +1,8 @@
-import 'package:financial_controlee_app/app/global/controllers/auth_controller.dart';
+import 'package:financial_controlee_app/app/global/services/auth_service.dart';
 import 'package:get/get.dart';
 
 class SplashController extends GetxController {
-  final authController = Get.find<AuthController>();
+  final authController = Get.find<AuthService>();
 
   @override
   void onInit() {

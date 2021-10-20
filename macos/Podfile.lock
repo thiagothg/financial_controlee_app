@@ -55,12 +55,15 @@ PODS:
   - path_provider_macos (0.0.1):
     - FlutterMacOS
   - PromisesObjC (2.0.0)
+  - sign_in_with_apple (0.0.1):
+    - FlutterMacOS
 
 DEPENDENCIES:
   - firebase_auth (from `Flutter/ephemeral/.symlinks/plugins/firebase_auth/macos`)
   - firebase_core (from `Flutter/ephemeral/.symlinks/plugins/firebase_core/macos`)
   - FlutterMacOS (from `Flutter/ephemeral`)
   - path_provider_macos (from `Flutter/ephemeral/.symlinks/plugins/path_provider_macos/macos`)
+  - sign_in_with_apple (from `Flutter/ephemeral/.symlinks/plugins/sign_in_with_apple/macos`)
 
 SPEC REPOS:
   trunk:
@@ -83,6 +86,8 @@ EXTERNAL SOURCES:
     :path: Flutter/ephemeral
   path_provider_macos:
     :path: Flutter/ephemeral/.symlinks/plugins/path_provider_macos/macos
+  sign_in_with_apple:
+    :path: Flutter/ephemeral/.symlinks/plugins/sign_in_with_apple/macos
 
 SPEC CHECKSUMS:
   Firebase: e84d95f6d3a91f634abc384f0751c434cb3aecfa
@@ -98,6 +103,7 @@ SPEC CHECKSUMS:
   nanopb: a0ba3315591a9ae0a16a309ee504766e90db0c96
   path_provider_macos: 160cab0d5461f0c0e02995469a98f24bdb9a3f1f
   PromisesObjC: 68159ce6952d93e17b2dfe273b8c40907db5ba58
+  sign_in_with_apple: a9e97e744e8edc36aefc2723111f652102a7a727
 
 PODFILE CHECKSUM: c7161fcf45d4fd9025dc0f48a76d6e64e52f8176
 

@@ -11,7 +11,7 @@ dependencies:
   firebase_auth: ^3.1.0
   hasura_connect: ^3.0.4
   firebase_core: ^1.6.0
-  get: 4.3.8
+  get: ^4.3.8
   flutter:
     sdk: flutter
   flutter_localizations:
@@ -28,16 +28,39 @@ dependencies:
   getwidget: ^2.0.4
   flutter_native_splash: ^1.2.4
   flutter_localized_locales: ^2.0.3
+  simple_animations: ^4.0.0
+  google_fonts: ^2.1.0
+  flutter_svg: ^0.22.0
+  flutter_facebook_auth: ^3.5.2
+  sign_in_with_apple: ^3.2.0
+  date_range_form_field: ^1.0.2
 
 dev_dependencies:
   build_runner: ^2.1.2
   lints: ^1.0.1
   flutter_lints: ^1.0.4
+  flutter_launcher_icons: ^0.9.2
   flutter_test:
     sdk: flutter
 
+flutter_icons:
+  image_path: "assets/icons/logo.png"
+  android: true
+  ios: true
+  remove_alpha_ios: true
+  adaptive_icon_foreground: "assets/icons/logo_foreground.png"
+  adaptive_icon_background: "#153E90"
+
+flutter_launcher_name:
+  name: "Controlasse"
+
 flutter:
   uses-material-design: true
+
+  # To add assets to your application, add an assets section, like this:
+  assets:
+    - assets/images/
+    - assets/icons/
 
 vars:
   clean: flutter clean

@@ -1,4 +1,4 @@
-import 'package:financial_controlee_app/app/global/controllers/auth_controller.dart';
+// import 'package:financial_controlee_app/app/global/controllers/auth_controller.dart';
 import 'package:financial_controlee_app/app/global/utils/helpers/language_helper.dart';
 import 'package:financial_controlee_app/app/routes/app_pages.dart';
 import 'package:flutter/material.dart';
@@ -9,7 +9,7 @@ import 'package:intl/intl.dart';
 class GoalController extends GetxController {
   //Essential
   // final goalRepository = Get.find<GoalRepository>();
-  final auth = Get.find<AuthController>();
+  // final auth = Get.find<AuthController>();
 
   // RxList<GoalModel> listGoals = <GoalModel>[].obs;
   RxBool isLoading = true.obs;

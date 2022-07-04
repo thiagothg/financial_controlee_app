@@ -16,8 +16,9 @@ import 'app/routes/app_pages.dart';
 import 'app/theme/app_theme.dart';
 
 Future<void> main() async {
-  GestureBinding.instance?.resamplingEnabled = true;
   WidgetsFlutterBinding.ensureInitialized();
+  GestureBinding.instance.resamplingEnabled = true;
+  
 
   ///
   await Firebase.initializeApp();

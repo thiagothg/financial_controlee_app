@@ -11,6 +11,7 @@ ThemeData lightTheme = ThemeData(
   // scaffoldBackgroundColor: Colors.white,
   // highlightColor: Colors.transparent,
   // splashColor: Colors.transparent,
+  primaryColorDark: Colors.black,
   primaryColorLight: Colors.white,
   primaryColor: AppColors.primaryColor,
   colorScheme: ThemeData().colorScheme.copyWith(
@@ -46,6 +47,12 @@ ThemeData lightTheme = ThemeData(
     ),
   ),
   textTheme: GoogleFonts.varelaRoundTextTheme(Get.textTheme).copyWith(
+    bodyText1: TextStyle(
+      color: Colors.white
+    ),
+    bodyText2: TextStyle(
+      color: Colors.black
+    ),
     button: TextStyle(
       color: Colors.white,
     ).apply(
@@ -89,6 +96,12 @@ ThemeData lightTheme = ThemeData(
       borderSide: BorderSide(
         color: Colors.grey.shade400,
       ),
+    ),
+    labelStyle: TextStyle(
+      color: Colors.black 
+    ),
+    hintStyle: TextStyle(
+      color: Colors.black
     ),
     contentPadding: EdgeInsets.symmetric(
       vertical: 0,

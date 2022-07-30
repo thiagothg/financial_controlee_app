@@ -1,13 +1,15 @@
-import '../../../../../../data/model/debts/borrowed_model.dart';
-import '../../../../../../global/utils/utils.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
-class BorrowedCard extends StatelessWidget {
-  final Borrowed model;
+import '../../utils.dart';
 
-  const BorrowedCard({Key? key, required this.model}) : super(key: key);
+class DebtsCard extends StatelessWidget {
+  final DateTime? date;
+  final String title;
+  final double total;
+
+
+  const DebtsCard({Key? key, this.date, required this.title, required this.total}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -33,8 +35,8 @@ class BorrowedCard extends StatelessWidget {
                     SizedBox(
                       width: 10,
                     ),
-                    (model.dateEnd != null)
-                        ? Text(DateFormat.yMd().format(model.dateEnd!))
+                    (date != null)
+                        ? Text(DateFormat.yMd().format(date!))
                         : Text(''),
                   ],
                 ),
@@ -43,17 +45,19 @@ class BorrowedCard extends StatelessWidget {
           ),
         ),
         Card(
-          margin: EdgeInsets.symmetric(vertical: 10, horizontal: 5),
+          margin: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
           elevation: 10,
           child: Container(
-            padding: EdgeInsets.symmetric(vertical: 10, horizontal: 5),
+            padding: EdgeInsets.symmetric(vertical: 15, horizontal: 10),
             child: Column(
               children: [
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    (model.dateEnd != null)
-                        ? Text(DateFormat.yMd().format(model.dateEnd!))
+                    (date != null)
+                        ? Text(DateFormat.yMd().format(date!), 
+                          style: Theme.of(context).textTheme.bodyText1
+                        )
                         : Text(''),
                   ],
                 ),
@@ -63,8 +67,10 @@ class BorrowedCard extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(model.title),
-                    Text(Utils().getMoneyFormat(model.total)),
+                    Text(title, style: Theme.of(context).textTheme.bodyText1),
+                    Text(Utils().getMoneyFormat(total), 
+                      style: Theme.of(context).textTheme.bodyText1,
+                    ),
                   ],
                 ),
               ],
@@ -76,9 +82,9 @@ class BorrowedCard extends StatelessWidget {
   }
 
   Widget _getDescriation() {
-    if (model.dateEnd == null) {
+    if (date == null) {
       return Text('No expiration date');
-    } else if (model.dateEnd!.difference(DateTime.now()).inDays > 1) {
+    } else if (date!.difference(DateTime.now()).inDays > 1) {
       return Text('Overdue - ');
     } else {
       return Text('');

@@ -1,4 +1,4 @@
-import 'package:financial_controlee_app/app/modules/debts/views/tabs/borrowed/add_borrowed_page.dart';
+import '../modules/debts/views/add_borrowed_page.dart';
 
 import '../modules/goals/goal/bindings/goal_binding.dart';
 import '../modules/goals/goal/views/goal_view.dart';
@@ -61,7 +61,7 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.DEBTS_ADD,
-      page: () => AddBorrowedPage(),
+      page: () => AddDebtsPage(),
       binding: DebtsBinding(),
       transition: Transition.rightToLeftWithFade,
     ),

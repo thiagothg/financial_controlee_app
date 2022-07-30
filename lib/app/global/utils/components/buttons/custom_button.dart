@@ -15,34 +15,42 @@ class CustomButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       key: UniqueKey(),
-      padding: EdgeInsets.symmetric(horizontal: 20),
+      padding: EdgeInsets.symmetric(horizontal: 10),
       child: Container(
-        padding: EdgeInsets.only(top: 3, left: 3),
+        // padding: EdgeInsets.only(top: 3, left: 3),
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(50),
-          border: Border(
-            bottom:
-                BorderSide(color: Get.isDarkMode ? Colors.white : Colors.black),
-            top:
-                BorderSide(color: Get.isDarkMode ? Colors.white : Colors.black),
-            left:
-                BorderSide(color: Get.isDarkMode ? Colors.white : Colors.black),
-            right:
-                BorderSide(color: Get.isDarkMode ? Colors.white : Colors.black),
-          ),
+          // borderRadius: BorderRadius.circular(50),
+          // border: Border(
+          //   bottom:
+          //       BorderSide(color: Get.isDarkMode ? Colors.white : Colors.black),
+          //   top:
+          //       BorderSide(color: Get.isDarkMode ? Colors.white : Colors.black),
+          //   left:
+          //       BorderSide(color: Get.isDarkMode ? Colors.white : Colors.black),
+          //   right:
+          //       BorderSide(color: Get.isDarkMode ? Colors.white : Colors.black),
+          // ),
         ),
-        child: MaterialButton(
+        child: ElevatedButton(
           key: UniqueKey(),
-          minWidth: double.infinity,
-          height: 60,
+          // minWidth: double.infinity,
+          // height: 60,
+          // onPressed: isLoading ? null : onPressed,
           onPressed: isLoading ? null : onPressed,
-          color: isLoading
-              ? Theme.of(context).primaryColor.withOpacity(.4)
-              : Theme.of(context).primaryColor,
+          // color: isLoading
+          //     ? Theme.of(context).primaryColor.withOpacity(.4)
+          //     : Colors.black,//Theme.of(context).primaryColor,
           // textTheme: Theme.of(context).butt,
-          elevation: 0,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(50),
+          // elevation: 0,
+          // shape: RoundedRectangleBorder(
+          //   borderRadius: BorderRadius.circular(50),
+          // ),
+          style: ElevatedButton.styleFrom(
+            minimumSize: Size.fromHeight(40),
+            elevation: 2,
+            shape: const RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(Radius.circular(50)),
+            ),
           ),
           child: isLoading
               ? LoadingView()

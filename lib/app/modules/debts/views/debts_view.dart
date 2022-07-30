@@ -6,7 +6,7 @@ import 'package:get/get.dart';
 
 import '../controllers/debts_controller.dart';
 import 'tabs/borrowed/borrowed_tab_view.dart';
-import 'lent_tab_view.dart';
+import 'tabs/lent/lent_tab_view.dart';
 
 class DebtsView extends GetView<DebtsController> {
   const DebtsView({Key? key}) : super(key: key);
@@ -21,9 +21,10 @@ class DebtsView extends GetView<DebtsController> {
         bottom: TabBar(
           controller: controller.tabController,
           tabs: controller.myTabs,
+          onTap: controller.onChangedTab
         ),
         actions: [
-          IconButton(onPressed: () {}, icon: Icon(FontAwesomeIcons.history)),
+          IconButton(onPressed: () {}, icon: Icon(FontAwesomeIcons.clockRotateLeft)),
         ],
       ),
       body: TabBarView(controller: controller.tabController, children: [

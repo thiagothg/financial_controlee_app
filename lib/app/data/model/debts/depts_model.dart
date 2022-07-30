@@ -1,11 +1,11 @@
+import '../base_model.dart';
 import 'package:json_annotation/json_annotation.dart';
 
-import '../base_model.dart';
 
-part 'borrowed_model.g.dart';
+part 'depts_model.g.dart';
 
 @JsonSerializable(explicitToJson: true)
-class Borrowed extends BaseModel {
+class Depts extends BaseModel {
   @JsonKey(name: 'title')
   String title;
   @JsonKey(name: 'total')
@@ -18,20 +18,29 @@ class Borrowed extends BaseModel {
   String note;
   @JsonKey(name: 'user_id')
   String userUid;
+  @JsonKey(name: 'type')
+  TypeDebts type;
 
-  Borrowed(
+  Depts(
       {required this.title,
       required this.total,
       this.dateEnd,
       required this.dateStart,
       required this.note,
       required this.userUid,
+      required this.type,
       required String id})
       : super(id: id);
 
-  factory Borrowed.fromJson(Map<String, dynamic> json) =>
-      _$BorrowedFromJson(json);
+  factory Depts.fromJson(Map<String, dynamic> json) =>
+      _$DeptsFromJson(json);
 
   @override
-  Map<String, dynamic> toJson() => _$BorrowedToJson(this);
+  Map<String, dynamic> toJson() => _$DeptsToJson(this);
 }
+
+enum TypeDebts {
+  @JsonValue("borrowed") borrowed,
+  @JsonValue("lent") lent,
+}
+

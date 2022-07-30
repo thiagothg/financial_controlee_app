@@ -1,12 +1,12 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'borrowed_model.dart';
+part of 'depts_model.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-Borrowed _$BorrowedFromJson(Map<String, dynamic> json) => Borrowed(
+Depts _$DeptsFromJson(Map<String, dynamic> json) => Depts(
       title: json['title'] as String,
       total: (json['total'] as num).toDouble(),
       dateEnd: json['date_end'] == null
@@ -15,6 +15,7 @@ Borrowed _$BorrowedFromJson(Map<String, dynamic> json) => Borrowed(
       dateStart: DateTime.parse(json['date_start'] as String),
       note: json['note'] as String,
       userUid: json['user_id'] as String,
+      type: $enumDecode(_$TypeDebtsEnumMap, json['type']),
       id: json['id'] as String,
     )
       ..isActive = json['is_active'] as bool?
@@ -25,7 +26,7 @@ Borrowed _$BorrowedFromJson(Map<String, dynamic> json) => Borrowed(
           ? null
           : DateTime.parse(json['updated_at'] as String);
 
-Map<String, dynamic> _$BorrowedToJson(Borrowed instance) {
+Map<String, dynamic> _$DeptsToJson(Depts instance) {
   final val = <String, dynamic>{
     'id': instance.id,
   };
@@ -45,5 +46,11 @@ Map<String, dynamic> _$BorrowedToJson(Borrowed instance) {
   val['date_end'] = instance.dateEnd?.toIso8601String();
   val['note'] = instance.note;
   val['user_id'] = instance.userUid;
+  val['type'] = _$TypeDebtsEnumMap[instance.type];
   return val;
 }
+
+const _$TypeDebtsEnumMap = {
+  TypeDebts.borrowed: 'borrowed',
+  TypeDebts.lent: 'lent',
+};
